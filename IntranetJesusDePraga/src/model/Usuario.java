@@ -2,7 +2,7 @@ package model;
 
 public class Usuario {
     private int id;
-    private String nom_usuario;
+    private String rut_usuario;
     private int tipo;
     private String contrasenia;
 
@@ -11,15 +11,15 @@ public class Usuario {
     
     
 
-    public Usuario(String nom_usuario, int tipo, String contrasenia) {
-        this.nom_usuario = nom_usuario;
+    public Usuario(String rut_usuario, int tipo, String contrasenia) {
+        this.rut_usuario = rut_usuario;
         this.tipo = tipo;
         this.contrasenia = contrasenia;
     }
 
-    public Usuario(int id, String nom_usuario, int tipo, String contrasenia) {
+    public Usuario(int id, String rut_usuario, int tipo, String contrasenia) {
         this.id = id;
-        this.nom_usuario = nom_usuario;
+        this.rut_usuario = rut_usuario;
         this.tipo = tipo;
         this.contrasenia = contrasenia;
     }
@@ -34,12 +34,12 @@ public class Usuario {
         this.id = id;
     }
 
-    public String getNom_usuario() {
-        return nom_usuario;
+    public String getRut_usuario() {
+        return rut_usuario;
     }
 
-    public void setNom_usuario(String nom_usuario) {
-        this.nom_usuario = nom_usuario;
+    public void setRut_usuario(String rut_usuario) {
+        this.rut_usuario = rut_usuario;
     }
 
     public int getTipo() {

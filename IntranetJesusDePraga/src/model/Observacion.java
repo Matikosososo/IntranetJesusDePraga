@@ -2,22 +2,22 @@ package model;
 
 public class Observacion {
     private int id;
-    private String profesor;
+    private String asignatura;
     private String alumno;
     private String observacion;
 
     public Observacion() {
     }
 
-    public Observacion(String profesor, String alumno, String observacion) {
-        this.profesor = profesor;
+    public Observacion(String asignatura, String alumno, String observacion) {
+        this.asignatura = asignatura;
         this.alumno = alumno;
         this.observacion = observacion;
     }
 
-    public Observacion(int id, String profesor, String alumno, String observacion) {
+    public Observacion(int id, String asignatura, String alumno, String observacion) {
         this.id = id;
-        this.profesor = profesor;
+        this.asignatura = asignatura;
         this.alumno = alumno;
         this.observacion = observacion;
     }
@@ -30,12 +30,12 @@ public class Observacion {
         this.id = id;
     }
 
-    public String getProfesor() {
-        return profesor;
+    public String getAsignatura() {
+        return asignatura;
     }
 
-    public void setProfesor(String profesor) {
-        this.profesor = profesor;
+    public void setAsignatura(String asignatura) {
+        this.asignatura = asignatura;
     }
 
     public String getAlumno() {

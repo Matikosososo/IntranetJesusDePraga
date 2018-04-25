@@ -49,6 +49,7 @@ create table nota(
     id int primary key auto_increment,
     asignatura int,
     alumno_fk int,
+    nota float,
     foreign key(alumno_fk) references alumno(id),
     ponderacion float,
     foreign key(asignatura) references asignatura(id)
@@ -68,7 +69,6 @@ Create table horario(
 
 Create table observacion(
     id int primary key auto_increment,
-    nombre varchar(50),
     alumno_fk int,
     asignatura_fk int,
     comentario varchar(5000),
@@ -79,6 +79,10 @@ Create table observacion(
 create table asistencia(
     id int primary key auto_increment,
     alumno_fk int,
+    asignatura_fk int,
+    foreign key(asignatura_fk) references asignatura(id),
     foreign key(alumno_fk) references alumno (id),
     fecha date
 );
+
+select * from alumno

@@ -5,24 +5,24 @@ public class Horario {
     private String asignatura;
     private String alumno;
     private String fecha;
-    private String hora;
+    private float Cantidad_horas;
 
     public Horario() {
     }
 
-    public Horario(String asignatura, String alumno, String fecha, String hora) {
+    public Horario(String asignatura, String alumno, String fecha, float Cantidad_horas) {
         this.asignatura = asignatura;
         this.alumno = alumno;
         this.fecha = fecha;
-        this.hora = hora;
+        this.Cantidad_horas = Cantidad_horas;
     }
 
-    public Horario(int id, String asignatura, String alumno, String fecha, String hora) {
+    public Horario(int id, String asignatura, String alumno, String fecha, float Cantidad_horas) {
         this.id = id;
         this.asignatura = asignatura;
         this.alumno = alumno;
         this.fecha = fecha;
-        this.hora = hora;
+        this.Cantidad_horas = Cantidad_horas;
     }
 
     public int getId() {
@@ -57,12 +57,12 @@ public class Horario {
         this.fecha = fecha;
     }
 
-    public String getHora() {
-        return hora;
+    public float getCantidad_horas() {
+        return Cantidad_horas;
     }
 
-    public void setHora(String hora) {
-        this.hora = hora;
+    public void setCantidad_horas(float Cantidad_horas) {
+        this.Cantidad_horas = Cantidad_horas;
     }
 
     
