@@ -12,4 +12,8 @@ public interface ObservacionDAO {
     void update(Observacion o);
 
     void delete(String id);
+    
+    Observacion bgetByID(String id);
+    
+    List<Observacion> search(String exp);
 }

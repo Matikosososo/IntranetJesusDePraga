@@ -28,7 +28,7 @@ public class MySQL_NotaDAO implements NotaDAO {
 
     @Override
     public List<Nota> read() {
-         String query = "Select * from nota";
+        String query = "Select * from nota";
         Nota n;
         list_Nota = new ArrayList<>();
         tablaVirtual = c.ejecutarSelect(query);
@@ -60,5 +60,53 @@ public class MySQL_NotaDAO implements NotaDAO {
     public void delete(String id) {
         String query = "delete from nota where id = " + id;
         c.ejecutar(query);
+    }
+
+    @Override
+    public Nota getByID(String id) {
+        String query = "Select * from nota id = " + id;
+        Nota n;
+        list_Nota = new ArrayList<>();
+        tablaVirtual = c.ejecutarSelect(query);
+        try {
+            if (tablaVirtual.next()) {
+                n = new Nota();
+
+                n.setId(tablaVirtual.getInt(1));
+                n.setAsignatura(tablaVirtual.getString(2));
+                n.setAlumno(tablaVirtual.getString(3));
+                n.setNota(tablaVirtual.getFloat(4));
+                n.setPonderacion(tablaVirtual.getFloat(5));
+                list_Nota.add(n);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQL_NotaDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        c.desconectar();
+        return list_Nota.get(0);
+    }
+
+    @Override
+    public List<Nota> search(String exp) {
+        String query = "Select * from nota LIKE '%"+exp+"%'";
+        Nota n;
+        list_Nota = new ArrayList<>();
+        tablaVirtual = c.ejecutarSelect(query);
+        try {
+            while (tablaVirtual.next()) {
+                n = new Nota();
+
+                n.setId(tablaVirtual.getInt(1));
+                n.setAsignatura(tablaVirtual.getString(2));
+                n.setAlumno(tablaVirtual.getString(3));
+                n.setNota(tablaVirtual.getFloat(4));
+                n.setPonderacion(tablaVirtual.getFloat(5));
+                list_Nota.add(n);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQL_NotaDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        c.desconectar();
+        return list_Nota;
     }
 }

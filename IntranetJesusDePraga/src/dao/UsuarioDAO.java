@@ -12,4 +12,8 @@ public interface UsuarioDAO {
     void update(Usuario u);
 
     void delete(String id);
+    
+    Usuario getByID(String id);
+    
+    List<Usuario> search(String exp);
 }

@@ -60,4 +60,50 @@ public class MySQL_ProfesorDAO implements ProfesorDAO {
         String query = "delete from profesor where id = " + id;
         c.ejecutar(query);
     }
+
+    @Override
+    public Profesor getByID(String id) {
+        String query = "Select * from profesor id = " + id;
+        Profesor p;
+        list_Profesores = new ArrayList<>();
+        tablaVirtual = c.ejecutarSelect(query);
+        try {
+            if (tablaVirtual.next()) {
+                p = new Profesor();
+
+                p.setId(tablaVirtual.getInt(1));
+                p.setNombre(tablaVirtual.getString(2));
+                p.setRut(tablaVirtual.getString(3));
+
+                list_Profesores.add(p);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQL_ProfesorDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        c.desconectar();
+        return list_Profesores.get(0);
+    }
+
+    @Override
+    public List<Profesor> search(String exp) {
+        String query = "Select * from profesor LIKE '%"+exp+"%'";
+        Profesor p;
+        list_Profesores = new ArrayList<>();
+        tablaVirtual = c.ejecutarSelect(query);
+        try {
+            while (tablaVirtual.next()) {
+                p = new Profesor();
+
+                p.setId(tablaVirtual.getInt(1));
+                p.setNombre(tablaVirtual.getString(2));
+                p.setRut(tablaVirtual.getString(3));
+
+                list_Profesores.add(p);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQL_ProfesorDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        c.desconectar();
+        return list_Profesores;
+    }
 }

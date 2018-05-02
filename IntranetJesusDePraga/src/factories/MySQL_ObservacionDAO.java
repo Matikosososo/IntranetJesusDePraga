@@ -60,4 +60,50 @@ public class MySQL_ObservacionDAO implements ObservacionDAO {
         String query = "delete from observacion where id = " + id;
         c.ejecutar(query);
     }
+
+    @Override
+    public Observacion bgetByID(String id) {
+        String query = "Select * from observacion where id = " + id;
+        Observacion o;
+        list_Observ = new ArrayList<>();
+        tablaVirtual = c.ejecutarSelect(query);
+        try {
+            if (tablaVirtual.next()) {
+                o = new Observacion();
+
+                o.setId(tablaVirtual.getInt(1));
+                o.setAlumno(tablaVirtual.getString(2));
+                o.setAsignatura(tablaVirtual.getString(3));
+                o.setObservacion(tablaVirtual.getString(4));
+                list_Observ.add(o);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQL_ObservacionDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        c.desconectar();
+        return list_Observ.get(0);
+    }
+
+    @Override
+    public List<Observacion> search(String exp) {
+        String query = "Select * from observacion LIKE '%"+exp+"%'";
+        Observacion o;
+        list_Observ = new ArrayList<>();
+        tablaVirtual = c.ejecutarSelect(query);
+        try {
+            while (tablaVirtual.next()) {
+                o = new Observacion();
+
+                o.setId(tablaVirtual.getInt(1));
+                o.setAlumno(tablaVirtual.getString(2));
+                o.setAsignatura(tablaVirtual.getString(3));
+                o.setObservacion(tablaVirtual.getString(4));
+                list_Observ.add(o);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQL_ObservacionDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        c.desconectar();
+        return list_Observ;
+    }
 }

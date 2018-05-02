@@ -12,4 +12,8 @@ public interface ProfesorDAO {
     void update(Profesor p);
 
     void delete(String id);
+    
+    Profesor getByID(String id);
+    
+    List<Profesor> search(String exp);
 }

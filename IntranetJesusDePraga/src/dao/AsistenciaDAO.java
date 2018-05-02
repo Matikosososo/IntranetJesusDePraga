@@ -12,4 +12,8 @@ public interface AsistenciaDAO {
     void update(Asistencia a);
 
     void delete(String id);
+    
+    Asistencia getByID(String id);
+    
+    List<Asistencia> search(String exp);
 }

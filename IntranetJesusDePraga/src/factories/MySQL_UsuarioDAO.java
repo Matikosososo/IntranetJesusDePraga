@@ -60,4 +60,50 @@ public class MySQL_UsuarioDAO implements UsuarioDAO {
         String query = "delete from usuario where id = " + id;
         c.ejecutar(query);
     }
+
+    @Override
+    public Usuario getByID(String id) {
+        String query = "Select * from usuario";
+        Usuario u;
+        list_Usuarios = new ArrayList<>();
+        tablaVirtual = c.ejecutarSelect(query);
+        try {
+            if (tablaVirtual.next()) {
+                u = new Usuario();
+
+                u.setId(tablaVirtual.getInt(1));
+                u.setRut_usuario(tablaVirtual.getString(2));
+                u.setTipo(tablaVirtual.getInt(3));
+                u.setContrasenia(tablaVirtual.getString(4));
+                list_Usuarios.add(u);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQL_UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        c.desconectar();
+        return list_Usuarios.get(0);
+    }
+
+    @Override
+    public List<Usuario> search(String exp) {
+        String query = "Select * from usuario LIKE '%"+exp+"%'";
+        Usuario u;
+        list_Usuarios = new ArrayList<>();
+        tablaVirtual = c.ejecutarSelect(query);
+        try {
+            while (tablaVirtual.next()) {
+                u = new Usuario();
+
+                u.setId(tablaVirtual.getInt(1));
+                u.setRut_usuario(tablaVirtual.getString(2));
+                u.setTipo(tablaVirtual.getInt(3));
+                u.setContrasenia(tablaVirtual.getString(4));
+                list_Usuarios.add(u);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQL_UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        c.desconectar();
+        return list_Usuarios;
+    }
 }

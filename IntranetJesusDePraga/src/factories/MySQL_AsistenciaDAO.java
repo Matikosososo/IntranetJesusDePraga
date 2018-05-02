@@ -60,4 +60,50 @@ public class MySQL_AsistenciaDAO implements AsistenciaDAO {
         String query = "delete from asistencia where id = " + id;
         c.ejecutar(query);
     }
+
+    @Override
+    public Asistencia getByID(String id) {
+        String query = "Select * from asistencia id = " + id;
+        Asistencia a;
+        list_Asistencia = new ArrayList<>();
+        tablaVirtual = c.ejecutarSelect(query);
+        try {
+            if (tablaVirtual.next()) {
+                a = new Asistencia();
+
+                a.setId(tablaVirtual.getInt(1));
+                a.setAlumno(tablaVirtual.getString(2));
+                a.setAsignatura(tablaVirtual.getString(3));
+                a.setFecha(tablaVirtual.getString(4));
+                list_Asistencia.add(a);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQL_AsistenciaDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        c.desconectar();
+        return list_Asistencia.get(0);
+    }
+
+    @Override
+    public List<Asistencia> search(String exp) {
+        String query = "Select * from asistencia LIKE '%"+exp+"%'";
+        Asistencia a;
+        list_Asistencia = new ArrayList<>();
+        tablaVirtual = c.ejecutarSelect(query);
+        try {
+            while (tablaVirtual.next()) {
+                a = new Asistencia();
+
+                a.setId(tablaVirtual.getInt(1));
+                a.setAlumno(tablaVirtual.getString(2));
+                a.setAsignatura(tablaVirtual.getString(3));
+                a.setFecha(tablaVirtual.getString(4));
+                list_Asistencia.add(a);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQL_AsistenciaDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        c.desconectar();
+        return list_Asistencia;
+    }
 }

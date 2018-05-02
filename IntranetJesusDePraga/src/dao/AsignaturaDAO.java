@@ -12,4 +12,8 @@ public interface AsignaturaDAO {
     void update(Asignatura a);
 
     void delete(String id);
+    
+    Asignatura getByID(String id);
+    
+    List<Asignatura> search(String exp);
 }

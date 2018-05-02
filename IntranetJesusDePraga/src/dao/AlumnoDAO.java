@@ -12,4 +12,8 @@ public interface AlumnoDAO {
     void update(Alumno a);
 
     void delete(String id);
+    
+    Alumno getByID(String id);
+    
+    List<Alumno> search(String exp);
 }

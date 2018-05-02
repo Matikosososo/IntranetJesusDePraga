@@ -58,4 +58,46 @@ public class MySQL_TipoUsuarioDAO implements TipoUsuarioDAO {
         String query = "delete from tipo_de_usuario where id = " + id;
         c.ejecutar(query);
     }
+
+    @Override
+    public Tipo_usuario getByID(String id) {
+        String query = "Select * from tipo_de_usuario id = " + id;
+        Tipo_usuario tU;
+        list_TipoUsuarios = new ArrayList<>();
+        tablaVirtual = c.ejecutarSelect(query);
+        try {
+            if (tablaVirtual.next()) {
+                tU = new Tipo_usuario();
+
+                tU.setId(tablaVirtual.getInt(1));
+                tU.setTipo(tablaVirtual.getString(2));
+                list_TipoUsuarios.add(tU);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQL_TipoUsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        c.desconectar();
+        return list_TipoUsuarios.get(0);
+    }
+
+    @Override
+    public List<Tipo_usuario> search(String exp) {
+        String query = "Select * from tipo_de_usuario LIKE '%"+exp+"%'";
+        Tipo_usuario tU;
+        list_TipoUsuarios = new ArrayList<>();
+        tablaVirtual = c.ejecutarSelect(query);
+        try {
+            while (tablaVirtual.next()) {
+                tU = new Tipo_usuario();
+
+                tU.setId(tablaVirtual.getInt(1));
+                tU.setTipo(tablaVirtual.getString(2));
+                list_TipoUsuarios.add(tU);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQL_TipoUsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        c.desconectar();
+        return list_TipoUsuarios;
+    }
 }

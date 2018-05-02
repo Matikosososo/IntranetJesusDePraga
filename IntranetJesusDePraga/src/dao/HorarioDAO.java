@@ -12,4 +12,8 @@ public interface HorarioDAO {
     void update(Horario h);
 
     void delete(String id);
+    
+    Horario getByID(String id);
+    
+    List<Horario> search(String exp);
 }

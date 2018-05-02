@@ -12,4 +12,8 @@ public interface NotaDAO {
     void update(Nota n);
 
     void delete(String id);
+    
+    Nota getByID(String id);
+    
+    List<Nota> search(String exp);
 }
