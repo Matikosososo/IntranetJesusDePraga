@@ -33,6 +33,7 @@ public class jFrameMenuAlumno extends javax.swing.JFrame {
         btnVerMensajeAlumno = new javax.swing.JButton();
         btnCerrarSesionAlumno = new javax.swing.JButton();
         btnCambiarPassAlumno = new javax.swing.JButton();
+        btnCambiarPassAlumno1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -47,10 +48,17 @@ public class jFrameMenuAlumno extends javax.swing.JFrame {
 
         btnCerrarSesionAlumno.setText("Cerrar Sesión");
 
-        btnCambiarPassAlumno.setText("Cambiar Contraseña");
+        btnCambiarPassAlumno.setText("Horario");
         btnCambiarPassAlumno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCambiarPassAlumnoActionPerformed(evt);
+            }
+        });
+
+        btnCambiarPassAlumno1.setText("Cambiar Contraseña");
+        btnCambiarPassAlumno1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCambiarPassAlumno1ActionPerformed(evt);
             }
         });
 
@@ -59,10 +67,6 @@ public class jFrameMenuAlumno extends javax.swing.JFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(btnCerrarSesionAlumno)
-                .addGap(93, 93, 93))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnVerNotaAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -70,8 +74,16 @@ public class jFrameMenuAlumno extends javax.swing.JFrame {
                     .addComponent(btnCambiarPassAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(58, 58, 58))
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(72, 72, 72)
-                .addComponent(jLabel11)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(72, 72, 72)
+                        .addComponent(jLabel11))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(43, 43, 43)
+                        .addComponent(btnCerrarSesionAlumno))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btnCambiarPassAlumno1, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -82,12 +94,14 @@ public class jFrameMenuAlumno extends javax.swing.JFrame {
                 .addGap(26, 26, 26)
                 .addComponent(btnVerNotaAlumno)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnCambiarPassAlumno)
+                .addGap(11, 11, 11)
                 .addComponent(btnVerMensajeAlumno)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnCambiarPassAlumno)
-                .addGap(35, 35, 35)
+                .addComponent(btnCambiarPassAlumno1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
                 .addComponent(btnCerrarSesionAlumno)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addGap(41, 41, 41))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -113,6 +127,10 @@ public class jFrameMenuAlumno extends javax.swing.JFrame {
     private void btnCambiarPassAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCambiarPassAlumnoActionPerformed
 
     }//GEN-LAST:event_btnCambiarPassAlumnoActionPerformed
+
+    private void btnCambiarPassAlumno1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCambiarPassAlumno1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnCambiarPassAlumno1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -151,6 +169,7 @@ public class jFrameMenuAlumno extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCambiarPassAlumno;
+    private javax.swing.JButton btnCambiarPassAlumno1;
     private javax.swing.JButton btnCerrarSesionAlumno;
     private javax.swing.JButton btnVerMensajeAlumno;
     private javax.swing.JButton btnVerNotaAlumno;
