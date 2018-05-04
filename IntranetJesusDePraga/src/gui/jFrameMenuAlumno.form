@@ -114,11 +114,17 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Ver Notas"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnVerNotaAlumnoActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnVerMensajeAlumno">
           <Properties>
             <Property name="text" type="java.lang.String" value="Ver Mensajes De profesores"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnVerMensajeAlumnoActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnCerrarSesionAlumno">
           <Properties>

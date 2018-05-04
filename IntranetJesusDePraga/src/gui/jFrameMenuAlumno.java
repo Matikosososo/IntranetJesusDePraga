@@ -43,8 +43,18 @@ public class jFrameMenuAlumno extends javax.swing.JFrame {
         jLabel11.setText("Bienvenido/a");
 
         btnVerNotaAlumno.setText("Ver Notas");
+        btnVerNotaAlumno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVerNotaAlumnoActionPerformed(evt);
+            }
+        });
 
         btnVerMensajeAlumno.setText("Ver Mensajes De profesores");
+        btnVerMensajeAlumno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVerMensajeAlumnoActionPerformed(evt);
+            }
+        });
 
         btnCerrarSesionAlumno.setText("Cerrar Sesión");
 
@@ -129,8 +139,20 @@ public class jFrameMenuAlumno extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCambiarPassAlumnoActionPerformed
 
     private void btnCambiarPassAlumno1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCambiarPassAlumno1ActionPerformed
-        // TODO add your handling code here:
+        jFramePassword verFormPass = new jFramePassword();
+        verFormPass.setVisible(true);
     }//GEN-LAST:event_btnCambiarPassAlumno1ActionPerformed
+
+    private void btnVerNotaAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerNotaAlumnoActionPerformed
+        JFrameAsignatura verFormNotas = new JFrameAsignatura();
+        verFormNotas.setVisible(true);
+    }//GEN-LAST:event_btnVerNotaAlumnoActionPerformed
+
+    private void btnVerMensajeAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerMensajeAlumnoActionPerformed
+        jFrameMensaje verFormMensaje = new jFrameMensaje();
+        verFormMensaje.setVisible(true);
+        
+    }//GEN-LAST:event_btnVerMensajeAlumnoActionPerformed
 
     /**
      * @param args the command line arguments

@@ -153,14 +153,7 @@ public class IntranetJesusDePraga extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_login_ingresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_login_ingresarActionPerformed
-    /*
-        LEER ESTO y Comentar con el equipo si les parece o no!!
-        
-        AL ingresar el usuario y su contraseña, dependera de su tipo de Usuario
-        para redireccionar a cada menu que se creo
-        (ej: si es alumno --> ira al menu de alumno y asi con los demas tipos de usuarios)
-        
-        */  
+    
     }//GEN-LAST:event_btn_login_ingresarActionPerformed
 
     /**

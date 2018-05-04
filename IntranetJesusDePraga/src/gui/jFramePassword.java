@@ -151,7 +151,7 @@ public class jFramePassword extends javax.swing.JFrame {
     }//GEN-LAST:event_txtContraseñaActionPerformed
 
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
-
+        this.setVisible(false);
     }//GEN-LAST:event_btnVolverActionPerformed
 
     /**
