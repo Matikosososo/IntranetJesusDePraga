@@ -44,6 +44,11 @@ public class jFrameMenuProfesor extends javax.swing.JFrame {
         jLabel12.setText("Bienvenido/a");
 
         btnSubirNotaProfesor.setText("Subir Notas");
+        btnSubirNotaProfesor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSubirNotaProfesorActionPerformed(evt);
+            }
+        });
 
         btnModificarNotaProfesor.setText("Modificar Notas");
 
@@ -59,6 +64,11 @@ public class jFrameMenuProfesor extends javax.swing.JFrame {
         jButton4.setText("Enviar un Mensaje");
 
         btnCambiarPassProfesor.setText("Cambiar Contraseña");
+        btnCambiarPassProfesor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCambiarPassProfesorActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -124,6 +134,16 @@ public class jFrameMenuProfesor extends javax.swing.JFrame {
     private void btnCerrarSesionProfesorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarSesionProfesorActionPerformed
 
     }//GEN-LAST:event_btnCerrarSesionProfesorActionPerformed
+
+    private void btnCambiarPassProfesorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCambiarPassProfesorActionPerformed
+        jFramePassword verFormPass = new jFramePassword();
+        verFormPass.setVisible(true);
+    }//GEN-LAST:event_btnCambiarPassProfesorActionPerformed
+
+    private void btnSubirNotaProfesorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubirNotaProfesorActionPerformed
+        jFrameSubirNota verFormSubirN = new jFrameSubirNota();
+        verFormSubirN.setVisible(true);
+    }//GEN-LAST:event_btnSubirNotaProfesorActionPerformed
 
     /**
      * @param args the command line arguments

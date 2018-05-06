@@ -111,6 +111,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Subir Notas"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSubirNotaProfesorActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnModificarNotaProfesor">
           <Properties>
@@ -139,6 +142,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Cambiar Contrase&#xf1;a"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCambiarPassProfesorActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
