@@ -43,7 +43,7 @@ public class IntranetJesusDePraga extends javax.swing.JFrame {
 
         jPanelInicio.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jLabel1.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Intranet Jesús de Praga");
         jLabel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
