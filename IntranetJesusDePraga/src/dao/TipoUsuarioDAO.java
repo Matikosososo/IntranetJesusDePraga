@@ -16,4 +16,5 @@ public interface TipoUsuarioDAO {
     Tipo_usuario getByID(String id);
     
     List<Tipo_usuario>search(String exp);
+    
 }

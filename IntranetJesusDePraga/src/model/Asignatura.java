@@ -42,6 +42,13 @@ public class Asignatura {
     public void setProfesor(String profesor) {
         this.profesor = profesor;
     }
+
+    @Override
+    public String toString() {
+        return nombre;
+    }
+
+    
     
     
 }

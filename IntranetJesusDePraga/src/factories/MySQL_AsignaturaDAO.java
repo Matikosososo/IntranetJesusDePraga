@@ -106,4 +106,26 @@ public class MySQL_AsignaturaDAO implements AsignaturaDAO {
         return list_Asignatura;
     }
 
+    @Override
+    public List<Asignatura> getByProfe(int id) {
+        String query = "Select * from asignatura where profesor = " + id;
+        Asignatura a;
+        list_Asignatura = new ArrayList<>();
+        tablaVirtual = c.ejecutarSelect(query);
+        try {
+            while (tablaVirtual.next()) {
+                a = new Asignatura();
+
+                a.setId(tablaVirtual.getInt(1));
+                a.setNombre(tablaVirtual.getString(2));
+                a.setProfesor(tablaVirtual.getString(3));
+                list_Asignatura.add(a);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQL_AsignaturaDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        c.desconectar();
+        return list_Asignatura;
+    }
+
 }

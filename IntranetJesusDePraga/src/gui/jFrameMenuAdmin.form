@@ -70,6 +70,7 @@
                               </Group>
                           </Group>
                       </Group>
+                      <Component id="jInvisibleAdmin" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="18" max="32767" attributes="0"/>
               </Group>
@@ -93,6 +94,7 @@
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="btnCerrarSesionApoderado" min="-2" max="-2" attributes="0"/>
                   <EmptySpace pref="42" max="32767" attributes="0"/>
+                  <Component id="jInvisibleAdmin" min="-2" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -144,6 +146,11 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Administrar Horario"/>
           </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jInvisibleAdmin">
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+          </AuxValues>
         </Component>
       </SubComponents>
     </Container>

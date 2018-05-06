@@ -1,15 +1,19 @@
 package gui;
 
+import exception.MotorNoSoportadoException;
+import factories.DAOFactory;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import model.Usuario;
 
 public class IntranetJesusDePraga extends javax.swing.JFrame {
 
-    /**
-     * Creates new form IntranetJesusDePraga
-     */
+    Usuario user;
+
     public IntranetJesusDePraga() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -62,6 +66,11 @@ public class IntranetJesusDePraga extends javax.swing.JFrame {
 
         txt_login_usuario.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txt_login_usuario.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txt_login_usuario.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txt_login_usuarioKeyPressed(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -69,6 +78,11 @@ public class IntranetJesusDePraga extends javax.swing.JFrame {
 
         txt_login_clave.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txt_login_clave.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txt_login_clave.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txt_login_claveKeyPressed(evt);
+            }
+        });
 
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/icon/intranet.png"))); // NOI18N
@@ -153,8 +167,172 @@ public class IntranetJesusDePraga extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_login_ingresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_login_ingresarActionPerformed
-    
+
+        try {
+            String rut = txt_login_usuario.getText();
+            String password = new String(txt_login_clave.getPassword());
+
+            password = md5(password);
+
+            jFrameMenuAdmin menuAdmin = new jFrameMenuAdmin();
+            jFrameMenuAlumno menuAlumno = new jFrameMenuAlumno();
+            jFrameMenuProfesor menuProfe = new jFrameMenuProfesor();
+
+            if (rut.equals("") || !rut.equals(DAOFactory.getInstance().getUsuarioDAO(DAOFactory.Motor.MY_SQL).getByRut(rut))) {
+                JOptionPane.showMessageDialog(null, "Usuario Invalido", "ERROR", JOptionPane.OK_OPTION);
+                txt_login_usuario.select(0, txt_login_usuario.getText().length());
+                txt_login_usuario.requestFocus();
+                txt_login_clave.setText(null);
+            } else {
+                if (!password.equals(DAOFactory.getInstance().getUsuarioDAO(DAOFactory.Motor.MY_SQL).getByPass(password)) || (password.equals(""))) {
+                    JOptionPane.showMessageDialog(null, "Contraseña Incorrecta", "ERROR", JOptionPane.OK_OPTION);
+                    txt_login_clave.setText(null);
+                    txt_login_clave.requestFocus();
+                } else {
+                    user = DAOFactory.getInstance().getUsuarioDAO(DAOFactory.Motor.MY_SQL).search(rut).get(0);
+                    System.out.println(user.getTipo());
+                    switch (user.getTipo()) {
+                        case 1:
+                            menuProfe.setVisible(true);
+                            menuProfe.jinvisible.setText(rut);//hacer para todos
+                            this.setVisible(false);
+                            txt_login_clave.setText(null);
+                            break;
+
+                        case 2:
+                            menuAlumno.setVisible(true);
+                            menuAlumno.jInvisibleAlumno.setText(rut);
+                            this.setVisible(false);
+                            txt_login_clave.setText(null);
+                            break;
+                        case 3:
+                            menuAdmin.setVisible(true);
+                            menuAdmin.jInvisibleAdmin.setText(rut);
+                            this.setVisible(false);
+                            txt_login_clave.setText(null);
+                            break;
+                    }
+                }
+            }
+        } catch (MotorNoSoportadoException ex) {
+            Logger.getLogger(IntranetJesusDePraga.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(IntranetJesusDePraga.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(IntranetJesusDePraga.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }//GEN-LAST:event_btn_login_ingresarActionPerformed
+
+    private void txt_login_claveKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_login_claveKeyPressed
+        if (evt.getKeyCode() == evt.VK_ENTER) {
+            try {
+                String rut = txt_login_usuario.getText();
+                String password = new String(txt_login_clave.getPassword());
+
+                password = md5(password);
+
+                jFrameMenuAdmin menuAdmin = new jFrameMenuAdmin();
+                jFrameMenuAlumno menuAlumno = new jFrameMenuAlumno();
+                jFrameMenuProfesor menuProfe = new jFrameMenuProfesor();
+
+                if (rut.equals("") || !rut.equals(DAOFactory.getInstance().getUsuarioDAO(DAOFactory.Motor.MY_SQL).getByRut(rut))) {
+                    JOptionPane.showMessageDialog(null, "Usuario Invalido", "ERROR", JOptionPane.OK_OPTION);
+                    txt_login_usuario.select(0, txt_login_usuario.getText().length());
+                    txt_login_usuario.requestFocus();
+                    txt_login_clave.setText(null);
+                } else {
+                    if (!password.equals(DAOFactory.getInstance().getUsuarioDAO(DAOFactory.Motor.MY_SQL).getByPass(password)) || (password.equals(""))) {
+                        JOptionPane.showMessageDialog(null, "Contraseña Incorrecta", "ERROR", JOptionPane.OK_OPTION);
+                        txt_login_clave.setText(null);
+                        txt_login_clave.requestFocus();
+                    } else {
+                        user = DAOFactory.getInstance().getUsuarioDAO(DAOFactory.Motor.MY_SQL).search(rut).get(0);
+                        System.out.println(user.getTipo());
+                        switch (user.getTipo()) {
+                            case 1:
+                                menuProfe.setVisible(true);
+                                this.setVisible(false);
+                                txt_login_clave.setText(null);
+                                break;
+
+                            case 2:
+                                menuAlumno.setVisible(true);
+                                this.setVisible(false);
+                                txt_login_clave.setText(null);
+                                break;
+                            case 3:
+                                menuAdmin.setVisible(true);
+                                this.setVisible(false);
+                                txt_login_clave.setText(null);
+                                break;
+                        }
+                    }
+                }
+            } catch (MotorNoSoportadoException ex) {
+                Logger.getLogger(IntranetJesusDePraga.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(IntranetJesusDePraga.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                Logger.getLogger(IntranetJesusDePraga.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_txt_login_claveKeyPressed
+
+    private void txt_login_usuarioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_login_usuarioKeyPressed
+        if (evt.getKeyCode() == evt.VK_ENTER) {
+            try {
+                String rut = txt_login_usuario.getText();
+                String password = new String(txt_login_clave.getPassword());
+
+                password = md5(password);
+
+                jFrameMenuAdmin menuAdmin = new jFrameMenuAdmin();
+                jFrameMenuAlumno menuAlumno = new jFrameMenuAlumno();
+                jFrameMenuProfesor menuProfe = new jFrameMenuProfesor();
+
+                if (rut.equals("") || !rut.equals(DAOFactory.getInstance().getUsuarioDAO(DAOFactory.Motor.MY_SQL).getByRut(rut))) {
+                    JOptionPane.showMessageDialog(null, "Usuario Invalido", "ERROR", JOptionPane.OK_OPTION);
+                    txt_login_usuario.select(0, txt_login_usuario.getText().length());
+                    txt_login_usuario.requestFocus();
+                    txt_login_clave.setText(null);
+                } else {
+                    if (!password.equals(DAOFactory.getInstance().getUsuarioDAO(DAOFactory.Motor.MY_SQL).getByPass(password)) || (password.equals(""))) {
+                        JOptionPane.showMessageDialog(null, "Contraseña Incorrecta", "ERROR", JOptionPane.OK_OPTION);
+                        txt_login_clave.setText(null);
+                        txt_login_clave.requestFocus();
+                    } else {
+                        user = DAOFactory.getInstance().getUsuarioDAO(DAOFactory.Motor.MY_SQL).search(rut).get(0);
+                        System.out.println(user.getTipo());
+                        switch (user.getTipo()) {
+                            case 1:
+                                menuProfe.setVisible(true);
+                                this.setVisible(false);
+                                txt_login_clave.setText(null);
+                                break;
+
+                            case 2:
+                                menuAlumno.setVisible(true);
+                                this.setVisible(false);
+                                txt_login_clave.setText(null);
+                                break;
+                            case 3:
+                                menuAdmin.setVisible(true);
+                                this.setVisible(false);
+                                txt_login_clave.setText(null);
+                                break;
+                        }
+                    }
+                }
+            } catch (MotorNoSoportadoException ex) {
+                Logger.getLogger(IntranetJesusDePraga.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(IntranetJesusDePraga.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                Logger.getLogger(IntranetJesusDePraga.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_txt_login_usuarioKeyPressed
 
     /**
      * @param args the command line arguments
@@ -165,7 +343,7 @@ public class IntranetJesusDePraga extends javax.swing.JFrame {
             //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
             /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
             * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
-            */
+             */
             UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
             //</editor-fold>
         } catch (ClassNotFoundException ex) {
@@ -177,13 +355,13 @@ public class IntranetJesusDePraga extends javax.swing.JFrame {
         } catch (UnsupportedLookAndFeelException ex) {
             Logger.getLogger(IntranetJesusDePraga.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new IntranetJesusDePraga().setVisible(true);
-                
+
             }
         });
     }
@@ -200,4 +378,23 @@ public class IntranetJesusDePraga extends javax.swing.JFrame {
     private javax.swing.JPasswordField txt_login_clave;
     private javax.swing.JTextField txt_login_usuario;
     // End of variables declaration//GEN-END:variables
+
+    private static String getHash(String txt, String hashType) {
+        try {
+            java.security.MessageDigest md = java.security.MessageDigest.getInstance(hashType);
+            byte[] array = md.digest(txt.getBytes());
+            StringBuffer sb = new StringBuffer();
+            for (int i = 0; i < array.length; ++i) {
+                sb.append(Integer.toHexString((array[i] & 0xFF) | 0x100).substring(1, 3));
+            }
+            return sb.toString();
+        } catch (java.security.NoSuchAlgorithmException e) {
+            System.out.println(e.getMessage());
+        }
+        return null;
+    }
+
+    private String md5(String txt) {
+        return getHash(txt, "MD5");
+    }
 }

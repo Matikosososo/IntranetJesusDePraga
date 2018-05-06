@@ -5,10 +5,6 @@
  */
 package gui;
 
-/**
- *
- * @author Sammy Guergachi <sguergachi at gmail.com>
- */
 public class jFrameMenuProfesor extends javax.swing.JFrame {
 
     /**
@@ -16,6 +12,9 @@ public class jFrameMenuProfesor extends javax.swing.JFrame {
      */
     public jFrameMenuProfesor() {
         initComponents();
+        jinvisible.setVisible(false);
+        
+        
     }
 
     /**
@@ -35,10 +34,12 @@ public class jFrameMenuProfesor extends javax.swing.JFrame {
         btnCerrarSesionProfesor = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         btnCambiarPassProfesor = new javax.swing.JButton();
+        jinvisible = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Profesor"));
+        jPanel4.setName(""); // NOI18N
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel12.setText("Bienvenido/a");
@@ -75,21 +76,23 @@ public class jFrameMenuProfesor extends javax.swing.JFrame {
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(47, 47, 47)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnSubirNotaProfesor, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnModificarNotaProfesor, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnRegistrarAsistenciaProfesor, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel4Layout.createSequentialGroup()
-                            .addGap(22, 22, 22)
-                            .addComponent(jLabel12))
-                        .addGroup(jPanel4Layout.createSequentialGroup()
-                            .addGap(18, 18, 18)
-                            .addComponent(btnCerrarSesionProfesor))
-                        .addComponent(btnCambiarPassProfesor)))
-                .addContainerGap(41, Short.MAX_VALUE))
+                .addComponent(jinvisible, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(btnCerrarSesionProfesor))
+                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(btnSubirNotaProfesor, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnModificarNotaProfesor, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnRegistrarAsistenciaProfesor, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addGap(22, 22, 22)
+                                .addComponent(jLabel12))
+                            .addComponent(btnCambiarPassProfesor))))
+                .addContainerGap(39, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -106,9 +109,13 @@ public class jFrameMenuProfesor extends javax.swing.JFrame {
                 .addComponent(jButton4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnCambiarPassProfesor)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnCerrarSesionProfesor)
-                .addGap(19, 19, 19))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jinvisible, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(0, 3, Short.MAX_VALUE)
+                        .addComponent(btnCerrarSesionProfesor)))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -132,7 +139,7 @@ public class jFrameMenuProfesor extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCerrarSesionProfesorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarSesionProfesorActionPerformed
-
+        System.out.println(jinvisible.getText());
     }//GEN-LAST:event_btnCerrarSesionProfesorActionPerformed
 
     private void btnCambiarPassProfesorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCambiarPassProfesorActionPerformed
@@ -143,6 +150,9 @@ public class jFrameMenuProfesor extends javax.swing.JFrame {
     private void btnSubirNotaProfesorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubirNotaProfesorActionPerformed
         jFrameSubirNota verFormSubirN = new jFrameSubirNota();
         verFormSubirN.setVisible(true);
+        
+        String rutVaribale = jinvisible.getText();
+        verFormSubirN.jinvisible2.setText(rutVaribale);
     }//GEN-LAST:event_btnSubirNotaProfesorActionPerformed
 
     /**
@@ -189,5 +199,6 @@ public class jFrameMenuProfesor extends javax.swing.JFrame {
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JPanel jPanel4;
+    public static javax.swing.JLabel jinvisible;
     // End of variables declaration//GEN-END:variables
 }

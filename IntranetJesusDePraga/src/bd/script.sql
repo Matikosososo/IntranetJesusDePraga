@@ -6,6 +6,7 @@ create table tipo_de_usuario(
     id int primary key auto_increment,
     nombre varchar(13)     
 );
+
 insert into tipo_de_usuario values(null,"profesor");
 insert into tipo_de_usuario values(null,"alumno");
 insert into tipo_de_usuario values(null,"Admin");
@@ -18,7 +19,10 @@ create table usuario(
     contraseña varchar(50),
     foreign key (tipo_de_usuario) references tipo_de_usuario(id)   
 );
-insert into usuario values(null,'21.870.280-5',2,md5('123456'));
+insert into usuario values(null,'22-2',2,md5('1234'));
+insert into usuario values(null, '11-1',1,md5('1234'));
+insert into usuario values(null, '00-0',3,md5('1234'));
+insert into usuario values(null,'33-3',2,md5('1234'));
 select contraseña FROM usuario;
 
 
@@ -29,12 +33,18 @@ create table profesor(
     rut varchar(13) UNIQUE
 );
 
+insert into profesor values(null, 'patito', '11-1');
+insert into profesor values(null, 'maria', '00-0');
+
 create table asignatura(
     id int primary key auto_increment,
     nombre varchar(100),
     profesor int,
     foreign key (profesor) references profesor(id)
 );
+
+insert into asignatura values(null, 'Programacion', 1);
+insert into asignatura values(null, 'Arquitectura de Software', 1);
 
 create table alumno(
     id int primary key auto_increment,
@@ -44,6 +54,9 @@ create table alumno(
     foreign key(asignatura_fk) references asignatura(id)
     
 );
+
+insert into alumno values(null, 'vero', '22-2',1);
+insert into alumno values(null, 'Mati', '33-3',2);
 
 create table nota(
     id int primary key auto_increment,
@@ -84,5 +97,15 @@ create table asistencia(
     foreign key(alumno_fk) references alumno (id),
     fecha date
 );
-
+/*
 select * from alumno
+select * from asignatura
+select * from profesor
+
+Select * from usuario where rut = '11-1'
+
+Select * from usuario where rut LIKE '%11-1%'
+
+Select * from alumno where asignatura_fk = 1
+
+*/

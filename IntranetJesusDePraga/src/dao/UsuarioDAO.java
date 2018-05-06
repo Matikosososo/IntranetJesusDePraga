@@ -1,6 +1,7 @@
 package dao;
 
 import java.util.List;
+import model.Tipo_usuario;
 import model.Usuario;
 
 public interface UsuarioDAO {
@@ -16,4 +17,8 @@ public interface UsuarioDAO {
     Usuario getByID(String id);
     
     List<Usuario> search(String exp);
+    
+    String getByRut(String rut);
+    
+    String getByPass(String pass);
 }

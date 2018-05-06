@@ -115,4 +115,28 @@ public class MySQL_AlumnoDAO implements AlumnoDAO {
         return list_ALumnos;
     }
 
+    @Override
+    public List<Alumno> getByAsignatura(int i) {
+        String query = "Select * from alumno where asignatura_fk = "+i;
+        Alumno a;
+        list_ALumnos = new ArrayList<>();
+        tablaVirtual = c.ejecutarSelect(query);
+        try {
+            while (tablaVirtual.next()) {
+                a = new Alumno();
+
+                a.setId(tablaVirtual.getInt(1));
+                a.setNombre(tablaVirtual.getString(2));
+                a.setRut(tablaVirtual.getString(3));
+                a.setAsignatura(tablaVirtual.getString(4));
+
+                list_ALumnos.add(a);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQL_AlumnoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        c.desconectar();
+        return list_ALumnos;
+    }
+
 }

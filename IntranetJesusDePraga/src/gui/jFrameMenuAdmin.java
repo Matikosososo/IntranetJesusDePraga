@@ -35,6 +35,7 @@ public class jFrameMenuAdmin extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
+        jInvisibleAdmin = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -92,7 +93,8 @@ public class jFrameMenuAdmin extends javax.swing.JFrame {
                                     .addComponent(btnCambioPassApoderado)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addGap(10, 10, 10)
-                                        .addComponent(btnCerrarSesionApoderado)))))))
+                                        .addComponent(btnCerrarSesionApoderado))))))
+                    .addComponent(jInvisibleAdmin))
                 .addContainerGap(18, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -112,7 +114,8 @@ public class jFrameMenuAdmin extends javax.swing.JFrame {
                 .addComponent(btnCambioPassApoderado)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnCerrarSesionApoderado)
-                .addContainerGap(42, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                .addComponent(jInvisibleAdmin))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -183,6 +186,7 @@ public class jFrameMenuAdmin extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    public static javax.swing.JLabel jInvisibleAdmin;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables

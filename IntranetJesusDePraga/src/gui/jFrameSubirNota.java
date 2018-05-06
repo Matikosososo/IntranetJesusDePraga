@@ -5,17 +5,34 @@
  */
 package gui;
 
+import exception.MotorNoSoportadoException;
+import factories.DAOFactory;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.ComboBoxModel;
+import javax.swing.JComboBox;
+import model.Alumno;
+import model.Asignatura;
+import model.Usuario;
+
 /**
  *
  * @author naxho
  */
 public class jFrameSubirNota extends javax.swing.JFrame {
 
-    /**
-     * Creates new form jFrameSubirNota
-     */
+    private List<Asignatura> listaAsig = new ArrayList<>();
+    private List<Alumno> listaAlum;
+    Usuario user;
+
     public jFrameSubirNota() {
+
         initComponents();
+        init();
+        jinvisible2.setVisible(false);
     }
 
     /**
@@ -30,7 +47,7 @@ public class jFrameSubirNota extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        cbo_Alumno = new javax.swing.JComboBox<>();
+        jcbox_Alumno = new javax.swing.JComboBox();
         jLabel4 = new javax.swing.JLabel();
         txtPorcentajeNota = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
@@ -41,17 +58,17 @@ public class jFrameSubirNota extends javax.swing.JFrame {
         btn_subirNota = new javax.swing.JButton();
         btn_atrasN = new javax.swing.JButton();
         btn_LimpiarN = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jcbox_asignatura = new javax.swing.JComboBox();
+        jinvisible2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Subir Nota"));
+        jPanel1.setPreferredSize(new java.awt.Dimension(297, 280));
 
         jLabel1.setText("Asignatura: ");
 
         jLabel3.setText("Alumno:");
-
-        cbo_Alumno.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel4.setText("Porcentaje:");
 
@@ -78,7 +95,22 @@ public class jFrameSubirNota extends javax.swing.JFrame {
 
         btn_LimpiarN.setText("Limpiar");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcbox_asignatura.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jcbox_asignaturaItemStateChanged(evt);
+            }
+        });
+        jcbox_asignatura.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jcbox_asignaturaMouseEntered(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jcbox_asignaturaMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jcbox_asignaturaMouseReleased(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -87,29 +119,32 @@ public class jFrameSubirNota extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE)
-                            .addComponent(cbo_TipoNota, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtPorcentajeNota)
-                            .addComponent(cbo_Alumno, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel5)
-                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(btn_atrasN, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btn_LimpiarN, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btn_subirNota)))
+                        .addComponent(btn_subirNota))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE)
+                                    .addComponent(cbo_TipoNota, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jcbox_asignatura, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(txtPorcentajeNota)
+                                    .addComponent(jcbox_Alumno, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel5))
+                            .addComponent(jinvisible2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -118,10 +153,10 @@ public class jFrameSubirNota extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jcbox_asignatura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cbo_Alumno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jcbox_Alumno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -137,7 +172,9 @@ public class jFrameSubirNota extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cbo_TipoNota, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 85, Short.MAX_VALUE)
+                .addGap(36, 36, 36)
+                .addComponent(jinvisible2, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_subirNota)
                     .addComponent(btn_atrasN)
@@ -156,9 +193,8 @@ public class jFrameSubirNota extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 288, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -168,6 +204,37 @@ public class jFrameSubirNota extends javax.swing.JFrame {
     private void btn_atrasNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_atrasNActionPerformed
         this.setVisible(false);
     }//GEN-LAST:event_btn_atrasNActionPerformed
+
+    private void jcbox_asignaturaMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jcbox_asignaturaMouseReleased
+
+    }//GEN-LAST:event_jcbox_asignaturaMouseReleased
+
+    private void jcbox_asignaturaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jcbox_asignaturaMousePressed
+
+    }//GEN-LAST:event_jcbox_asignaturaMousePressed
+
+    private void jcbox_asignaturaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jcbox_asignaturaMouseEntered
+
+    }//GEN-LAST:event_jcbox_asignaturaMouseEntered
+
+    private void jcbox_asignaturaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcbox_asignaturaItemStateChanged
+        jcbox_Alumno.removeAllItems();
+        try {
+            listaAlum = new ArrayList<>();
+
+            Asignatura a = (Asignatura) jcbox_asignatura.getSelectedItem();
+
+//            int asignaturaId =  jcbox_asignatura.getSelectedIndex()+1;
+            listaAlum = DAOFactory.getInstance().getAlumnoDAO(DAOFactory.Motor.MY_SQL).getByAsignatura(a.getId());
+            cargarAlumnos(listaAlum);
+        } catch (MotorNoSoportadoException ex) {
+            Logger.getLogger(jFrameSubirNota.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(jFrameSubirNota.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(jFrameSubirNota.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jcbox_asignaturaItemStateChanged
 
     /**
      * @param args the command line arguments
@@ -208,9 +275,7 @@ public class jFrameSubirNota extends javax.swing.JFrame {
     private javax.swing.JButton btn_LimpiarN;
     private javax.swing.JButton btn_atrasN;
     private javax.swing.JButton btn_subirNota;
-    private javax.swing.JComboBox<String> cbo_Alumno;
     private javax.swing.JComboBox<String> cbo_TipoNota;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -219,6 +284,40 @@ public class jFrameSubirNota extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JComboBox jcbox_Alumno;
+    private javax.swing.JComboBox jcbox_asignatura;
+    public static javax.swing.JLabel jinvisible2;
     private javax.swing.JTextField txtPorcentajeNota;
     // End of variables declaration//GEN-END:variables
+
+    private void init() {
+        cargarAsignaturas();
+
+    }
+
+    private void cargarAsignaturas() {
+
+        try {
+            String rut = jinvisible2.getText();
+            user = DAOFactory.getInstance().getUsuarioDAO(DAOFactory.Motor.MY_SQL).search(rut).get(0);
+            listaAsig = DAOFactory.getInstance().getAsignaturaDAO(DAOFactory.Motor.MY_SQL).getByProfe(user.getId());
+
+            for (Asignatura a : listaAsig) {
+                jcbox_asignatura.addItem(a);
+            }
+
+        } catch (MotorNoSoportadoException ex) {
+            Logger.getLogger(jFrameSubirNota.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(jFrameSubirNota.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(jFrameSubirNota.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private void cargarAlumnos(List list) {
+        for (Alumno al : listaAlum) {
+            jcbox_Alumno.addItem(al);
+        }
+    }
 }

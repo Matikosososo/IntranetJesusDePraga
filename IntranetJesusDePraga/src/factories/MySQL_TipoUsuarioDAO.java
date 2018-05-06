@@ -100,4 +100,5 @@ public class MySQL_TipoUsuarioDAO implements TipoUsuarioDAO {
         c.desconectar();
         return list_TipoUsuarios;
     }
+
 }

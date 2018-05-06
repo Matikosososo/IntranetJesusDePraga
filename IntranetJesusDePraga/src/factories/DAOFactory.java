@@ -28,7 +28,7 @@ public class DAOFactory {
         MY_SQL, ORACLE, MS_SQL
     }
     
-    public AlumnoDAO getAlumnoDAO(Motor motor) throws MotorNoSoportadoException, ClassNotFoundException, SQLException{
+    public AlumnoDAO getAlumnoDAO(Motor motor) throws MotorNoSoportadoException, SQLException, ClassNotFoundException{
         switch(motor){
             case MY_SQL:
                 return new MySQL_AlumnoDAO();

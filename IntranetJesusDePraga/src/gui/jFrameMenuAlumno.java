@@ -34,6 +34,7 @@ public class jFrameMenuAlumno extends javax.swing.JFrame {
         btnCerrarSesionAlumno = new javax.swing.JButton();
         btnCambiarPassAlumno = new javax.swing.JButton();
         btnCambiarPassAlumno1 = new javax.swing.JButton();
+        jInvisibleAlumno = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -93,7 +94,8 @@ public class jFrameMenuAlumno extends javax.swing.JFrame {
                         .addComponent(btnCerrarSesionAlumno))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(btnCambiarPassAlumno1, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnCambiarPassAlumno1, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jInvisibleAlumno))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -109,9 +111,10 @@ public class jFrameMenuAlumno extends javax.swing.JFrame {
                 .addComponent(btnVerMensajeAlumno)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnCambiarPassAlumno1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
                 .addComponent(btnCerrarSesionAlumno)
-                .addGap(41, 41, 41))
+                .addGap(27, 27, 27)
+                .addComponent(jInvisibleAlumno))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -195,6 +198,7 @@ public class jFrameMenuAlumno extends javax.swing.JFrame {
     private javax.swing.JButton btnCerrarSesionAlumno;
     private javax.swing.JButton btnVerMensajeAlumno;
     private javax.swing.JButton btnVerNotaAlumno;
+    public static javax.swing.JLabel jInvisibleAlumno;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JPanel jPanel3;
     // End of variables declaration//GEN-END:variables

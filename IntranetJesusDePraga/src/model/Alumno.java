@@ -53,6 +53,11 @@ public class Alumno {
     public void setAsignatura(String asignatura) {
         this.asignatura = asignatura;
     }
+
+    @Override
+    public String toString() {
+        return nombre;
+    }
     
     
 }
