@@ -5,10 +5,7 @@
  */
 package gui;
 
-/**
- *
- * @author Sammy Guergachi <sguergachi at gmail.com>
- */
+
 public class jFrameMenuAdmin extends javax.swing.JFrame {
 
     /**
@@ -16,6 +13,7 @@ public class jFrameMenuAdmin extends javax.swing.JFrame {
      */
     public jFrameMenuAdmin() {
         initComponents();
+        jInvisibleAdmin.setVisible(false);
     }
 
     /**
@@ -158,7 +156,10 @@ public class jFrameMenuAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCerrarSesionApoderadoActionPerformed
 
     private void btnCambioPassApoderadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCambioPassApoderadoActionPerformed
-
+        jFramePassword verFarmPass = new jFramePassword();
+        verFarmPass.setVisible(true);
+        String rutVariable = jInvisibleAdmin.getText();
+        verFarmPass.jInsivisiblePass.setText(rutVariable);
     }//GEN-LAST:event_btnCambioPassApoderadoActionPerformed
 
     /**

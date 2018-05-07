@@ -184,7 +184,7 @@ public class IntranetJesusDePraga extends javax.swing.JFrame {
                 txt_login_usuario.requestFocus();
                 txt_login_clave.setText(null);
             } else {
-                if (!password.equals(DAOFactory.getInstance().getUsuarioDAO(DAOFactory.Motor.MY_SQL).getByPass(password)) || (password.equals(""))) {
+                if (!password.equals(DAOFactory.getInstance().getUsuarioDAO(DAOFactory.Motor.MY_SQL).search(rut).get(0).getContrasenia()) || (password.equals(""))) {
                     JOptionPane.showMessageDialog(null, "Contraseña Incorrecta", "ERROR", JOptionPane.OK_OPTION);
                     txt_login_clave.setText(null);
                     txt_login_clave.requestFocus();
@@ -194,7 +194,7 @@ public class IntranetJesusDePraga extends javax.swing.JFrame {
                     switch (user.getTipo()) {
                         case 1:
                             menuProfe.setVisible(true);
-                            menuProfe.jinvisible.setText(rut);//hacer para todos
+                            menuProfe.jInvisibleProfe.setText(rut);//hacer para todos
                             this.setVisible(false);
                             txt_login_clave.setText(null);
                             break;
@@ -242,7 +242,7 @@ public class IntranetJesusDePraga extends javax.swing.JFrame {
                     txt_login_usuario.requestFocus();
                     txt_login_clave.setText(null);
                 } else {
-                    if (!password.equals(DAOFactory.getInstance().getUsuarioDAO(DAOFactory.Motor.MY_SQL).getByPass(password)) || (password.equals(""))) {
+                    if (!password.equals(DAOFactory.getInstance().getUsuarioDAO(DAOFactory.Motor.MY_SQL).search(rut).get(0).getContrasenia()) || (password.equals(""))) {
                         JOptionPane.showMessageDialog(null, "Contraseña Incorrecta", "ERROR", JOptionPane.OK_OPTION);
                         txt_login_clave.setText(null);
                         txt_login_clave.requestFocus();
@@ -252,17 +252,20 @@ public class IntranetJesusDePraga extends javax.swing.JFrame {
                         switch (user.getTipo()) {
                             case 1:
                                 menuProfe.setVisible(true);
+                                menuProfe.jInvisibleProfe.setText(rut);//hacer para todos
                                 this.setVisible(false);
                                 txt_login_clave.setText(null);
                                 break;
 
                             case 2:
                                 menuAlumno.setVisible(true);
+                                menuAlumno.jInvisibleAlumno.setText(rut);
                                 this.setVisible(false);
                                 txt_login_clave.setText(null);
                                 break;
                             case 3:
                                 menuAdmin.setVisible(true);
+                                menuAdmin.jInvisibleAdmin.setText(rut);
                                 this.setVisible(false);
                                 txt_login_clave.setText(null);
                                 break;
@@ -297,7 +300,7 @@ public class IntranetJesusDePraga extends javax.swing.JFrame {
                     txt_login_usuario.requestFocus();
                     txt_login_clave.setText(null);
                 } else {
-                    if (!password.equals(DAOFactory.getInstance().getUsuarioDAO(DAOFactory.Motor.MY_SQL).getByPass(password)) || (password.equals(""))) {
+                    if (!password.equals(DAOFactory.getInstance().getUsuarioDAO(DAOFactory.Motor.MY_SQL).search(rut).get(0).getContrasenia()) || (password.equals(""))) {
                         JOptionPane.showMessageDialog(null, "Contraseña Incorrecta", "ERROR", JOptionPane.OK_OPTION);
                         txt_login_clave.setText(null);
                         txt_login_clave.requestFocus();
@@ -307,17 +310,20 @@ public class IntranetJesusDePraga extends javax.swing.JFrame {
                         switch (user.getTipo()) {
                             case 1:
                                 menuProfe.setVisible(true);
+                                menuProfe.jInvisibleProfe.setText(rut);//hacer para todos
                                 this.setVisible(false);
                                 txt_login_clave.setText(null);
                                 break;
 
                             case 2:
                                 menuAlumno.setVisible(true);
+                                menuAlumno.jInvisibleAlumno.setText(rut);
                                 this.setVisible(false);
                                 txt_login_clave.setText(null);
                                 break;
                             case 3:
                                 menuAdmin.setVisible(true);
+                                menuAdmin.jInvisibleAdmin.setText(rut);
                                 this.setVisible(false);
                                 txt_login_clave.setText(null);
                                 break;

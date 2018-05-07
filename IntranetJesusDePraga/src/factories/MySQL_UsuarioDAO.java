@@ -155,5 +155,11 @@ public class MySQL_UsuarioDAO implements UsuarioDAO {
         return passExp;
     }
 
+    @Override
+    public void updatePass(Usuario u, String pass) {
+        String query = "update usuario set contraseña = md5('" + pass + "') where id =" + u.getId();
+        c.ejecutar(query);
+    }
+
    
 }

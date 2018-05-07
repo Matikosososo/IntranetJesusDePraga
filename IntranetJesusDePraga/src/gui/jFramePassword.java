@@ -5,10 +5,14 @@
  */
 package gui;
 
-/**
- *
- * @author Sammy Guergachi <sguergachi at gmail.com>
- */
+import exception.MotorNoSoportadoException;
+import factories.DAOFactory;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import model.Usuario;
+
 public class jFramePassword extends javax.swing.JFrame {
 
     /**
@@ -16,6 +20,7 @@ public class jFramePassword extends javax.swing.JFrame {
      */
     public jFramePassword() {
         initComponents();
+        jInsivisiblePass.setVisible(false);
     }
 
     /**
@@ -29,15 +34,16 @@ public class jFramePassword extends javax.swing.JFrame {
 
         jPanel2 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
-        txtContraseña = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        txtNuevaContraseña = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        txtConfirmarContraseña = new javax.swing.JTextField();
         btnConfirmarContraseña = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
         btnLimpiarContraseña = new javax.swing.JButton();
         btnVolver = new javax.swing.JButton();
+        jpass = new javax.swing.JPasswordField();
+        jpass_new = new javax.swing.JPasswordField();
+        jpass_newConfirm = new javax.swing.JPasswordField();
+        jInsivisiblePass = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -45,17 +51,16 @@ public class jFramePassword extends javax.swing.JFrame {
 
         jLabel6.setText("Contraseña actual:");
 
-        txtContraseña.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtContraseñaActionPerformed(evt);
-            }
-        });
-
         jLabel7.setText("Contraseña Nueva:");
 
         jLabel8.setText("Confirmar contraseña:");
 
         btnConfirmarContraseña.setText("Confirmar");
+        btnConfirmarContraseña.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConfirmarContraseñaActionPerformed(evt);
+            }
+        });
 
         jLabel9.setFont(new java.awt.Font("Arial", 2, 14)); // NOI18N
         jLabel9.setText("Cambiar Contraseña");
@@ -84,42 +89,44 @@ public class jFramePassword extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(btnConfirmarContraseña))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel8)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtConfirmarContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel7)
-                            .addComponent(jLabel6))
-                        .addGap(32, 32, 32)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtNuevaContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(292, Short.MAX_VALUE))
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel8))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jpass_newConfirm, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
+                            .addComponent(jpass)
+                            .addComponent(jpass_new))))
+                .addContainerGap(290, Short.MAX_VALUE))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addComponent(jInsivisiblePass)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel9)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 195, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 209, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6))
+                    .addComponent(jLabel6)
+                    .addComponent(jpass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(txtNuevaContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jpass_new, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(txtConfirmarContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jpass_newConfirm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnConfirmarContraseña)
                     .addComponent(btnLimpiarContraseña)
                     .addComponent(btnVolver))
-                .addGap(41, 41, 41))
+                .addGap(27, 27, 27)
+                .addComponent(jInsivisiblePass))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -142,13 +149,45 @@ public class jFramePassword extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtContraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtContraseñaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtContraseñaActionPerformed
-
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
         this.setVisible(false);
     }//GEN-LAST:event_btnVolverActionPerformed
+
+    private void btnConfirmarContraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarContraseñaActionPerformed
+        try {
+            String password = new String(jpass.getPassword());
+            String passNew = new String(jpass_new.getPassword());
+            String passNewComfirm = new String(jpass_newConfirm.getPassword());
+
+            String rutUser = jInsivisiblePass.getText();
+
+            Usuario user = DAOFactory.getInstance().getUsuarioDAO(DAOFactory.Motor.MY_SQL).search(rutUser).get(0);
+            password = md5(password);
+            if (!password.equals(DAOFactory.getInstance().getUsuarioDAO(DAOFactory.Motor.MY_SQL).search(rutUser).get(0).getContrasenia()) || password.equals("")) {
+                JOptionPane.showMessageDialog(null, "Contraseña incorrecta", "ERROR", JOptionPane.OK_OPTION);
+                jpass.requestFocus();
+                jpass.selectAll();
+                jpass_new.setText(null);
+                jpass_newConfirm.setText(null);
+            } else {
+                if (!passNew.equals(passNewComfirm) || passNew.equals("") || passNewComfirm.equals("")) {
+                    JOptionPane.showMessageDialog(null, "Contraseñas no coinciden", "ERROR", JOptionPane.OK_OPTION);
+                    jpass_new.setText(null);
+                    jpass_newConfirm.setText(null);
+                }else{
+                    DAOFactory.getInstance().getUsuarioDAO(DAOFactory.Motor.MY_SQL).updatePass(user, passNew);
+                }
+            }
+
+        } catch (MotorNoSoportadoException ex) {
+            Logger.getLogger(jFramePassword.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(jFramePassword.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(jFramePassword.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_btnConfirmarContraseñaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -189,13 +228,32 @@ public class jFramePassword extends javax.swing.JFrame {
     private javax.swing.JButton btnConfirmarContraseña;
     private javax.swing.JButton btnLimpiarContraseña;
     private javax.swing.JButton btnVolver;
+    public static javax.swing.JLabel jInsivisiblePass;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JTextField txtConfirmarContraseña;
-    private javax.swing.JTextField txtContraseña;
-    private javax.swing.JTextField txtNuevaContraseña;
+    private javax.swing.JPasswordField jpass;
+    private javax.swing.JPasswordField jpass_new;
+    private javax.swing.JPasswordField jpass_newConfirm;
     // End of variables declaration//GEN-END:variables
+    private static String getHash(String txt, String hashType) {
+        try {
+            java.security.MessageDigest md = java.security.MessageDigest.getInstance(hashType);
+            byte[] array = md.digest(txt.getBytes());
+            StringBuffer sb = new StringBuffer();
+            for (int i = 0; i < array.length; ++i) {
+                sb.append(Integer.toHexString((array[i] & 0xFF) | 0x100).substring(1, 3));
+            }
+            return sb.toString();
+        } catch (java.security.NoSuchAlgorithmException e) {
+            System.out.println(e.getMessage());
+        }
+        return null;
+    }
+
+    private String md5(String txt) {
+        return getHash(txt, "MD5");
+    }
 }

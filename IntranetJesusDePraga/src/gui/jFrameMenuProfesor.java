@@ -12,7 +12,7 @@ public class jFrameMenuProfesor extends javax.swing.JFrame {
      */
     public jFrameMenuProfesor() {
         initComponents();
-        jinvisible.setVisible(false);
+        jInvisibleProfe.setVisible(false);
         
         
     }
@@ -33,7 +33,7 @@ public class jFrameMenuProfesor extends javax.swing.JFrame {
         btnRegistrarAsistenciaProfesor = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         btnCambiarPassProfesor = new javax.swing.JButton();
-        jinvisible = new javax.swing.JLabel();
+        jInvisibleProfe = new javax.swing.JLabel();
         btnCerrarSesionProfesor = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
@@ -106,7 +106,7 @@ public class jFrameMenuProfesor extends javax.swing.JFrame {
                         .addGap(0, 88, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jinvisible, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jInvisibleProfe, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
@@ -129,7 +129,7 @@ public class jFrameMenuProfesor extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(btnCerrarSesionProfesor, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jinvisible, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jInvisibleProfe, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(40, 40, 40))
         );
 
@@ -156,17 +156,21 @@ public class jFrameMenuProfesor extends javax.swing.JFrame {
     private void btnCambiarPassProfesorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCambiarPassProfesorActionPerformed
         jFramePassword verFormPass = new jFramePassword();
         verFormPass.setVisible(true);
+        String rutVaribale = jInvisibleProfe.getText();
+        System.out.println("La wea esss"+rutVaribale);
+        verFormPass.jInsivisiblePass.setText(rutVaribale);
     }//GEN-LAST:event_btnCambiarPassProfesorActionPerformed
 
     private void btnCerrarSesionProfesorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarSesionProfesorActionPerformed
-        System.out.println(jinvisible.getText());
+        System.out.println(jInvisibleProfe.getText());
     }//GEN-LAST:event_btnCerrarSesionProfesorActionPerformed
 
     private void btnSubirNotaProfesorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubirNotaProfesorActionPerformed
         jFrameSubirNota verFormSubirN = new jFrameSubirNota();
         verFormSubirN.setVisible(true);
 
-        String rutVaribale = jinvisible.getText();
+        String rutVaribale = jInvisibleProfe.getText();
+        System.out.println("La wea es"+rutVaribale);
         verFormSubirN.jinvisible2.setText(rutVaribale);
     }//GEN-LAST:event_btnSubirNotaProfesorActionPerformed
 
@@ -212,9 +216,9 @@ public class jFrameMenuProfesor extends javax.swing.JFrame {
     private javax.swing.JButton btnRegistrarAsistenciaProfesor;
     private javax.swing.JButton btnSubirNotaProfesor;
     private javax.swing.JButton jButton4;
+    public static javax.swing.JLabel jInvisibleProfe;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JPanel jPanel4;
-    public static javax.swing.JLabel jinvisible;
     // End of variables declaration//GEN-END:variables
 }

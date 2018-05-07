@@ -21,4 +21,6 @@ public interface UsuarioDAO {
     String getByRut(String rut);
     
     String getByPass(String pass);
+    
+    void updatePass(Usuario u, String pass);
 }

@@ -104,8 +104,10 @@ select * from profesor
 
 Select * from usuario where rut = '11-1'
 
-Select * from usuario where rut LIKE '%11-1%'
+Select * from usuario where rut LIKE '%22-2%'
 
 Select * from alumno where asignatura_fk = 1
+
+update usuario set contraseña = md5('1234') where id =3
 
 */

@@ -16,6 +16,7 @@ public class jFrameMenuAlumno extends javax.swing.JFrame {
      */
     public jFrameMenuAlumno() {
         initComponents();
+        jInvisibleAlumno.setVisible(false);
     }
 
     /**
@@ -153,6 +154,9 @@ public class jFrameMenuAlumno extends javax.swing.JFrame {
     private void btnCambiarPassAlumno1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCambiarPassAlumno1ActionPerformed
         jFramePassword verFormPass = new jFramePassword();
         verFormPass.setVisible(true);
+        String rutVaribale = jInvisibleAlumno.getText();
+        verFormPass.jInsivisiblePass.setText(rutVaribale);
+        System.out.println("La wea esss"+rutVaribale);
     }//GEN-LAST:event_btnCambiarPassAlumno1ActionPerformed
 
     private void btnVerNotaAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerNotaAlumnoActionPerformed
