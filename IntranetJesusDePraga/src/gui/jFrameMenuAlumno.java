@@ -62,6 +62,11 @@ public class jFrameMenuAlumno extends javax.swing.JFrame {
         });
 
         btnCerrarSesionAlumno.setText("Cerrar Sesión");
+        btnCerrarSesionAlumno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCerrarSesionAlumnoActionPerformed(evt);
+            }
+        });
 
         btnCambiarPassAlumno.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         btnCambiarPassAlumno.setText("Horario");
@@ -169,6 +174,12 @@ public class jFrameMenuAlumno extends javax.swing.JFrame {
         verFormMensaje.setVisible(true);
         
     }//GEN-LAST:event_btnVerMensajeAlumnoActionPerformed
+
+    private void btnCerrarSesionAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarSesionAlumnoActionPerformed
+        this.setVisible(false);
+        IntranetJesusDePraga inicio = new IntranetJesusDePraga();
+        inicio.setVisible(true);
+    }//GEN-LAST:event_btnCerrarSesionAlumnoActionPerformed
 
     /**
      * @param args the command line arguments

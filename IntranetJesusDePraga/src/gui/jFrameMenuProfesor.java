@@ -163,6 +163,9 @@ public class jFrameMenuProfesor extends javax.swing.JFrame {
 
     private void btnCerrarSesionProfesorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarSesionProfesorActionPerformed
         System.out.println(jInvisibleProfe.getText());
+        this.setVisible(false);
+        IntranetJesusDePraga inicio = new IntranetJesusDePraga();
+        inicio.setVisible(true);
     }//GEN-LAST:event_btnCerrarSesionProfesorActionPerformed
 
     private void btnSubirNotaProfesorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubirNotaProfesorActionPerformed

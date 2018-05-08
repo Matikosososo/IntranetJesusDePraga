@@ -162,7 +162,9 @@ public class jFrameMenuAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnCerrarSesionApoderadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarSesionApoderadoActionPerformed
-
+        this.setVisible(false);
+        IntranetJesusDePraga inicio = new IntranetJesusDePraga();
+        inicio.setVisible(true);
     }//GEN-LAST:event_btnCerrarSesionApoderadoActionPerformed
 
     private void btnCambioPassApoderadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCambioPassApoderadoActionPerformed
