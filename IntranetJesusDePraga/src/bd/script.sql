@@ -52,10 +52,10 @@ create table alumno(
     rut varchar(13) UNIQUE,
     asignatura_fk int,
     foreign key(asignatura_fk) references asignatura(id)
-    
 );
 
 insert into alumno values(null, 'vero', '22-2',1);
+insert into alumno values(null, 'vero', '22-2',2);
 insert into alumno values(null, 'Mati', '33-3',2);
 
 create table nota(
