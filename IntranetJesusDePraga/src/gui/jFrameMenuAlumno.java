@@ -61,6 +61,7 @@ public class jFrameMenuAlumno extends javax.swing.JFrame {
             }
         });
 
+        btnCerrarSesionAlumno.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         btnCerrarSesionAlumno.setText("Cerrar Sesión");
 
         btnCambiarPassAlumno.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
@@ -71,6 +72,7 @@ public class jFrameMenuAlumno extends javax.swing.JFrame {
             }
         });
 
+        btnCambiarPassAlumno1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         btnCambiarPassAlumno1.setText("Cambiar Contraseña");
         btnCambiarPassAlumno1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
