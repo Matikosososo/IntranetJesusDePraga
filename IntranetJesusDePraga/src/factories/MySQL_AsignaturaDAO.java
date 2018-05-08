@@ -86,7 +86,7 @@ public class MySQL_AsignaturaDAO implements AsignaturaDAO {
 
     @Override
     public List<Asignatura> search(String exp) {
-        String query = "Select * from asignatura LIKE '%"+exp+"%'";
+        String query = "Select * from asignatura LIKE '%" + exp + "%'";
         Asignatura a;
         list_Asignatura = new ArrayList<>();
         tablaVirtual = c.ejecutarSelect(query);
@@ -109,6 +109,30 @@ public class MySQL_AsignaturaDAO implements AsignaturaDAO {
     @Override
     public List<Asignatura> getByProfe(int id) {
         String query = "Select * from asignatura where profesor = " + id;
+        Asignatura a;
+        list_Asignatura = new ArrayList<>();
+        tablaVirtual = c.ejecutarSelect(query);
+        try {
+            while (tablaVirtual.next()) {
+                a = new Asignatura();
+
+                a.setId(tablaVirtual.getInt(1));
+                a.setNombre(tablaVirtual.getString(2));
+                a.setProfesor(tablaVirtual.getString(3));
+                list_Asignatura.add(a);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQL_AsignaturaDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        c.desconectar();
+        return list_Asignatura;
+    }
+
+    @Override
+    public List<Asignatura> getByAlumno(int id) {
+        String query = "select asignatura.id, asignatura.nombre, asignatura.profesor "
+                + "from nota, asignatura, alumno "
+                + "where nota.alumno_fk = alumno.id and nota.asignatura = asignatura.id and alumno.id = "+ id;
         Asignatura a;
         list_Asignatura = new ArrayList<>();
         tablaVirtual = c.ejecutarSelect(query);

@@ -166,6 +166,8 @@ public class jFrameMenuAlumno extends javax.swing.JFrame {
 
     private void btnVerNotaAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerNotaAlumnoActionPerformed
         JFrameAsignatura verFormNotas = new JFrameAsignatura();
+        
+        verFormNotas.jinvisible.setText(jInvisibleAlumno.getText());
         verFormNotas.setVisible(true);
     }//GEN-LAST:event_btnVerNotaAlumnoActionPerformed
 

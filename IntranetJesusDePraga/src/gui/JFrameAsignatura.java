@@ -5,17 +5,29 @@
  */
 package gui;
 
+import exception.MotorNoSoportadoException;
+import factories.DAOFactory;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import model.Asignatura;
+import model.Usuario;
+
 /**
  *
  * @author Marcos
  */
 public class JFrameAsignatura extends javax.swing.JFrame {
 
-    /**
-     * Creates new form JFrameAsignatura
-     */
+    private List<Asignatura> listaAsig = new ArrayList<>();
+    private Usuario user;
+    private String rut;
     public JFrameAsignatura() {
         initComponents();
+        init();
+        jinvisible.setVisible(true);
     }
 
     /**
@@ -37,6 +49,7 @@ public class JFrameAsignatura extends javax.swing.JFrame {
         btn_seleccionar = new javax.swing.JButton();
         btn_atras = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
+        jinvisible = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -47,7 +60,6 @@ public class JFrameAsignatura extends javax.swing.JFrame {
         jLabel1.setText("Favor de seleccionar asignatura :");
 
         CBO_asignatura.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        CBO_asignatura.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         tabla_notas_y_asistencia.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         tabla_notas_y_asistencia.setModel(new javax.swing.table.DefaultTableModel(
@@ -107,7 +119,10 @@ public class JFrameAsignatura extends javax.swing.JFrame {
                                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(pnlAsignaturaLayout.createSequentialGroup()
                         .addGap(183, 183, 183)
-                        .addComponent(btn_atras, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btn_atras, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnlAsignaturaLayout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addComponent(jinvisible)))
                 .addContainerGap(40, Short.MAX_VALUE))
         );
         pnlAsignaturaLayout.setVerticalGroup(
@@ -130,7 +145,9 @@ public class JFrameAsignatura extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(40, 40, 40)
                 .addComponent(btn_atras, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jinvisible)
+                .addGap(15, 15, 15))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -200,8 +217,35 @@ public class JFrameAsignatura extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
+    public static javax.swing.JLabel jinvisible;
     private javax.swing.JLabel lbl_notaAsignatura;
     private javax.swing.JPanel pnlAsignatura;
     private javax.swing.JTable tabla_notas_y_asistencia;
     // End of variables declaration//GEN-END:variables
+
+    private void init() {
+        cargarAsignaturas2();
+    }
+
+    private void cargarAsignaturas2() {
+        try {
+            rut = jinvisible.getText();
+            user = DAOFactory.getInstance().getUsuarioDAO(DAOFactory.Motor.MY_SQL).search(rut).get(0);
+            System.out.println("Rut del user: "+ rut);
+            listaAsig = DAOFactory.getInstance().getAsignaturaDAO(DAOFactory.Motor.MY_SQL).getByAlumno(user.getId());
+            
+            for (Asignatura a : listaAsig) {
+                CBO_asignatura.addItem(a);
+            }
+            
+            
+        } catch (MotorNoSoportadoException ex) {
+            Logger.getLogger(JFrameAsignatura.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(JFrameAsignatura.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(JFrameAsignatura.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
 }

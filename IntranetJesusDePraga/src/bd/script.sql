@@ -23,6 +23,8 @@ insert into usuario values(null,'22-2',2,md5('1234'));
 insert into usuario values(null, '11-1',1,md5('1234'));
 insert into usuario values(null, '00-0',3,md5('1234'));
 insert into usuario values(null,'33-3',2,md5('1234'));
+insert into usuario values(null,'44-4',1,md5('1234'));
+
 
 
 
@@ -34,6 +36,7 @@ create table profesor(
 );
 
 insert into profesor values(null, 'patito', '11-1');
+insert into profesor values(null, 'estay', '44-4');
 insert into profesor values(null, 'maria', '00-0');
 
 create table asignatura(
@@ -45,6 +48,7 @@ create table asignatura(
 
 insert into asignatura values(null, 'Programacion', 1);
 insert into asignatura values(null, 'Arquitectura de Software', 1);
+insert into asignatura values(null, 'Ingieneria de software', 3);
 
 create table alumno(
     id int primary key auto_increment,
@@ -76,6 +80,11 @@ where nota.alumno_fk = alumno.id and nota.asignatura = asignatura.id and
 asignatura.id = 2;
 
 select * FROM alumno;
+
+select asignatura.id, asignatura.nombre, asignatura.profesor
+from nota, asignatura, alumno
+where nota.alumno_fk = alumno.id and nota.asignatura = asignatura.id and
+alumno.id = 1;
 */
 
 Create table horario(

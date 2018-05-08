@@ -18,4 +18,6 @@ public interface AsignaturaDAO {
     List<Asignatura> search(String exp);
     
     List<Asignatura> getByProfe(int id);
+    
+    List<Asignatura> getByAlumno(int id);
 }
