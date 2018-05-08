@@ -72,6 +72,11 @@ public class jFrameMenuAdmin extends javax.swing.JFrame {
 
         jButton3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jButton3.setText("Administrar Asignaturas");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jButton4.setText("Administrar Horario");
@@ -86,7 +91,7 @@ public class jFrameMenuAdmin extends javax.swing.JFrame {
                 .addComponent(jInvisibleAdmin)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 100, Short.MAX_VALUE)
+                .addGap(0, 101, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel10)
@@ -161,6 +166,12 @@ public class jFrameMenuAdmin extends javax.swing.JFrame {
         String rutVariable = jInvisibleAdmin.getText();
         verFarmPass.jInsivisiblePass.setText(rutVariable);
     }//GEN-LAST:event_btnCambioPassApoderadoActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        jFrameCrud_Asignatura ver = new jFrameCrud_Asignatura();
+        ver.setVisible(true);
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments

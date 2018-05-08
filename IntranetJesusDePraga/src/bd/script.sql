@@ -23,7 +23,7 @@ insert into usuario values(null,'22-2',2,md5('1234'));
 insert into usuario values(null, '11-1',1,md5('1234'));
 insert into usuario values(null, '00-0',3,md5('1234'));
 insert into usuario values(null,'33-3',2,md5('1234'));
-
+select contraseña FROM usuario;
 
 
 
@@ -49,34 +49,26 @@ insert into asignatura values(null, 'Arquitectura de Software', 1);
 create table alumno(
     id int primary key auto_increment,
     nombre varchar(50),
-    rut varchar(13) UNIQUE
+    rut varchar(13) UNIQUE,
+    asignatura_fk int,
+    foreign key(asignatura_fk) references asignatura(id)
+    
 );
 
-insert into alumno values(null, 'vero', '22-2');
-insert into alumno values(null, 'Mati', '33-3');
+insert into alumno values(null, 'vero', '22-2',1);
+insert into alumno values(null, 'Mati', '33-3',2);
 
 create table nota(
     id int primary key auto_increment,
     asignatura int,
     alumno_fk int,
     nota float,
-    ponderacion float,
     foreign key(alumno_fk) references alumno(id),
+    ponderacion float,
     foreign key(asignatura) references asignatura(id)
 );
 
-insert into nota values(null, 1, 1, 0, 0);
-insert into nota values(null, 1, 2, 0, 0);
-insert into nota values(null, 2, 2, 0, 0);
 
-/*
-select alumno.id, alumno.nombre, alumno.rut
-from nota, asignatura, alumno
-where nota.alumno_fk = alumno.id and nota.asignatura = asignatura.id and
-asignatura.id = 2;
-
-select * FROM alumno;
-*/
 
 Create table horario(
     id int primary key auto_increment,
