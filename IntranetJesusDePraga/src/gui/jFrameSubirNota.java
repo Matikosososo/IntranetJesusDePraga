@@ -224,7 +224,6 @@ public class jFrameSubirNota extends javax.swing.JFrame {
 
             Asignatura a = (Asignatura) jcbox_asignatura.getSelectedItem();
 
-//            int asignaturaId =  jcbox_asignatura.getSelectedIndex()+1;
             listaAlum = DAOFactory.getInstance().getAlumnoDAO(DAOFactory.Motor.MY_SQL).getByAsignatura(a.getId());
             cargarAlumnos(listaAlum);
         } catch (MotorNoSoportadoException ex) {
