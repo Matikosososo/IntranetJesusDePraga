@@ -20,10 +20,9 @@ public class MySQL_AlumnoDAO implements AlumnoDAO {
         c = new MySQL_ConexionDAO(DatosConexion.MySQL.SERVER, DatosConexion.MySQL.USER, DatosConexion.MySQL.PASS, DatosConexion.MySQL.BD);
 
     }
-
-    @Override
+ @Override
     public void create(Alumno a) {
-        String query = "insert into alumno values(null, '" + a.getNombre() + "','" + a.getRut() + "','" + a.getAsignatura() + "')";
+        String query = "insert into alumno values(null, '" + a.getNombre() + "','" + a.getRut() + "')";
         c.ejecutar(query);
 
     }
@@ -41,7 +40,6 @@ public class MySQL_AlumnoDAO implements AlumnoDAO {
                 a.setId(tablaVirtual.getInt(1));
                 a.setNombre(tablaVirtual.getString(2));
                 a.setRut(tablaVirtual.getString(3));
-                a.setAsignatura(tablaVirtual.getString(4));
 
                 list_ALumnos.add(a);
             }
@@ -56,7 +54,7 @@ public class MySQL_AlumnoDAO implements AlumnoDAO {
     public void update(Alumno a) {
         String query = "UPDATE alumno set nombre = " + a.getNombre() + ""
                 + ", rut = " + a.getRut() + ""
-                + ", asignatura_fk = " + a.getAsignatura() + " where id =" + a.getId();
+                + " where id =" + a.getId();
         c.ejecutar(query);
 
     }
@@ -80,7 +78,6 @@ public class MySQL_AlumnoDAO implements AlumnoDAO {
                 a.setId(tablaVirtual.getInt(1));
                 a.setNombre(tablaVirtual.getString(2));
                 a.setRut(tablaVirtual.getString(3));
-                a.setAsignatura(tablaVirtual.getString(4));
 
                 list_ALumnos.add(a);
             }
@@ -93,7 +90,7 @@ public class MySQL_AlumnoDAO implements AlumnoDAO {
 
     @Override
     public List<Alumno> search(String exp) {
-        String query = "Select * from alumno LIKE '%"+exp+"%'";
+        String query = "Select * from alumno LIKE '%" + exp + "%'";
         Alumno a;
         list_ALumnos = new ArrayList<>();
         tablaVirtual = c.ejecutarSelect(query);
@@ -104,7 +101,6 @@ public class MySQL_AlumnoDAO implements AlumnoDAO {
                 a.setId(tablaVirtual.getInt(1));
                 a.setNombre(tablaVirtual.getString(2));
                 a.setRut(tablaVirtual.getString(3));
-                a.setAsignatura(tablaVirtual.getString(4));
 
                 list_ALumnos.add(a);
             }
@@ -117,7 +113,10 @@ public class MySQL_AlumnoDAO implements AlumnoDAO {
 
     @Override
     public List<Alumno> getByAsignatura(int i) {
-        String query = "Select * from alumno where asignatura_fk = "+i;
+        String query = "select alumno.id, alumno.nombre, alumno.rut "
+                + "from nota, asignatura, alumno "
+                + "where nota.alumno_fk = alumno.id and nota.asignatura = asignatura.id and "
+                + "asignatura.id =" + i;
         Alumno a;
         list_ALumnos = new ArrayList<>();
         tablaVirtual = c.ejecutarSelect(query);
@@ -128,7 +127,6 @@ public class MySQL_AlumnoDAO implements AlumnoDAO {
                 a.setId(tablaVirtual.getInt(1));
                 a.setNombre(tablaVirtual.getString(2));
                 a.setRut(tablaVirtual.getString(3));
-                a.setAsignatura(tablaVirtual.getString(4));
 
                 list_ALumnos.add(a);
             }

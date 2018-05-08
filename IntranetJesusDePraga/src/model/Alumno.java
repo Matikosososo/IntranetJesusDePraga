@@ -4,22 +4,22 @@ public class Alumno {
     private int id;
     private String nombre;
     private String rut;
-    private String asignatura;
+    
 
     public Alumno() {
     }
 
-    public Alumno(String nombre, String rut, String asignatura) {
+    public Alumno(String nombre, String rut) {
         this.nombre = nombre;
         this.rut = rut;
-        this.asignatura = asignatura;
+        
     }
 
-    public Alumno(int id, String nombre, String rut, String asignatura) {
+    public Alumno(int id, String nombre, String rut) {
         this.id = id;
         this.nombre = nombre;
         this.rut = rut;
-        this.asignatura = asignatura;
+        
     }
 
     public int getId() {
@@ -44,14 +44,6 @@ public class Alumno {
 
     public void setRut(String rut) {
         this.rut = rut;
-    }
-
-    public String getAsignatura() {
-        return asignatura;
-    }
-
-    public void setAsignatura(String asignatura) {
-        this.asignatura = asignatura;
     }
 
     @Override

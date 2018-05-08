@@ -69,6 +69,11 @@ public class jFrameMenuAdmin extends javax.swing.JFrame {
 
         jButton2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jButton2.setText("Administrar Alumnos");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jButton3.setText("Administrar Asignaturas");
@@ -172,6 +177,13 @@ public class jFrameMenuAdmin extends javax.swing.JFrame {
         jFrameCrud_Asignatura ver = new jFrameCrud_Asignatura();
         ver.setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        JFrameCRUDAlumno alum = new JFrameCRUDAlumno();
+        
+        alum.setVisible(true);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
