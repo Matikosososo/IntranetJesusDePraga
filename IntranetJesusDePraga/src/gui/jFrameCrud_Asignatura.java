@@ -5,6 +5,14 @@
  */
 package gui;
 
+import exception.MotorNoSoportadoException;
+import factories.DAOFactory;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import model.Asignatura;
+import model.Profesor;
+
 /**
  *
  * @author Carolina
@@ -32,7 +40,7 @@ public class jFrameCrud_Asignatura extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         txt_CrearNom = new javax.swing.JTextField();
-        cbo_Profes = new javax.swing.JComboBox<>();
+        cbo_Profes = new javax.swing.JComboBox();
         btnCrear = new javax.swing.JButton();
         btnActualizar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -51,7 +59,9 @@ public class jFrameCrud_Asignatura extends javax.swing.JFrame {
 
         jLabel3.setText("profesor: ");
 
-        cbo_Profes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        txt_CrearNom.setToolTipText("");
+
+        cbo_Profes.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Profesor 1", "Profesor 2" }));
 
         btnCrear.setText("Crear");
         btnCrear.addActionListener(new java.awt.event.ActionListener() {
@@ -126,6 +136,11 @@ public class jFrameCrud_Asignatura extends javax.swing.JFrame {
         btnBuscar.setText("Buscar");
 
         btn_volver.setText("Volver");
+        btn_volver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_volverActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -168,8 +183,30 @@ public class jFrameCrud_Asignatura extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearActionPerformed
-        // TODO add your handling code here:
+        try {
+            String nombreAsignatura;
+//        Profesor profe = (Profesor) cbo_Profes.getSelectedItem();
+            int profe = cbo_Profes.getSelectedIndex() + 1;
+            nombreAsignatura = txt_CrearNom.getText();
+
+            System.out.println("Profe" + profe);
+
+            Asignatura a = new Asignatura(nombreAsignatura, profe);
+            DAOFactory.getInstance().getAsignaturaDAO(DAOFactory.Motor.MY_SQL).create(a);
+            
+        } catch (MotorNoSoportadoException ex) {
+            Logger.getLogger(jFrameCrud_Asignatura.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(jFrameCrud_Asignatura.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(jFrameCrud_Asignatura.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }//GEN-LAST:event_btnCrearActionPerformed
+
+    private void btn_volverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_volverActionPerformed
+        this.setVisible(false);
+    }//GEN-LAST:event_btn_volverActionPerformed
 
     /**
      * @param args the command line arguments
@@ -211,7 +248,7 @@ public class jFrameCrud_Asignatura extends javax.swing.JFrame {
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnCrear;
     private javax.swing.JButton btn_volver;
-    private javax.swing.JComboBox<String> cbo_Profes;
+    private javax.swing.JComboBox cbo_Profes;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

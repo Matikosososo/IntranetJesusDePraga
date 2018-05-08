@@ -3,17 +3,19 @@ package model;
 public class Asignatura {
     private int id;
     private String nombre;
-    private String profesor;
+    private int profesor;
 
     public Asignatura() {
+        
+        
     }
 
-    public Asignatura(String nombre, String profesor) {
+    public Asignatura(String nombre, int profesor) {
         this.nombre = nombre;
         this.profesor = profesor;
     }
 
-    public Asignatura(int id, String nombre, String profesor) {
+    public Asignatura(int id, String nombre, int profesor) {
         this.id = id;
         this.nombre = nombre;
         this.profesor = profesor;
@@ -35,20 +37,20 @@ public class Asignatura {
         this.nombre = nombre;
     }
 
-    public String getProfesor() {
+    public int getProfesor() {
         return profesor;
     }
 
-    public void setProfesor(String profesor) {
+    public void setProfesor(int profesor) {
         this.profesor = profesor;
     }
 
     @Override
     public String toString() {
-        return nombre;
+        return  nombre ;
     }
-
-    
     
     
 }
+
+    

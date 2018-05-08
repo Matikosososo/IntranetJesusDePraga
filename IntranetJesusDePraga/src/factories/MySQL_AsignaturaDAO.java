@@ -39,7 +39,7 @@ public class MySQL_AsignaturaDAO implements AsignaturaDAO {
 
                 a.setId(tablaVirtual.getInt(1));
                 a.setNombre(tablaVirtual.getString(2));
-                a.setProfesor(tablaVirtual.getString(3));
+                a.setProfesor(tablaVirtual.getInt(3));
                 list_Asignatura.add(a);
             }
         } catch (SQLException ex) {
@@ -74,7 +74,7 @@ public class MySQL_AsignaturaDAO implements AsignaturaDAO {
 
                 a.setId(tablaVirtual.getInt(1));
                 a.setNombre(tablaVirtual.getString(2));
-                a.setProfesor(tablaVirtual.getString(3));
+                a.setProfesor(tablaVirtual.getInt(3));
                 list_Asignatura.add(a);
             }
         } catch (SQLException ex) {
@@ -96,7 +96,7 @@ public class MySQL_AsignaturaDAO implements AsignaturaDAO {
 
                 a.setId(tablaVirtual.getInt(1));
                 a.setNombre(tablaVirtual.getString(2));
-                a.setProfesor(tablaVirtual.getString(3));
+                a.setProfesor(tablaVirtual.getInt(3));
                 list_Asignatura.add(a);
             }
         } catch (SQLException ex) {
@@ -118,7 +118,7 @@ public class MySQL_AsignaturaDAO implements AsignaturaDAO {
 
                 a.setId(tablaVirtual.getInt(1));
                 a.setNombre(tablaVirtual.getString(2));
-                a.setProfesor(tablaVirtual.getString(3));
+                a.setProfesor(tablaVirtual.getInt(3));
                 list_Asignatura.add(a);
             }
         } catch (SQLException ex) {
@@ -142,7 +142,7 @@ public class MySQL_AsignaturaDAO implements AsignaturaDAO {
 
                 a.setId(tablaVirtual.getInt(1));
                 a.setNombre(tablaVirtual.getString(2));
-                a.setProfesor(tablaVirtual.getString(3));
+                a.setProfesor(tablaVirtual.getInt(3));
                 list_Asignatura.add(a);
             }
         } catch (SQLException ex) {

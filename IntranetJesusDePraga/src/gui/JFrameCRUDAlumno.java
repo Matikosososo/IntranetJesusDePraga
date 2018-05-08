@@ -5,6 +5,14 @@
  */
 package gui;
 
+import exception.MotorNoSoportadoException;
+import factories.DAOFactory;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import model.Alumno;
+import model.Usuario;
+
 /**
  *
  * @author Marcos
@@ -73,6 +81,11 @@ public class JFrameCRUDAlumno extends javax.swing.JFrame {
         jLabel4.setText("Buscar");
 
         btn_volver.setText("Volver");
+        btn_volver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_volverActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -157,8 +170,29 @@ public class JFrameCRUDAlumno extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_crear_alumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_crear_alumActionPerformed
-    
+        try {
+            String rut, nombre;
+            rut = txt_rutAlumno.getText();
+            nombre = txt_nombreAlumno.getText();
+            
+            Alumno a = new Alumno(nombre, rut);
+            Usuario u = new Usuario(rut, 2, rut);
+            
+            DAOFactory.getInstance().getAlumnoDAO(DAOFactory.Motor.MY_SQL).create(a);
+            DAOFactory.getInstance().getUsuarioDAO(DAOFactory.Motor.MY_SQL).create(u);
+        } catch (MotorNoSoportadoException ex) {
+            Logger.getLogger(JFrameCRUDAlumno.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(JFrameCRUDAlumno.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(JFrameCRUDAlumno.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }//GEN-LAST:event_btn_crear_alumActionPerformed
+
+    private void btn_volverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_volverActionPerformed
+        this.setVisible(false);
+    }//GEN-LAST:event_btn_volverActionPerformed
 
     /**
      * @param args the command line arguments
