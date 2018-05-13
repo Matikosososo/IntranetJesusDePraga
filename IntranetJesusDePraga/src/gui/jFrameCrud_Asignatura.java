@@ -8,20 +8,20 @@ package gui;
 import exception.MotorNoSoportadoException;
 import factories.DAOFactory;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Asignatura;
 import model.Profesor;
+import model.Usuario;
 
-/**
- *
- * @author Carolina
- */
 public class jFrameCrud_Asignatura extends javax.swing.JFrame {
 
-    /**
-     * Creates new form jFrameCrud_Asignatura
-     */
+    private List<Profesor> listaProfes = new ArrayList<>();
+    private Usuario user;
+    private String rutVar;
+
     public jFrameCrud_Asignatura() {
         initComponents();
     }
@@ -48,6 +48,7 @@ public class jFrameCrud_Asignatura extends javax.swing.JFrame {
         btnBuscar = new javax.swing.JButton();
         txt_Buscar = new javax.swing.JTextField();
         btn_volver = new javax.swing.JButton();
+        jInvisibleCrearAsig = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -61,7 +62,12 @@ public class jFrameCrud_Asignatura extends javax.swing.JFrame {
 
         txt_CrearNom.setToolTipText("");
 
-        cbo_Profes.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Profesor 1", "Profesor 2" }));
+        cbo_Profes.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccione un Profesor" }));
+        cbo_Profes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                cbo_ProfesMousePressed(evt);
+            }
+        });
 
         btnCrear.setText("Crear");
         btnCrear.addActionListener(new java.awt.event.ActionListener() {
@@ -149,19 +155,25 @@ public class jFrameCrud_Asignatura extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(22, 22, 22)
-                        .addComponent(btn_volver)))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(txt_Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(22, 22, 22)
+                                .addComponent(btn_volver)))
                         .addGap(18, 18, 18)
-                        .addComponent(btnBuscar)))
-                .addContainerGap(22, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(txt_Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnBuscar)))
+                        .addGap(0, 12, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jInvisibleCrearAsig)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -176,7 +188,9 @@ public class jFrameCrud_Asignatura extends javax.swing.JFrame {
                         .addComponent(txt_Buscar)
                         .addComponent(btn_volver))
                     .addComponent(btnBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE))
-                .addContainerGap(40, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addComponent(jInvisibleCrearAsig)
+                .addContainerGap())
         );
 
         pack();
@@ -185,15 +199,15 @@ public class jFrameCrud_Asignatura extends javax.swing.JFrame {
     private void btnCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearActionPerformed
         try {
             String nombreAsignatura;
-//        Profesor profe = (Profesor) cbo_Profes.getSelectedItem();
-            int profe = cbo_Profes.getSelectedIndex() + 1;
+            Profesor profe = (Profesor) cbo_Profes.getSelectedItem();
+//            int profe = cbo_Profes.getSelectedIndex() + 1;
             nombreAsignatura = txt_CrearNom.getText();
 
             System.out.println("Profe" + profe);
 
-            Asignatura a = new Asignatura(nombreAsignatura, profe);
+            Asignatura a = new Asignatura(nombreAsignatura, profe.getId());
             DAOFactory.getInstance().getAsignaturaDAO(DAOFactory.Motor.MY_SQL).create(a);
-            
+
         } catch (MotorNoSoportadoException ex) {
             Logger.getLogger(jFrameCrud_Asignatura.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
@@ -207,6 +221,11 @@ public class jFrameCrud_Asignatura extends javax.swing.JFrame {
     private void btn_volverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_volverActionPerformed
         this.setVisible(false);
     }//GEN-LAST:event_btn_volverActionPerformed
+
+    private void cbo_ProfesMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbo_ProfesMousePressed
+        cbo_Profes.removeAllItems();
+        cargarProfesores();
+    }//GEN-LAST:event_cbo_ProfesMousePressed
 
     /**
      * @param args the command line arguments
@@ -249,6 +268,7 @@ public class jFrameCrud_Asignatura extends javax.swing.JFrame {
     private javax.swing.JButton btnCrear;
     private javax.swing.JButton btn_volver;
     private javax.swing.JComboBox cbo_Profes;
+    private javax.swing.JLabel jInvisibleCrearAsig;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -258,4 +278,30 @@ public class jFrameCrud_Asignatura extends javax.swing.JFrame {
     private javax.swing.JTextField txt_Buscar;
     private javax.swing.JTextField txt_CrearNom;
     // End of variables declaration//GEN-END:variables
+
+    public void setRutjFrame(String txt) {
+        rutVar = txt;
+        jInvisibleCrearAsig.setText(txt);
+        jInvisibleCrearAsig.setVisible(false);
+    }
+
+    private void cargarProfesores() {
+
+        try {
+//            String rut = jInvisibleCrearAsig.getText();
+//            user = DAOFactory.getInstance().getUsuarioDAO(DAOFactory.Motor.MY_SQL).search(rut).get(0);
+            listaProfes = DAOFactory.getInstance().getProfesorDAO(DAOFactory.Motor.MY_SQL).read();
+
+            for (Profesor p : listaProfes) {
+                cbo_Profes.addItem(p);
+            }
+
+        } catch (MotorNoSoportadoException ex) {
+            Logger.getLogger(jFrameSubirNota.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(jFrameSubirNota.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(jFrameSubirNota.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }

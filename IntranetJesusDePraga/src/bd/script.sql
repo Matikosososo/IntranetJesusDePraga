@@ -19,25 +19,23 @@ create table usuario(
     contraseña varchar(50),
     foreign key (tipo_de_usuario) references tipo_de_usuario(id)   
 );
-insert into usuario values(null,'22-2',2,md5('1234'));
-insert into usuario values(null, '11-1',1,md5('1234'));
 insert into usuario values(null, '00-0',3,md5('1234'));
+insert into usuario values(null, '11-1',1,md5('1234'));
+insert into usuario values(null,'22-2',2,md5('1234'));
 insert into usuario values(null,'33-3',2,md5('1234'));
 insert into usuario values(null,'44-4',1,md5('1234'));
-
-
-
-
 
 create table profesor(
     id int primary key auto_increment,
     nombre varchar(50),
-    rut varchar(13) UNIQUE
+    rut varchar(13) UNIQUE,
+    usuario int,
+    foreign key (usuario) references usuario(id)
 );
 
-insert into profesor values(null, 'patito', '11-1');
-insert into profesor values(null, 'estay', '44-4');
-insert into profesor values(null, 'maria', '00-0');
+insert into profesor values(null, 'patito', '11-1', 2);
+insert into profesor values(null, 'estay', '44-4', 5);
+insert into profesor values(null, 'maria', '00-0', 1);
 
 create table asignatura(
     id int primary key auto_increment,
@@ -53,11 +51,13 @@ insert into asignatura values(null, 'Ingieneria de software', 3);
 create table alumno(
     id int primary key auto_increment,
     nombre varchar(50),
-    rut varchar(13) UNIQUE
+    rut varchar(13) UNIQUE,
+    usuario int,
+    foreign key (usuario) references usuario(id)
 );
 
-insert into alumno values(null, 'vero', '22-2');
-insert into alumno values(null, 'Mati', '33-3');
+insert into alumno values(null, 'vero', '22-2', 3);
+insert into alumno values(null, 'Mati', '33-3', 4);
 
 create table nota(
     id int primary key auto_increment,
@@ -85,6 +85,10 @@ select asignatura.id, asignatura.nombre, asignatura.profesor
 from nota, asignatura, alumno
 where nota.alumno_fk = alumno.id and nota.asignatura = asignatura.id and
 alumno.id = 1;
+
+select asignatura.id, asignatura.nombre, asignatura.profesor 
+from nota, asignatura, alumno 
+where nota.alumno_fk = alumno.id and nota.asignatura = asignatura.id and alumno.id = 4
 */
 
 Create table horario(
@@ -126,5 +130,13 @@ Select * from usuario where rut LIKE '%22-2%'
 Select * from alumno where asignatura_fk = 1
 
 update usuario set contraseña = md5('1234') where id =3
+
+Select * from usuario where rut LIKE '%11-1%'
+
+select asignatura.id, asignatura.nombre, asignatura.profesor 
+from asignatura, profesor
+where asignatura.profesor = profesor.id and usuario = 2
+
+Select count(id) from usuario
 
 */

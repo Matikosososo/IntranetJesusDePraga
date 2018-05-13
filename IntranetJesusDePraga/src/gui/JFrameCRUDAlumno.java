@@ -19,9 +19,8 @@ import model.Usuario;
  */
 public class JFrameCRUDAlumno extends javax.swing.JFrame {
 
-    /**
-     * Creates new form JFrameCRUDAlumno
-     */
+    private int PROFESOR = 1;
+    private int ALUMNO = 2;
     public JFrameCRUDAlumno() {
         initComponents();
     }
@@ -172,14 +171,21 @@ public class JFrameCRUDAlumno extends javax.swing.JFrame {
     private void btn_crear_alumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_crear_alumActionPerformed
         try {
             String rut, nombre;
+            int countId;
             rut = txt_rutAlumno.getText();
             nombre = txt_nombreAlumno.getText();
+                        
+            Usuario u = new Usuario(rut, ALUMNO, rut);
             
-            Alumno a = new Alumno(nombre, rut);
-            Usuario u = new Usuario(rut, 2, rut);
-            
-            DAOFactory.getInstance().getAlumnoDAO(DAOFactory.Motor.MY_SQL).create(a);
             DAOFactory.getInstance().getUsuarioDAO(DAOFactory.Motor.MY_SQL).create(u);
+            
+            Usuario u2 = DAOFactory.getInstance().getUsuarioDAO(DAOFactory.Motor.MY_SQL).getObjectByRut(rut);
+            
+            
+            
+           System.out.println("cantidad de id's: "+u2.getId());
+            Alumno a = new Alumno(nombre, rut, u2.getId());
+            DAOFactory.getInstance().getAlumnoDAO(DAOFactory.Motor.MY_SQL).create(a);
         } catch (MotorNoSoportadoException ex) {
             Logger.getLogger(JFrameCRUDAlumno.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {

@@ -108,7 +108,9 @@ public class MySQL_AsignaturaDAO implements AsignaturaDAO {
 
     @Override
     public List<Asignatura> getByProfe(int id) {
-        String query = "Select * from asignatura where profesor = " + id;
+        String query = "select asignatura.id, asignatura.nombre, asignatura.profesor "
+                + "from asignatura, profesor "
+                + "where asignatura.profesor = profesor.id and usuario = "+id;
         Asignatura a;
         list_Asignatura = new ArrayList<>();
         tablaVirtual = c.ejecutarSelect(query);
@@ -132,7 +134,7 @@ public class MySQL_AsignaturaDAO implements AsignaturaDAO {
     public List<Asignatura> getByAlumno(int id) {
         String query = "select asignatura.id, asignatura.nombre, asignatura.profesor "
                 + "from nota, asignatura, alumno "
-                + "where nota.alumno_fk = alumno.id and nota.asignatura = asignatura.id and alumno.id = "+ id;
+                + "where nota.alumno_fk = alumno.id and nota.asignatura = asignatura.id and alumno.id = " + id;
         Asignatura a;
         list_Asignatura = new ArrayList<>();
         tablaVirtual = c.ejecutarSelect(query);

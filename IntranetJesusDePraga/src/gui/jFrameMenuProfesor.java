@@ -7,14 +7,9 @@ package gui;
 
 public class jFrameMenuProfesor extends javax.swing.JFrame {
 
-    /**
-     * Creates new form jFrameMenuProfesor
-     */
+    private String rutVar;
     public jFrameMenuProfesor() {
-        initComponents();
-        jInvisibleProfe.setVisible(false);
-        
-        
+        initComponents();   
     }
 
     /**
@@ -174,7 +169,7 @@ public class jFrameMenuProfesor extends javax.swing.JFrame {
 
         String rutVaribale = jInvisibleProfe.getText();
         System.out.println("La wea es"+rutVaribale);
-        verFormSubirN.jinvisible2.setText(rutVaribale);
+        verFormSubirN.setRutjFrame(rutVaribale);
     }//GEN-LAST:event_btnSubirNotaProfesorActionPerformed
 
     /**
@@ -219,9 +214,15 @@ public class jFrameMenuProfesor extends javax.swing.JFrame {
     private javax.swing.JButton btnRegistrarAsistenciaProfesor;
     private javax.swing.JButton btnSubirNotaProfesor;
     private javax.swing.JButton jButton4;
-    public static javax.swing.JLabel jInvisibleProfe;
+    private javax.swing.JLabel jInvisibleProfe;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JPanel jPanel4;
     // End of variables declaration//GEN-END:variables
+
+    public void getRutjFrame(String txt){
+        rutVar = txt;
+        jInvisibleProfe.setText(txt);
+        jInvisibleProfe.setVisible(false);
+    }
 }

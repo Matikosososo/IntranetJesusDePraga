@@ -22,7 +22,7 @@ public class MySQL_AlumnoDAO implements AlumnoDAO {
     }
  @Override
     public void create(Alumno a) {
-        String query = "insert into alumno values(null, '" + a.getNombre() + "','" + a.getRut() + "')";
+        String query = "insert into alumno values(null, '" + a.getNombre() + "','" + a.getRut() + "', " + a.getUsuario() + ")";
         c.ejecutar(query);
 
     }
@@ -116,7 +116,7 @@ public class MySQL_AlumnoDAO implements AlumnoDAO {
         String query = "select alumno.id, alumno.nombre, alumno.rut "
                 + "from nota, asignatura, alumno "
                 + "where nota.alumno_fk = alumno.id and nota.asignatura = asignatura.id and "
-                + "asignatura.id =" + i;
+                + "asignatura.id = " + i;
         Alumno a;
         list_ALumnos = new ArrayList<>();
         tablaVirtual = c.ejecutarSelect(query);
@@ -135,6 +135,29 @@ public class MySQL_AlumnoDAO implements AlumnoDAO {
         }
         c.desconectar();
         return list_ALumnos;
+    }
+
+    @Override
+    public Alumno getByIDUser(int idUser) {
+        String query = "Select * from alumno where usuario = " + idUser;
+        Alumno a = new Alumno();
+        list_ALumnos = new ArrayList<>();
+        tablaVirtual = c.ejecutarSelect(query);
+        try {
+            if (tablaVirtual.next()) {
+                a = new Alumno();
+
+                a.setId(tablaVirtual.getInt(1));
+                a.setNombre(tablaVirtual.getString(2));
+                a.setRut(tablaVirtual.getString(3));
+
+                
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQL_AlumnoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        c.desconectar();
+        return a;
     }
 
 }

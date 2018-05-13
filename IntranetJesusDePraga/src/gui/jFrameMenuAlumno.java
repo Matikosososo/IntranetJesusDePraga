@@ -11,12 +11,10 @@ package gui;
  */
 public class jFrameMenuAlumno extends javax.swing.JFrame {
 
-    /**
-     * Creates new form jFrameMenuAlumno
-     */
+    private String rutVar;
     public jFrameMenuAlumno() {
         initComponents();
-        jInvisibleAlumno.setVisible(false);
+        
     }
 
     /**
@@ -167,7 +165,7 @@ public class jFrameMenuAlumno extends javax.swing.JFrame {
     private void btnVerNotaAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerNotaAlumnoActionPerformed
         JFrameAsignatura verFormNotas = new JFrameAsignatura();
         
-        verFormNotas.jinvisible.setText(jInvisibleAlumno.getText());
+        verFormNotas.setRutjFrame(rutVar);
         verFormNotas.setVisible(true);
     }//GEN-LAST:event_btnVerNotaAlumnoActionPerformed
 
@@ -224,9 +222,15 @@ public class jFrameMenuAlumno extends javax.swing.JFrame {
     private javax.swing.JButton btnCerrarSesionAlumno;
     private javax.swing.JButton btnVerMensajeAlumno;
     private javax.swing.JButton btnVerNotaAlumno;
-    public static javax.swing.JLabel jInvisibleAlumno;
+    private javax.swing.JLabel jInvisibleAlumno;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JPanel jPanel3;
     // End of variables declaration//GEN-END:variables
+
+    public void setRutjFrame(String txt){
+        rutVar = txt;
+        jInvisibleAlumno.setText(txt);
+        jInvisibleAlumno.setVisible(false);
+    }
 }

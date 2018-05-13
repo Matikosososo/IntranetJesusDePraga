@@ -4,6 +4,7 @@ public class Profesor {
     private int id;
     private String nombre;
     private String rut;
+    private int usuario;
 
     public Profesor() {
     }
@@ -13,6 +14,13 @@ public class Profesor {
         this.rut = rut;
     }
 
+    public Profesor(String nombre, String rut, int usuario) {
+        this.nombre = nombre;
+        this.rut = rut;
+        this.usuario = usuario;
+    }
+
+    
     public Profesor(int id, String nombre, String rut) {
         this.id = id;
         this.nombre = nombre;
@@ -41,6 +49,19 @@ public class Profesor {
 
     public void setRut(String rut) {
         this.rut = rut;
+    }
+
+    public int getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(int usuario) {
+        this.usuario = usuario;
+    }
+
+    @Override
+    public String toString() {
+        return nombre;
     }
     
     

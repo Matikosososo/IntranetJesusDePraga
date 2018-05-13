@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.Alumno;
 import model.Asignatura;
 import model.Usuario;
 
@@ -24,10 +25,12 @@ public class JFrameAsignatura extends javax.swing.JFrame {
     private List<Asignatura> listaAsig = new ArrayList<>();
     private Usuario user;
     private String rut;
+    private String rutVar;
+    private Alumno alumno;
     public JFrameAsignatura() {
         initComponents();
         init();
-        jinvisible.setVisible(true);
+        
     }
 
     /**
@@ -54,12 +57,18 @@ public class JFrameAsignatura extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         pnlAsignatura.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Asignatura", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 24))); // NOI18N
-        pnlAsignatura.setCursor(new java.awt.Cursor(java.awt.Cursor.MOVE_CURSOR));
+        pnlAsignatura.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jLabel1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel1.setText("Favor de seleccionar asignatura :");
 
         CBO_asignatura.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        CBO_asignatura.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccione una Asignatura" }));
+        CBO_asignatura.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                CBO_asignaturaMousePressed(evt);
+            }
+        });
 
         tabla_notas_y_asistencia.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         tabla_notas_y_asistencia.setModel(new javax.swing.table.DefaultTableModel(
@@ -174,6 +183,12 @@ public class JFrameAsignatura extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btn_atrasActionPerformed
 
+    private void CBO_asignaturaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CBO_asignaturaMousePressed
+        CBO_asignatura.removeAllItems();
+        cargarAsignaturas2();
+        
+    }//GEN-LAST:event_CBO_asignaturaMousePressed
+
     /**
      * @param args the command line arguments
      */
@@ -217,22 +232,23 @@ public class JFrameAsignatura extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
-    public static javax.swing.JLabel jinvisible;
+    private javax.swing.JLabel jinvisible;
     private javax.swing.JLabel lbl_notaAsignatura;
     private javax.swing.JPanel pnlAsignatura;
     private javax.swing.JTable tabla_notas_y_asistencia;
     // End of variables declaration//GEN-END:variables
 
     private void init() {
-        cargarAsignaturas2();
+        
     }
 
     private void cargarAsignaturas2() {
         try {
             rut = jinvisible.getText();
-            user = DAOFactory.getInstance().getUsuarioDAO(DAOFactory.Motor.MY_SQL).search(rut).get(0);
+            user = DAOFactory.getInstance().getUsuarioDAO(DAOFactory.Motor.MY_SQL).getObjectByRut(rut);
+            alumno = DAOFactory.getInstance().getAlumnoDAO(DAOFactory.Motor.MY_SQL).getByIDUser(user.getId());
             System.out.println("Rut del user: "+ rut);
-            listaAsig = DAOFactory.getInstance().getAsignaturaDAO(DAOFactory.Motor.MY_SQL).getByAlumno(user.getId());
+            listaAsig = DAOFactory.getInstance().getAsignaturaDAO(DAOFactory.Motor.MY_SQL).getByAlumno(alumno.getId());
             
             for (Asignatura a : listaAsig) {
                 CBO_asignatura.addItem(a);
@@ -248,4 +264,9 @@ public class JFrameAsignatura extends javax.swing.JFrame {
         }
     }
     
+    public void setRutjFrame(String txt){
+        rutVar = txt;
+        jinvisible.setText(txt);
+        jinvisible.setVisible(false);
+    }
 }

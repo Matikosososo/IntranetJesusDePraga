@@ -8,12 +8,9 @@ package gui;
 
 public class jFrameMenuAdmin extends javax.swing.JFrame {
 
-    /**
-     * Creates new form jFrameMenuAdmin
-     */
+    private String rutVar;
     public jFrameMenuAdmin() {
         initComponents();
-        jInvisibleAdmin.setVisible(false);
     }
 
     /**
@@ -29,10 +26,10 @@ public class jFrameMenuAdmin extends javax.swing.JFrame {
         btnCambioPassApoderado = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
         btnCerrarSesionApoderado = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        jbtn_AdminProfes = new javax.swing.JButton();
+        jbtn_AdminAlumnos = new javax.swing.JButton();
+        jbtn_AdminAsignatura = new javax.swing.JButton();
+        jbtn_AdminHorario = new javax.swing.JButton();
         jInvisibleAdmin = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
@@ -59,32 +56,32 @@ public class jFrameMenuAdmin extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jButton1.setText("Administrar Profesores");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jbtn_AdminProfes.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jbtn_AdminProfes.setText("Administrar Profesores");
+        jbtn_AdminProfes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jbtn_AdminProfesActionPerformed(evt);
             }
         });
 
-        jButton2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jButton2.setText("Administrar Alumnos");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jbtn_AdminAlumnos.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jbtn_AdminAlumnos.setText("Administrar Alumnos");
+        jbtn_AdminAlumnos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jbtn_AdminAlumnosActionPerformed(evt);
             }
         });
 
-        jButton3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jButton3.setText("Administrar Asignaturas");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        jbtn_AdminAsignatura.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jbtn_AdminAsignatura.setText("Administrar Asignaturas");
+        jbtn_AdminAsignatura.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                jbtn_AdminAsignaturaActionPerformed(evt);
             }
         });
 
-        jButton4.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jButton4.setText("Administrar Horario");
+        jbtn_AdminHorario.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jbtn_AdminHorario.setText("Administrar Horario");
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/icon/escuela.png"))); // NOI18N
 
@@ -106,10 +103,10 @@ public class jFrameMenuAdmin extends javax.swing.JFrame {
                         .addGap(159, 159, 159))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jbtn_AdminAsignatura, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jbtn_AdminAlumnos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jbtn_AdminProfes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jbtn_AdminHorario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnCambioPassApoderado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnCerrarSesionApoderado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(100, 100, 100))))
@@ -122,13 +119,13 @@ public class jFrameMenuAdmin extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel10)
                 .addGap(18, 18, 18)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jbtn_AdminProfes, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jbtn_AdminAlumnos, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jbtn_AdminAsignatura, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jbtn_AdminHorario, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnCambioPassApoderado, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -157,9 +154,9 @@ public class jFrameMenuAdmin extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jbtn_AdminProfesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_AdminProfesActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jbtn_AdminProfesActionPerformed
 
     private void btnCerrarSesionApoderadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarSesionApoderadoActionPerformed
         this.setVisible(false);
@@ -174,18 +171,18 @@ public class jFrameMenuAdmin extends javax.swing.JFrame {
         verFarmPass.jInsivisiblePass.setText(rutVariable);
     }//GEN-LAST:event_btnCambioPassApoderadoActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void jbtn_AdminAsignaturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_AdminAsignaturaActionPerformed
         // TODO add your handling code here:
         jFrameCrud_Asignatura ver = new jFrameCrud_Asignatura();
         ver.setVisible(true);
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_jbtn_AdminAsignaturaActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void jbtn_AdminAlumnosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_AdminAlumnosActionPerformed
         // TODO add your handling code here:
         JFrameCRUDAlumno alum = new JFrameCRUDAlumno();
         
         alum.setVisible(true);
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_jbtn_AdminAlumnosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -225,13 +222,19 @@ public class jFrameMenuAdmin extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCambioPassApoderado;
     private javax.swing.JButton btnCerrarSesionApoderado;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    public static javax.swing.JLabel jInvisibleAdmin;
+    private javax.swing.JLabel jInvisibleAdmin;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton jbtn_AdminAlumnos;
+    private javax.swing.JButton jbtn_AdminAsignatura;
+    private javax.swing.JButton jbtn_AdminHorario;
+    private javax.swing.JButton jbtn_AdminProfes;
     // End of variables declaration//GEN-END:variables
+
+    public void setRutjFrame(String txt){
+        rutVar = txt;
+        jInvisibleAdmin.setText(txt);
+        jInvisibleAdmin.setVisible(false);
+    }
 }

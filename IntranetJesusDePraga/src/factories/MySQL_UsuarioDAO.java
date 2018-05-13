@@ -57,7 +57,7 @@ public class MySQL_UsuarioDAO implements UsuarioDAO {
 
     @Override
     public void delete(String id) {
-        String query = "delete from usuario where id = '" + id+"'";
+        String query = "delete from usuario where id = '" + id + "'";
         c.ejecutar(query);
     }
 
@@ -86,7 +86,7 @@ public class MySQL_UsuarioDAO implements UsuarioDAO {
 
     @Override
     public List<Usuario> search(String exp) {
-        String query = "Select * from usuario where rut LIKE '%"+exp+"%'";
+        String query = "Select * from usuario where rut LIKE '%" + exp + "%'";
         Usuario u;
         list_Usuarios = new ArrayList<>();
         tablaVirtual = c.ejecutarSelect(query);
@@ -109,7 +109,7 @@ public class MySQL_UsuarioDAO implements UsuarioDAO {
 
     @Override
     public String getByRut(String rut) {
-        String query = "Select * from usuario where rut = '"+rut+"'";
+        String query = "Select * from usuario where rut = '" + rut + "'";
         Usuario u;
         String rutExp = "";
         tablaVirtual = c.ejecutarSelect(query);
@@ -121,7 +121,7 @@ public class MySQL_UsuarioDAO implements UsuarioDAO {
                 u.setRut_usuario(tablaVirtual.getString(2));
                 u.setTipo(tablaVirtual.getInt(3));
                 u.setContrasenia(tablaVirtual.getString(4));
-                
+
                 rutExp = u.getRut_usuario();
             }
         } catch (SQLException ex) {
@@ -133,7 +133,7 @@ public class MySQL_UsuarioDAO implements UsuarioDAO {
 
     @Override
     public String getByPass(String pass) {
-        String query = "Select * from usuario where contraseña = '"+pass+"'";
+        String query = "Select * from usuario where contraseña = '" + pass + "'";
         Usuario u;
         String passExp = "";
         tablaVirtual = c.ejecutarSelect(query);
@@ -145,7 +145,7 @@ public class MySQL_UsuarioDAO implements UsuarioDAO {
                 u.setRut_usuario(tablaVirtual.getString(2));
                 u.setTipo(tablaVirtual.getInt(3));
                 u.setContrasenia(tablaVirtual.getString(4));
-                
+
                 passExp = u.getContrasenia();
             }
         } catch (SQLException ex) {
@@ -161,5 +161,43 @@ public class MySQL_UsuarioDAO implements UsuarioDAO {
         c.ejecutar(query);
     }
 
-   
+    @Override
+    public int getCountId() {
+        String query = "Select count(id) from usuario";
+        int cantidadId = 0;
+        try {
+            if (tablaVirtual.next()) {
+                cantidadId = tablaVirtual.getInt(1);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQL_UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        c.desconectar();
+        return cantidadId;
+    }
+
+    @Override
+    public Usuario getObjectByRut(String rut) {
+        String query = "Select * from usuario where rut = '" + rut + "'";
+        Usuario u = new Usuario();
+        
+        tablaVirtual = c.ejecutarSelect(query);
+        try {
+            if (tablaVirtual.next()) {
+                u = new Usuario();
+
+                u.setId(tablaVirtual.getInt(1));
+                u.setRut_usuario(tablaVirtual.getString(2));
+                u.setTipo(tablaVirtual.getInt(3));
+                u.setContrasenia(tablaVirtual.getString(4));
+
+                
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQL_UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        c.desconectar();
+        return u;
+    }
+
 }

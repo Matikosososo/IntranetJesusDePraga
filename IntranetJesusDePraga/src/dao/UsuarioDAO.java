@@ -20,7 +20,11 @@ public interface UsuarioDAO {
     
     String getByRut(String rut);
     
+    Usuario getObjectByRut(String rut);
+    
     String getByPass(String pass);
     
     void updatePass(Usuario u, String pass);
+    
+    int getCountId();
 }

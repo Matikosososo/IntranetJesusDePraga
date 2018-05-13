@@ -194,20 +194,20 @@ public class IntranetJesusDePraga extends javax.swing.JFrame {
                     switch (user.getTipo()) {
                         case 1:
                             menuProfe.setVisible(true);
-                            menuProfe.jInvisibleProfe.setText(rut);//hacer para todos
+                            menuProfe.getRutjFrame(rut);//hacer para todos
                             this.setVisible(false);
                             txt_login_clave.setText(null);
                             break;
 
                         case 2:
                             menuAlumno.setVisible(true);
-                            menuAlumno.jInvisibleAlumno.setText(rut);
+                            menuAlumno.setRutjFrame(rut);
                             this.setVisible(false);
                             txt_login_clave.setText(null);
                             break;
                         case 3:
                             menuAdmin.setVisible(true);
-                            menuAdmin.jInvisibleAdmin.setText(rut);
+                            menuAdmin.setRutjFrame(rut);
                             this.setVisible(false);
                             txt_login_clave.setText(null);
                             break;
@@ -252,20 +252,20 @@ public class IntranetJesusDePraga extends javax.swing.JFrame {
                         switch (user.getTipo()) {
                             case 1:
                                 menuProfe.setVisible(true);
-                                menuProfe.jInvisibleProfe.setText(rut);//hacer para todos
+                                menuProfe.getRutjFrame(rut);//hacer para todos
                                 this.setVisible(false);
                                 txt_login_clave.setText(null);
                                 break;
 
                             case 2:
                                 menuAlumno.setVisible(true);
-                                menuAlumno.jInvisibleAlumno.setText(rut);
+                                menuAlumno.setRutjFrame(rut);
                                 this.setVisible(false);
                                 txt_login_clave.setText(null);
                                 break;
                             case 3:
                                 menuAdmin.setVisible(true);
-                                menuAdmin.jInvisibleAdmin.setText(rut);
+                                menuAdmin.setRutjFrame(rut);
                                 this.setVisible(false);
                                 txt_login_clave.setText(null);
                                 break;
@@ -310,20 +310,20 @@ public class IntranetJesusDePraga extends javax.swing.JFrame {
                         switch (user.getTipo()) {
                             case 1:
                                 menuProfe.setVisible(true);
-                                menuProfe.jInvisibleProfe.setText(rut);//hacer para todos
+                                menuProfe.getRutjFrame(rut);//hacer para todos
                                 this.setVisible(false);
                                 txt_login_clave.setText(null);
                                 break;
 
                             case 2:
                                 menuAlumno.setVisible(true);
-                                menuAlumno.jInvisibleAlumno.setText(rut);
+                                menuAlumno.setRutjFrame(rut);
                                 this.setVisible(false);
                                 txt_login_clave.setText(null);
                                 break;
                             case 3:
                                 menuAdmin.setVisible(true);
-                                menuAdmin.jInvisibleAdmin.setText(rut);
+                                menuAdmin.setRutjFrame(rut);
                                 this.setVisible(false);
                                 txt_login_clave.setText(null);
                                 break;
