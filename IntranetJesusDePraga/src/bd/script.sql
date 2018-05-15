@@ -74,6 +74,11 @@ insert into nota values(null, 1, 2, 0, 0);
 insert into nota values(null, 2, 2, 0, 0);
 
 /*
+select alumno.id, alumno.nombre, alumno.rut, alumno.usuario
+from profesor, asignatura, alumno, nota
+where asignatura.profesor = profesor.id and nota.alumno_fk = alumno.id and nota.asignatura = asignatura.id
+and profesor.id = 1 and asignatura.id = 2
+
 select alumno.id, alumno.nombre, alumno.rut
 from nota, asignatura, alumno
 where nota.alumno_fk = alumno.id and nota.asignatura = asignatura.id and
@@ -138,5 +143,7 @@ from asignatura, profesor
 where asignatura.profesor = profesor.id and usuario = 2
 
 Select count(id) from usuario
+
+select 
 
 */

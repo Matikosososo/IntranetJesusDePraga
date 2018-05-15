@@ -20,4 +20,6 @@ public interface AlumnoDAO {
     List<Alumno> getByAsignatura(int i);
     
     Alumno getByIDUser(int idUser);
+    
+    List<Alumno> getByProfeAsignatura(int idProfe, int idAsig);
 }

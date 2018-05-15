@@ -20,7 +20,8 @@ public class MySQL_AlumnoDAO implements AlumnoDAO {
         c = new MySQL_ConexionDAO(DatosConexion.MySQL.SERVER, DatosConexion.MySQL.USER, DatosConexion.MySQL.PASS, DatosConexion.MySQL.BD);
 
     }
- @Override
+
+    @Override
     public void create(Alumno a) {
         String query = "insert into alumno values(null, '" + a.getNombre() + "','" + a.getRut() + "', " + a.getUsuario() + ")";
         c.ejecutar(query);
@@ -151,13 +152,39 @@ public class MySQL_AlumnoDAO implements AlumnoDAO {
                 a.setNombre(tablaVirtual.getString(2));
                 a.setRut(tablaVirtual.getString(3));
 
-                
             }
         } catch (SQLException ex) {
             Logger.getLogger(MySQL_AlumnoDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         c.desconectar();
         return a;
+    }
+
+    @Override
+    public List<Alumno> getByProfeAsignatura(int idProfe, int idAsig) {
+        String query = "select alumno.id, alumno.nombre, alumno.rut, alumno.usuario "
+                + "from profesor, asignatura, alumno, nota "
+                + "where asignatura.profesor = profesor.id and nota.alumno_fk = alumno.id and nota.asignatura = asignatura.id "
+                + "and profesor.id = " + idProfe + " and asignatura.id = " + idAsig;
+        Alumno a;
+        list_ALumnos = new ArrayList<>();
+        tablaVirtual = c.ejecutarSelect(query);
+        try {
+            while (tablaVirtual.next()) {
+                a = new Alumno();
+
+                a.setId(tablaVirtual.getInt(1));
+                a.setNombre(tablaVirtual.getString(2));
+                a.setRut(tablaVirtual.getString(3));
+                a.setUsuario(tablaVirtual.getInt(4));
+
+                list_ALumnos.add(a);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQL_AlumnoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        c.desconectar();
+        return list_ALumnos;
     }
 
 }

@@ -50,6 +50,11 @@ public class jFrameMenuProfesor extends javax.swing.JFrame {
 
         btnModificarNotaProfesor.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         btnModificarNotaProfesor.setText("Modificar Notas");
+        btnModificarNotaProfesor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnModificarNotaProfesorActionPerformed(evt);
+            }
+        });
 
         btnRegistrarAsistenciaProfesor.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         btnRegistrarAsistenciaProfesor.setText("Registrar Asistencia");
@@ -171,6 +176,14 @@ public class jFrameMenuProfesor extends javax.swing.JFrame {
         System.out.println("La wea es"+rutVaribale);
         verFormSubirN.setRutjFrame(rutVaribale);
     }//GEN-LAST:event_btnSubirNotaProfesorActionPerformed
+
+    private void btnModificarNotaProfesorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarNotaProfesorActionPerformed
+        jFrameModificarNotas modNotas = new jFrameModificarNotas();
+        modNotas.setVisible(true);
+        
+        String rutVaribale = jInvisibleProfe.getText();
+        modNotas.setRutjFrame(rutVaribale);
+    }//GEN-LAST:event_btnModificarNotaProfesorActionPerformed
 
     /**
      * @param args the command line arguments
