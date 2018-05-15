@@ -18,7 +18,7 @@ create table usuario(
     tipo_de_usuario int,
     contraseña varchar(50),
     foreign key (tipo_de_usuario) references tipo_de_usuario(id)   
-);
+); -- select * from usuario
 insert into usuario values(null, '00-0',3,md5('1234'));
 insert into usuario values(null, '11-1',1,md5('1234'));
 insert into usuario values(null,'22-2',2,md5('1234'));

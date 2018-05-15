@@ -155,7 +155,9 @@ public class jFrameMenuAdmin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbtn_AdminProfesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_AdminProfesActionPerformed
-        // TODO add your handling code here:
+        
+        JFrameCRUDProfesor profe = new JFrameCRUDProfesor();
+        profe.setVisible(true);
     }//GEN-LAST:event_jbtn_AdminProfesActionPerformed
 
     private void btnCerrarSesionApoderadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarSesionApoderadoActionPerformed

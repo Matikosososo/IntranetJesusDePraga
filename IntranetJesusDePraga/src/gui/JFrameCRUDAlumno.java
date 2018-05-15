@@ -63,6 +63,11 @@ public class JFrameCRUDAlumno extends javax.swing.JFrame {
         });
 
         btn_actualizar_alum.setText("Actualizar");
+        btn_actualizar_alum.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_actualizar_alumActionPerformed(evt);
+            }
+        });
 
         table_alumno.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -94,15 +99,13 @@ public class JFrameCRUDAlumno extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(91, 91, 91)
-                                .addComponent(txt_rutAlumno))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txt_nombreAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txt_rutAlumno)
+                            .addComponent(txt_nombreAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(24, 24, 24)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -171,7 +174,6 @@ public class JFrameCRUDAlumno extends javax.swing.JFrame {
     private void btn_crear_alumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_crear_alumActionPerformed
         try {
             String rut, nombre;
-            int countId;
             rut = txt_rutAlumno.getText();
             nombre = txt_nombreAlumno.getText();
                         
@@ -186,6 +188,8 @@ public class JFrameCRUDAlumno extends javax.swing.JFrame {
            System.out.println("cantidad de id's: "+u2.getId());
             Alumno a = new Alumno(nombre, rut, u2.getId());
             DAOFactory.getInstance().getAlumnoDAO(DAOFactory.Motor.MY_SQL).create(a);
+            
+            
         } catch (MotorNoSoportadoException ex) {
             Logger.getLogger(JFrameCRUDAlumno.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
@@ -199,6 +203,10 @@ public class JFrameCRUDAlumno extends javax.swing.JFrame {
     private void btn_volverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_volverActionPerformed
         this.setVisible(false);
     }//GEN-LAST:event_btn_volverActionPerformed
+
+    private void btn_actualizar_alumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_actualizar_alumActionPerformed
+        
+    }//GEN-LAST:event_btn_actualizar_alumActionPerformed
 
     /**
      * @param args the command line arguments

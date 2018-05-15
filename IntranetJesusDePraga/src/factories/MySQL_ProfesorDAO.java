@@ -22,7 +22,7 @@ public class MySQL_ProfesorDAO implements ProfesorDAO {
 
     @Override
     public void create(Profesor p) {
-        String query = "insert into profesor values(null,'" + p.getNombre() + "','" + p.getRut() + "')";
+        String query = "insert into profesor values(null,'" + p.getNombre() + "','" + p.getRut() + "','"+p.getUsuario()+"')";
         c.ejecutar(query);
     }
 
