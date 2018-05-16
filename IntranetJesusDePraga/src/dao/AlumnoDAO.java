@@ -12,14 +12,16 @@ public interface AlumnoDAO {
     void update(Alumno a);
 
     void delete(String id);
-    
+
     Alumno getByID(String id);
-    
+
     List<Alumno> search(String exp);
-    
+
     List<Alumno> getByAsignatura(int i);
-    
+
     Alumno getByIDUser(int idUser);
-    
+
+    String getByRUT(String rut);
+
     List<Alumno> getByProfeAsignatura(int idProfe, int idAsig);
 }

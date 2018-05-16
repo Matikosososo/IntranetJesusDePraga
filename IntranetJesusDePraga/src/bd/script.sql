@@ -116,6 +116,7 @@ Create table observacion(
 );
 insert into observacion values(null,1,1,'HOla');
 insert into observacion values(null,1,2,'Como');
+insert into observacion values(null,2,2,'JIJI');
 
 create table asistencia(
     id int primary key auto_increment,

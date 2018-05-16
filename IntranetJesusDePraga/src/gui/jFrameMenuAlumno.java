@@ -5,6 +5,12 @@
  */
 package gui;
 
+import factories.MySQL_AlumnoDAO;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import model.Alumno;
+
 /**
  *
  * @author Sammy Guergachi <sguergachi at gmail.com>
@@ -12,9 +18,32 @@ package gui;
 public class jFrameMenuAlumno extends javax.swing.JFrame {
 
     private String rutVar;
+    private MySQL_AlumnoDAO al;
+
     public jFrameMenuAlumno() {
-        initComponents();
-        
+
+        try {
+
+            initComponents();
+            
+            lbl_Alum.setText("Hola" + jInvisibleAlumno.getText());
+//            System.out.println(lbl_Alum.getText());
+            this.setLocationRelativeTo(null);
+//            jInvisibleAlumno.setVisible(false);
+//            lbl_Alum.setText(rutVar);
+//            System.out.println(rutVar);
+            al = new MySQL_AlumnoDAO();
+//            setRutjFrame(jInvisibleAlumno.getText());
+
+//            lbl_Alum.setText("Hola" + jInvisibleAlumno.getText() );
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(jFrameMenuAlumno.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(jFrameMenuAlumno.class.getName()).log(Level.SEVERE, null, ex);
+        }
+//        String rutString = jInvisibleAlumno.getText();
+//        System.out.println();
+
     }
 
     /**
@@ -35,6 +64,7 @@ public class jFrameMenuAlumno extends javax.swing.JFrame {
         btnCambiarPassAlumno1 = new javax.swing.JButton();
         jInvisibleAlumno = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        lbl_Alum = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -83,10 +113,22 @@ public class jFrameMenuAlumno extends javax.swing.JFrame {
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/icon/alumno.png"))); // NOI18N
 
+        lbl_Alum.setFont(new java.awt.Font("Tahoma", 3, 14)); // NOI18N
+        lbl_Alum.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(175, 175, 175))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(161, 161, 161))))
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jInvisibleAlumno)
@@ -101,13 +143,8 @@ public class jFrameMenuAlumno extends javax.swing.JFrame {
                 .addContainerGap(100, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(175, 175, 175))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(161, 161, 161))))
+                .addComponent(lbl_Alum, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -116,6 +153,8 @@ public class jFrameMenuAlumno extends javax.swing.JFrame {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel11)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lbl_Alum, javax.swing.GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(btnVerNotaAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -126,7 +165,7 @@ public class jFrameMenuAlumno extends javax.swing.JFrame {
                 .addComponent(btnCambiarPassAlumno1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnCerrarSesionAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jInvisibleAlumno))
         );
 
@@ -159,12 +198,12 @@ public class jFrameMenuAlumno extends javax.swing.JFrame {
         verFormPass.setVisible(true);
         String rutVaribale = jInvisibleAlumno.getText();
         verFormPass.jInsivisiblePass.setText(rutVaribale);
-        System.out.println("La wea esss"+rutVaribale);
+        System.out.println("La wea esss" + rutVaribale);
     }//GEN-LAST:event_btnCambiarPassAlumno1ActionPerformed
 
     private void btnVerNotaAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerNotaAlumnoActionPerformed
         JFrameAsignatura verFormNotas = new JFrameAsignatura();
-        
+
         verFormNotas.setRutjFrame(rutVar);
         verFormNotas.setVisible(true);
     }//GEN-LAST:event_btnVerNotaAlumnoActionPerformed
@@ -172,13 +211,17 @@ public class jFrameMenuAlumno extends javax.swing.JFrame {
     private void btnVerMensajeAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerMensajeAlumnoActionPerformed
         jFrameMensaje verFormMensaje = new jFrameMensaje();
         verFormMensaje.setVisible(true);
-        
+
+        String rutVaribale = jInvisibleAlumno.getText();
+        verFormMensaje.lblInvisibleRut.setText(rutVaribale);
+
     }//GEN-LAST:event_btnVerMensajeAlumnoActionPerformed
 
     private void btnCerrarSesionAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarSesionAlumnoActionPerformed
         this.setVisible(false);
         IntranetJesusDePraga inicio = new IntranetJesusDePraga();
         inicio.setVisible(true);
+
     }//GEN-LAST:event_btnCerrarSesionAlumnoActionPerformed
 
     /**
@@ -212,6 +255,7 @@ public class jFrameMenuAlumno extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new jFrameMenuAlumno().setVisible(true);
+
             }
         });
     }
@@ -226,11 +270,23 @@ public class jFrameMenuAlumno extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JLabel lbl_Alum;
     // End of variables declaration//GEN-END:variables
 
-    public void setRutjFrame(String txt){
+    public void setRutjFrame(String txt) {
+
         rutVar = txt;
         jInvisibleAlumno.setText(txt);
         jInvisibleAlumno.setVisible(false);
+//        System.out.println(rutVar);
+
     }
+
+    public void getRut() {
+
+        lbl_Alum.setText(al.getByRUT(rutVar));
+        System.out.println(lbl_Alum.getText());
+
+    }
+
 }

@@ -9,7 +9,8 @@ public class jFrameMenuProfesor extends javax.swing.JFrame {
 
     private String rutVar;
     public jFrameMenuProfesor() {
-        initComponents();   
+        initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**

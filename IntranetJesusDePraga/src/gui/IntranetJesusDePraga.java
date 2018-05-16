@@ -2,6 +2,7 @@ package gui;
 
 import exception.MotorNoSoportadoException;
 import factories.DAOFactory;
+import factories.MySQL_AlumnoDAO;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -13,10 +14,20 @@ import model.Usuario;
 public class IntranetJesusDePraga extends javax.swing.JFrame {
 
     Usuario user;
-
+    
+    private MySQL_AlumnoDAO al;
+    
     public IntranetJesusDePraga() {
-        initComponents();
-        this.setLocationRelativeTo(null);
+        try {
+            initComponents();
+            this.setLocationRelativeTo(null);
+            
+            al = new MySQL_AlumnoDAO();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(IntranetJesusDePraga.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(IntranetJesusDePraga.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -173,45 +184,55 @@ public class IntranetJesusDePraga extends javax.swing.JFrame {
             String password = new String(txt_login_clave.getPassword());
 
             password = md5(password);
-
+            
             jFrameMenuAdmin menuAdmin = new jFrameMenuAdmin();
             jFrameMenuAlumno menuAlumno = new jFrameMenuAlumno();
-            jFrameMenuProfesor menuProfe = new jFrameMenuProfesor();
+            jFrameMenuProfesor menuProfesor = new jFrameMenuProfesor();
+            
 
             if (rut.equals("") || !rut.equals(DAOFactory.getInstance().getUsuarioDAO(DAOFactory.Motor.MY_SQL).getByRut(rut))) {
                 JOptionPane.showMessageDialog(null, "Usuario Invalido", "ERROR", JOptionPane.OK_OPTION);
                 txt_login_usuario.select(0, txt_login_usuario.getText().length());
                 txt_login_usuario.requestFocus();
                 txt_login_clave.setText(null);
+            } else if (!password.equals(DAOFactory.getInstance().getUsuarioDAO(DAOFactory.Motor.MY_SQL).search(rut).get(0).getContrasenia()) || (password.equals(""))) {
+                JOptionPane.showMessageDialog(null, "Contraseña Incorrecta", "ERROR", JOptionPane.OK_OPTION);
+                txt_login_clave.setText(null);
+                txt_login_clave.requestFocus();
             } else {
-                if (!password.equals(DAOFactory.getInstance().getUsuarioDAO(DAOFactory.Motor.MY_SQL).search(rut).get(0).getContrasenia()) || (password.equals(""))) {
-                    JOptionPane.showMessageDialog(null, "Contraseña Incorrecta", "ERROR", JOptionPane.OK_OPTION);
-                    txt_login_clave.setText(null);
-                    txt_login_clave.requestFocus();
-                } else {
-                    user = DAOFactory.getInstance().getUsuarioDAO(DAOFactory.Motor.MY_SQL).search(rut).get(0);
-                    System.out.println(user.getTipo());
-                    switch (user.getTipo()) {
-                        case 1:
-                            menuProfe.setVisible(true);
-                            menuProfe.getRutjFrame(rut);//hacer para todos
-                            this.setVisible(false);
-                            txt_login_clave.setText(null);
-                            break;
+                user = DAOFactory.getInstance().getUsuarioDAO(DAOFactory.Motor.MY_SQL).search(rut).get(0);
+                System.out.println(user.getTipo());
+                switch (user.getTipo()) {
+                    case 1:
+                        menuProfesor.setLocationRelativeTo(null);
+                        menuProfesor.setVisible(true);
 
-                        case 2:
-                            menuAlumno.setVisible(true);
-                            menuAlumno.setRutjFrame(rut);
-                            this.setVisible(false);
-                            txt_login_clave.setText(null);
-                            break;
-                        case 3:
-                            menuAdmin.setVisible(true);
-                            menuAdmin.setRutjFrame(rut);
-                            this.setVisible(false);
-                            txt_login_clave.setText(null);
-                            break;
-                    }
+                        menuProfesor.getRutjFrame(rut);//hacer para todos
+                        this.setVisible(false);
+                        txt_login_clave.setText(null);
+                        break;
+
+                    case 2:
+                        
+                        menuAlumno.setLocationRelativeTo(null);
+                        menuAlumno.setVisible(true);
+                        menuAlumno.setRutjFrame(rut);
+                        
+//                        System.out.println(rut);
+//                        menuAlumno.init();
+                        
+                        
+                        this.setVisible(false);
+                        txt_login_clave.setText(null);
+                        break;
+                    case 3:
+                        menuAdmin.setLocationRelativeTo(null);
+                        menuAdmin.setVisible(true);
+
+                        menuAdmin.setRutjFrame(rut);
+                        this.setVisible(false);
+                        txt_login_clave.setText(null);
+                        break;
                 }
             }
         } catch (MotorNoSoportadoException ex) {
@@ -241,35 +262,33 @@ public class IntranetJesusDePraga extends javax.swing.JFrame {
                     txt_login_usuario.select(0, txt_login_usuario.getText().length());
                     txt_login_usuario.requestFocus();
                     txt_login_clave.setText(null);
+                } else if (!password.equals(DAOFactory.getInstance().getUsuarioDAO(DAOFactory.Motor.MY_SQL).search(rut).get(0).getContrasenia()) || (password.equals(""))) {
+                    JOptionPane.showMessageDialog(null, "Contraseña Incorrecta", "ERROR", JOptionPane.OK_OPTION);
+                    txt_login_clave.setText(null);
+                    txt_login_clave.requestFocus();
                 } else {
-                    if (!password.equals(DAOFactory.getInstance().getUsuarioDAO(DAOFactory.Motor.MY_SQL).search(rut).get(0).getContrasenia()) || (password.equals(""))) {
-                        JOptionPane.showMessageDialog(null, "Contraseña Incorrecta", "ERROR", JOptionPane.OK_OPTION);
-                        txt_login_clave.setText(null);
-                        txt_login_clave.requestFocus();
-                    } else {
-                        user = DAOFactory.getInstance().getUsuarioDAO(DAOFactory.Motor.MY_SQL).search(rut).get(0);
-                        System.out.println(user.getTipo());
-                        switch (user.getTipo()) {
-                            case 1:
-                                menuProfe.setVisible(true);
-                                menuProfe.getRutjFrame(rut);//hacer para todos
-                                this.setVisible(false);
-                                txt_login_clave.setText(null);
-                                break;
+                    user = DAOFactory.getInstance().getUsuarioDAO(DAOFactory.Motor.MY_SQL).search(rut).get(0);
+                    System.out.println(user.getTipo());
+                    switch (user.getTipo()) {
+                        case 1:
+                            menuProfe.setVisible(true);
+                            menuProfe.getRutjFrame(rut);//hacer para todos
+                            this.setVisible(false);
+                            txt_login_clave.setText(null);
+                            break;
 
-                            case 2:
-                                menuAlumno.setVisible(true);
-                                menuAlumno.setRutjFrame(rut);
-                                this.setVisible(false);
-                                txt_login_clave.setText(null);
-                                break;
-                            case 3:
-                                menuAdmin.setVisible(true);
-                                menuAdmin.setRutjFrame(rut);
-                                this.setVisible(false);
-                                txt_login_clave.setText(null);
-                                break;
-                        }
+                        case 2:
+                            menuAlumno.setVisible(true);
+                            menuAlumno.setRutjFrame(rut);
+                            this.setVisible(false);
+                            txt_login_clave.setText(null);
+                            break;
+                        case 3:
+                            menuAdmin.setVisible(true);
+                            menuAdmin.setRutjFrame(rut);
+                            this.setVisible(false);
+                            txt_login_clave.setText(null);
+                            break;
                     }
                 }
             } catch (MotorNoSoportadoException ex) {
@@ -299,35 +318,33 @@ public class IntranetJesusDePraga extends javax.swing.JFrame {
                     txt_login_usuario.select(0, txt_login_usuario.getText().length());
                     txt_login_usuario.requestFocus();
                     txt_login_clave.setText(null);
+                } else if (!password.equals(DAOFactory.getInstance().getUsuarioDAO(DAOFactory.Motor.MY_SQL).search(rut).get(0).getContrasenia()) || (password.equals(""))) {
+                    JOptionPane.showMessageDialog(null, "Contraseña Incorrecta", "ERROR", JOptionPane.OK_OPTION);
+                    txt_login_clave.setText(null);
+                    txt_login_clave.requestFocus();
                 } else {
-                    if (!password.equals(DAOFactory.getInstance().getUsuarioDAO(DAOFactory.Motor.MY_SQL).search(rut).get(0).getContrasenia()) || (password.equals(""))) {
-                        JOptionPane.showMessageDialog(null, "Contraseña Incorrecta", "ERROR", JOptionPane.OK_OPTION);
-                        txt_login_clave.setText(null);
-                        txt_login_clave.requestFocus();
-                    } else {
-                        user = DAOFactory.getInstance().getUsuarioDAO(DAOFactory.Motor.MY_SQL).search(rut).get(0);
-                        System.out.println(user.getTipo());
-                        switch (user.getTipo()) {
-                            case 1:
-                                menuProfe.setVisible(true);
-                                menuProfe.getRutjFrame(rut);//hacer para todos
-                                this.setVisible(false);
-                                txt_login_clave.setText(null);
-                                break;
+                    user = DAOFactory.getInstance().getUsuarioDAO(DAOFactory.Motor.MY_SQL).search(rut).get(0);
+                    System.out.println(user.getTipo());
+                    switch (user.getTipo()) {
+                        case 1:
+                            menuProfe.setVisible(true);
+                            menuProfe.getRutjFrame(rut);//hacer para todos
+                            this.setVisible(false);
+                            txt_login_clave.setText(null);
+                            break;
 
-                            case 2:
-                                menuAlumno.setVisible(true);
-                                menuAlumno.setRutjFrame(rut);
-                                this.setVisible(false);
-                                txt_login_clave.setText(null);
-                                break;
-                            case 3:
-                                menuAdmin.setVisible(true);
-                                menuAdmin.setRutjFrame(rut);
-                                this.setVisible(false);
-                                txt_login_clave.setText(null);
-                                break;
-                        }
+                        case 2:
+                            menuAlumno.setVisible(true);
+                            menuAlumno.setRutjFrame(rut);
+                            this.setVisible(false);
+                            txt_login_clave.setText(null);
+                            break;
+                        case 3:
+                            menuAdmin.setVisible(true);
+                            menuAdmin.setRutjFrame(rut);
+                            this.setVisible(false);
+                            txt_login_clave.setText(null);
+                            break;
                     }
                 }
             } catch (MotorNoSoportadoException ex) {

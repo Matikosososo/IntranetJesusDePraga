@@ -5,13 +5,19 @@
  */
 package gui;
 
+import exception.MotorNoSoportadoException;
+import factories.DAOFactory;
+import factories.MySQL_AlumnoDAO;
 import factories.MySQL_ObservacionDAO;
+import static gui.jFramePassword.jInsivisiblePass;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.scene.shape.FillRule;
 import model.Observacion;
 import model.TMObservacion;
+import model.Usuario;
 
 /**
  *
@@ -20,6 +26,7 @@ import model.TMObservacion;
 public class jFrameMensaje extends javax.swing.JFrame {
 
     private MySQL_ObservacionDAO ob;
+    private MySQL_AlumnoDAO al;
 
     /**
      * Creates new form jFrameMensaje
@@ -27,8 +34,11 @@ public class jFrameMensaje extends javax.swing.JFrame {
     public jFrameMensaje() {
         try {
             initComponents();
+            lblInvisibleRut.setVisible(false);
             ob = new MySQL_ObservacionDAO();
+            al = new MySQL_AlumnoDAO();
             cargarTablaObservacion();
+
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(jFrameMensaje.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
@@ -53,8 +63,9 @@ public class jFrameMensaje extends javax.swing.JFrame {
         btn_atrasMensaje = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabObservacion = new javax.swing.JTable();
-        jTextField1 = new javax.swing.JTextField();
+        txFObserva = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
+        lblInvisibleRut = new javax.swing.JLabel();
 
         jLabel2.setText("Favor de seleccionar asignatura :");
 
@@ -90,10 +101,14 @@ public class jFrameMensaje extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tabObservacion.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                tabObservacionMouseReleased(evt);
+            }
+        });
         jScrollPane1.setViewportView(tabObservacion);
 
-        jTextField1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jTextField1.setText("En la tabla, se mostrarian las asignaturas y una lista de cada anotacion correspondiente a\ncada asignatura, y al hacer doble click, se mostraria con mas detalle aqui :3");
+        txFObserva.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/icon/examen(1).png"))); // NOI18N
 
@@ -104,19 +119,23 @@ public class jFrameMensaje extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(40, 40, 40)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 545, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(lbl_anotacionALumno, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lbl_alumno, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txFObserva, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 545, Short.MAX_VALUE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(lbl_anotacionALumno, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lbl_alumno, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(40, 40, 40))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(189, 189, 189)
                         .addComponent(btn_atrasMensaje, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addGap(40, 40, 40))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblInvisibleRut)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -129,9 +148,11 @@ public class jFrameMensaje extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(40, 40, 40)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txFObserva, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
-                .addComponent(btn_atrasMensaje)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btn_atrasMensaje)
+                    .addComponent(lblInvisibleRut))
                 .addGap(40, 40, 40))
         );
 
@@ -158,6 +179,19 @@ public class jFrameMensaje extends javax.swing.JFrame {
     private void btn_atrasMensajeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_atrasMensajeActionPerformed
         this.setVisible(false);
     }//GEN-LAST:event_btn_atrasMensajeActionPerformed
+
+    private void tabObservacionMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabObservacionMouseReleased
+        if (evt.getClickCount() == 2) {
+            int fila = tabObservacion.getSelectedRow();
+            System.out.println(fila);
+            TMObservacion tabla = (TMObservacion) tabObservacion.getModel();
+
+            Observacion o = tabla.getObservacion(fila);
+            lbl_alumno.setText(o.getAlumno());
+
+            txFObserva.setText(o.getObservacion());
+        }
+    }//GEN-LAST:event_tabObservacionMouseReleased
 
     /**
      * @param args the command line arguments
@@ -200,11 +234,12 @@ public class jFrameMensaje extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
+    public static javax.swing.JLabel lblInvisibleRut;
     private javax.swing.JLabel lbl_alumno;
     private javax.swing.JLabel lbl_alumno1;
     private javax.swing.JLabel lbl_anotacionALumno;
     private javax.swing.JTable tabObservacion;
+    private javax.swing.JTextField txFObserva;
     // End of variables declaration//GEN-END:variables
 
     private void cargarTablaObservacion() {

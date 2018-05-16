@@ -53,10 +53,7 @@ public class Alumno {
         this.rut = rut;
     }
 
-    @Override
-    public String toString() {
-        return nombre;
-    }
+   
 
     public int getUsuario() {
         return usuario;
@@ -65,6 +62,12 @@ public class Alumno {
     public void setUsuario(int usuario) {
         this.usuario = usuario;
     }
+    
+     @Override
+    public String toString() {
+        return nombre;
+    }
+    
     
     
 }
