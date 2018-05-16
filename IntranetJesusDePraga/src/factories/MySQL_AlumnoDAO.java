@@ -69,8 +69,7 @@ public class MySQL_AlumnoDAO implements AlumnoDAO {
     @Override
     public Alumno getByID(String id) {
         String query = "Select * from alumno where id = " + id;
-        Alumno a;
-        list_ALumnos = new ArrayList<>();
+        Alumno a = null;
         tablaVirtual = c.ejecutarSelect(query);
         try {
             if (tablaVirtual.next()) {
@@ -80,13 +79,12 @@ public class MySQL_AlumnoDAO implements AlumnoDAO {
                 a.setNombre(tablaVirtual.getString(2));
                 a.setRut(tablaVirtual.getString(3));
 
-                list_ALumnos.add(a);
             }
         } catch (SQLException ex) {
             Logger.getLogger(MySQL_AlumnoDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         c.desconectar();
-        return list_ALumnos.get(0);
+        return a;
     }
 
     @Override

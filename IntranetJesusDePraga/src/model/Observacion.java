@@ -53,6 +53,13 @@ public class Observacion {
     public void setObservacion(String observacion) {
         this.observacion = observacion;
     }
+
+    @Override
+    public String toString() {
+        return observacion;
+    }
+    
+    
     
     
 }

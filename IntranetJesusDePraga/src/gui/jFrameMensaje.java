@@ -5,17 +5,35 @@
  */
 package gui;
 
+import factories.MySQL_ObservacionDAO;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import model.Observacion;
+import model.TMObservacion;
+
 /**
  *
  * @author naxho
  */
 public class jFrameMensaje extends javax.swing.JFrame {
 
+    private MySQL_ObservacionDAO ob;
+
     /**
      * Creates new form jFrameMensaje
      */
     public jFrameMensaje() {
-        initComponents();
+        try {
+            initComponents();
+            ob = new MySQL_ObservacionDAO();
+            cargarTablaObservacion();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(jFrameMensaje.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(jFrameMensaje.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -34,7 +52,7 @@ public class jFrameMensaje extends javax.swing.JFrame {
         lbl_alumno = new javax.swing.JLabel();
         btn_atrasMensaje = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tabObservacion = new javax.swing.JTable();
         jTextField1 = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
 
@@ -60,8 +78,8 @@ public class jFrameMensaje extends javax.swing.JFrame {
             }
         });
 
-        jTable1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tabObservacion.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        tabObservacion.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -72,7 +90,7 @@ public class jFrameMensaje extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tabObservacion);
 
         jTextField1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jTextField1.setText("En la tabla, se mostrarian las asignaturas y una lista de cada anotacion correspondiente a\ncada asignatura, y al hacer doble click, se mostraria con mas detalle aqui :3");
@@ -182,10 +200,26 @@ public class jFrameMensaje extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lbl_alumno;
     private javax.swing.JLabel lbl_alumno1;
     private javax.swing.JLabel lbl_anotacionALumno;
+    private javax.swing.JTable tabObservacion;
     // End of variables declaration//GEN-END:variables
+
+    private void cargarTablaObservacion() {
+
+        try {
+            List<Observacion> list = ob.read();
+            TMObservacion tm;
+
+            tm = new TMObservacion(list);
+            tabObservacion.setModel(tm);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(jFrameMensaje.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(jFrameMensaje.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
 }

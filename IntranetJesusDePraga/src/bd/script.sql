@@ -114,6 +114,8 @@ Create table observacion(
     foreign key(alumno_fk) references alumno(id),
     foreign key(asignatura_fk) references asignatura(id)
 );
+insert into observacion values(null,1,1,'HOla');
+insert into observacion values(null,1,2,'Como');
 
 create table asistencia(
     id int primary key auto_increment,
