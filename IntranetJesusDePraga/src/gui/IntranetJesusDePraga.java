@@ -186,7 +186,7 @@ public class IntranetJesusDePraga extends javax.swing.JFrame {
             password = md5(password);
             
             jFrameMenuAdmin menuAdmin = new jFrameMenuAdmin();
-            jFrameMenuAlumno menuAlumno = new jFrameMenuAlumno();
+            
             jFrameMenuProfesor menuProfesor = new jFrameMenuProfesor();
             
 
@@ -213,10 +213,11 @@ public class IntranetJesusDePraga extends javax.swing.JFrame {
                         break;
 
                     case 2:
-                        
+                        jFrameMenuAlumno menuAlumno = new jFrameMenuAlumno();
                         menuAlumno.setLocationRelativeTo(null);
                         menuAlumno.setVisible(true);
                         menuAlumno.setRutjFrame(rut);
+                        menuAlumno.cargarNombre();
                         
 //                        System.out.println(rut);
 //                        menuAlumno.init();

@@ -36,6 +36,7 @@ public class jFrameMenuAlumno extends javax.swing.JFrame {
 //            setRutjFrame(jInvisibleAlumno.getText());
 
 //            lbl_Alum.setText("Hola" + jInvisibleAlumno.getText() );
+            
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(jFrameMenuAlumno.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
@@ -273,20 +274,16 @@ public class jFrameMenuAlumno extends javax.swing.JFrame {
     private javax.swing.JLabel lbl_Alum;
     // End of variables declaration//GEN-END:variables
 
-    public void setRutjFrame(String txt) {
-
-        rutVar = txt;
-        jInvisibleAlumno.setText(txt);
+    public void setRutjFrame(String rut) {
+        rutVar = rut;
+        jInvisibleAlumno.setText(rut);
         jInvisibleAlumno.setVisible(false);
-//        System.out.println(rutVar);
-
+        System.out.println("RUT-->"+rutVar);
+        
     }
-
-    public void getRut() {
-
-        lbl_Alum.setText(al.getByRUT(rutVar));
-        System.out.println(lbl_Alum.getText());
-
+    
+    public void cargarNombre(){
+        String nombre  = al.getNombreBy(rutVar);
+        lbl_Alum.setText(nombre);
     }
-
 }

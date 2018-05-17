@@ -21,7 +21,7 @@ public interface AlumnoDAO {
 
     Alumno getByIDUser(int idUser);
 
-    String getByRUT(String rut);
+    String getNombreBy(String rut);
 
     List<Alumno> getByProfeAsignatura(int idProfe, int idAsig);
 }
