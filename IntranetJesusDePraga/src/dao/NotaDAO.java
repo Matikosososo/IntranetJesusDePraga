@@ -16,4 +16,7 @@ public interface NotaDAO {
     Nota getByID(String id);
     
     List<Nota> search(String exp);
+    
+    List<Nota> getNotaByAsig(int asig, int not);
+    
 }

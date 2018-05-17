@@ -65,6 +65,7 @@ insert into alumno values(null, 'Mati', '33-3', 4);
 
 create table nota(
     id int primary key auto_increment,
+    identificador int,
     asignatura int,
     alumno_fk int,
     nota float,
@@ -73,15 +74,18 @@ create table nota(
     foreign key(asignatura) references asignatura(id)
 );
 
-insert into nota values(null, 1, 1, 0, 0);
-insert into nota values(null, 1, 2, 0, 0);
-insert into nota values(null, 2, 2, 0, 0);
+select * from nota
+
+insert into nota values(null, 1, 1, 1, 0, 0);
+insert into nota values(null, 1, 1, 2, 0, 0);
+insert into nota values(null, 1, 2, 2, 0, 0);
+insert into nota values(null, 2, 2, 2, 50, 25);
 
 /*
-select alumno.id, alumno.nombre, alumno.rut, alumno.usuario
+select nota.id, asignatura.nombre, alumno.nombre, nota.nota, nota.ponderacion
 from profesor, asignatura, alumno, nota
 where asignatura.profesor = profesor.id and nota.alumno_fk = alumno.id and nota.asignatura = asignatura.id
-and profesor.id = 1 and asignatura.id = 2
+and profesor.id = 1 and asignatura.id = 2 and nota.id = 4
 
 select alumno.id, alumno.nombre, alumno.rut
 from nota, asignatura, alumno
@@ -152,5 +156,10 @@ where asignatura.profesor = profesor.id and usuario = 2
 Select count(id) from usuario
 
 select 
+
+select alumno.nombre, nota.nota, nota.ponderacion 
+from asignatura, alumno, nota 
+where nota.alumno_fk = alumno.id and nota.asignatura = asignatura.id 
+and asignatura.id = 2 and nota.identificador = 2
 
 */
