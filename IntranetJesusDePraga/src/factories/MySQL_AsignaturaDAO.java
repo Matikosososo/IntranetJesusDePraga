@@ -64,7 +64,7 @@ public class MySQL_AsignaturaDAO implements AsignaturaDAO {
 
     @Override
     public Asignatura getByID(String id) {
-        String query = "Select * from asignatura where id = " + id;
+        String query = "select * from asignatura where id = '" + id + "'";
         Asignatura a = null;
         tablaVirtual = c.ejecutarSelect(query);
         try {
@@ -108,7 +108,7 @@ public class MySQL_AsignaturaDAO implements AsignaturaDAO {
     public List<Asignatura> getByProfe(int id) {
         String query = "select asignatura.id, asignatura.nombre, asignatura.profesor "
                 + "from asignatura, profesor "
-                + "where asignatura.profesor = profesor.id and usuario = "+id;
+                + "where asignatura.profesor = profesor.id and usuario = " + id;
         Asignatura a;
         list_Asignatura = new ArrayList<>();
         tablaVirtual = c.ejecutarSelect(query);
@@ -151,7 +151,7 @@ public class MySQL_AsignaturaDAO implements AsignaturaDAO {
         c.desconectar();
         return list_Asignatura;
     }
-    
+
 //    public Asignatura getASignatura(int id) throws SQLException {
 //        Asignatura a = null;
 //        String query = "select * from asignatura where id=" + id;
@@ -170,5 +170,4 @@ public class MySQL_AsignaturaDAO implements AsignaturaDAO {
 //        return a;
 //
 //    }
-
 }

@@ -122,9 +122,21 @@ Create table observacion(
     foreign key(alumno_fk) references alumno(id),
     foreign key(asignatura_fk) references asignatura(id)
 );
+Select * from observacion;
+
+/*
+SELECT asignatura.nombre,observacion.comentario 
+FROM observacion,alumno,asignatura 
+WHERE observacion.alumno_fk = alumno.id 
+and asignatura.id = observacion.asignatura_fk 
+and alumno.rut = "22-2" and asignatura.id = 3;
+*/
+
 insert into observacion values(null,1,1,'HOla');
 insert into observacion values(null,1,2,'Como');
+insert into observacion values(null,1,2,'TAREA');
 insert into observacion values(null,2,2,'JIJI');
+insert into observacion values(null,1,3,'NUEVA TAREA');
 
 create table asistencia(
     id int primary key auto_increment,
@@ -134,6 +146,8 @@ create table asistencia(
     foreign key(alumno_fk) references alumno (id),
     fecha date
 );
+
+
 /*
 select * from alumno
 select * from asignatura
@@ -162,4 +176,6 @@ from asignatura, alumno, nota
 where nota.alumno_fk = alumno.id and nota.asignatura = asignatura.id 
 and asignatura.id = 2 and nota.identificador = 2
 
+/*
+SELECT * FROM asignatura WHERE id = 1;
 */

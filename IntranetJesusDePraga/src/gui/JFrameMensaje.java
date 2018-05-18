@@ -16,6 +16,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.scene.shape.FillRule;
 import model.Alumno;
+import model.Asignatura;
 import model.Observacion;
 import model.TMObservacion;
 import model.Usuario;
@@ -37,9 +38,15 @@ public class JFrameMensaje extends javax.swing.JFrame {
         try {
             initComponents();
             lblInvisibleRut.setVisible(false);
-            ob = new MySQL_ObservacionDAO();
+            IntranetJesusDePraga i = new IntranetJesusDePraga();
+            lblInvisibleRut.setText(i.rut);
+//            System.out.println("MSJ"+ lblInvisibleRut.getText());
+            
             al = new MySQL_AlumnoDAO();
-            cargarTablaObservacion();
+            
+            ob = new MySQL_ObservacionDAO();
+            cargarASignatura();
+//            cargarTablaObservacion();
 
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(JFrameMensaje.class.getName()).log(Level.SEVERE, null, ex);
@@ -61,13 +68,14 @@ public class JFrameMensaje extends javax.swing.JFrame {
         lbl_alumno1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         lbl_anotacionALumno = new javax.swing.JLabel();
-        lbl_alumno = new javax.swing.JLabel();
         btn_atrasMensaje = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabObservacion = new javax.swing.JTable();
         txFObserva = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         lblInvisibleRut = new javax.swing.JLabel();
+        cboAsignatura = new javax.swing.JComboBox();
+        btnAsignatura = new javax.swing.JButton();
 
         jLabel2.setText("Favor de seleccionar asignatura :");
 
@@ -78,10 +86,7 @@ public class JFrameMensaje extends javax.swing.JFrame {
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Anotaciones", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 24))); // NOI18N
 
         lbl_anotacionALumno.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        lbl_anotacionALumno.setText("Anotaciones del alumno: ");
-
-        lbl_alumno.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        lbl_alumno.setText("X");
+        lbl_anotacionALumno.setText("Asignatura:");
 
         btn_atrasMensaje.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         btn_atrasMensaje.setText("Atrás");
@@ -110,11 +115,22 @@ public class JFrameMensaje extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tabObservacion);
 
+        txFObserva.setEditable(false);
         txFObserva.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         txFObserva.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txFObserva.setToolTipText("");
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/icon/examen(1).png"))); // NOI18N
+
+        cboAsignatura.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1" }));
+        cboAsignatura.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+
+        btnAsignatura.setText("Seleccionar");
+        btnAsignatura.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAsignaturaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -128,9 +144,11 @@ public class JFrameMensaje extends javax.swing.JFrame {
                             .addComponent(txFObserva, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 545, Short.MAX_VALUE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(lbl_anotacionALumno, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lbl_anotacionALumno, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lbl_alumno, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(cboAsignatura, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnAsignatura, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(40, 40, 40))
@@ -148,12 +166,13 @@ public class JFrameMensaje extends javax.swing.JFrame {
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(lbl_anotacionALumno)
-                        .addComponent(lbl_alumno)))
-                .addGap(18, 18, 18)
+                        .addComponent(cboAsignatura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnAsignatura)))
+                .addGap(14, 14, 14)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(40, 40, 40)
                 .addComponent(txFObserva, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btn_atrasMensaje)
                     .addComponent(lblInvisibleRut))
@@ -189,15 +208,18 @@ public class JFrameMensaje extends javax.swing.JFrame {
             int fila = tabObservacion.getSelectedRow();
             System.out.println(fila);
             TMObservacion tabla = (TMObservacion) tabObservacion.getModel();
-            
+
             Observacion o = tabla.getObservacion(fila);
-            Alumno a ;
-             a = al.getByID(o.getAlumno());
-            lbl_alumno.setText(a.getNombre());
+            Alumno a;
+            a = al.getByID(o.getAlumno());
 
             txFObserva.setText(o.getObservacion());
         }
     }//GEN-LAST:event_tabObservacionMouseReleased
+
+    private void btnAsignaturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAsignaturaActionPerformed
+       cargarTablaObservacion();
+    }//GEN-LAST:event_btnAsignaturaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -236,13 +258,14 @@ public class JFrameMensaje extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAsignatura;
     private javax.swing.JButton btn_atrasMensaje;
+    private javax.swing.JComboBox cboAsignatura;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    public static javax.swing.JLabel lblInvisibleRut;
-    private javax.swing.JLabel lbl_alumno;
+    public javax.swing.JLabel lblInvisibleRut;
     private javax.swing.JLabel lbl_alumno1;
     private javax.swing.JLabel lbl_anotacionALumno;
     private javax.swing.JTable tabObservacion;
@@ -252,7 +275,9 @@ public class JFrameMensaje extends javax.swing.JFrame {
     private void cargarTablaObservacion() {
 
         try {
-            List<Observacion> list = ob.read();
+            String valor = lblInvisibleRut.getText();
+            Asignatura a = (Asignatura) cboAsignatura.getSelectedItem();
+            List<Observacion> list = ob.getByRut(valor,String.valueOf(a.getId()));
             TMObservacion tm;
 
             tm = new TMObservacion(list);
@@ -265,8 +290,23 @@ public class JFrameMensaje extends javax.swing.JFrame {
 
     }
     
-    public void cargarNombreMens(){
-        String nombre  = al.getByNombre(rutVar);
-        lbl_alumno.setText(nombre);
+    private void cargarASignatura(){
+    try {
+//            String rut = jInvisibleCrearAsig.getText();
+//            user = DAOFactory.getInstance().getUsuarioDAO(DAOFactory.Motor.MY_SQL).search(rut).get(0);
+            List<Asignatura> listAsig = DAOFactory.getInstance().getAsignaturaDAO(DAOFactory.Motor.MY_SQL).read();
+            cboAsignatura.removeAllItems();
+            for (Asignatura a : listAsig) {
+                cboAsignatura.addItem(a);
+            }
+
+        } catch (MotorNoSoportadoException ex) {
+            Logger.getLogger(JFrameSubirNota.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(JFrameSubirNota.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(JFrameSubirNota.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
+
 }

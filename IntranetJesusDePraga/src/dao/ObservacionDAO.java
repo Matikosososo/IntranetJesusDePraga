@@ -4,7 +4,7 @@ import java.util.List;
 import model.Observacion;
 
 public interface ObservacionDAO {
-    
+
     void create(Observacion o);
 
     List<Observacion> read();
@@ -12,8 +12,10 @@ public interface ObservacionDAO {
     void update(Observacion o);
 
     void delete(String id);
-    
+
     Observacion bgetByID(String id);
-    
+
+    List<Observacion> getByRut(String rut,String Asig);
+
     List<Observacion> search(String exp);
 }

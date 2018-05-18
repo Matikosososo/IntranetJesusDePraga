@@ -299,7 +299,8 @@ public class JFrameMenuProfesor extends javax.swing.JFrame {
         JFrameEnviarMensaje.setSize(400, 400);
         JFrameEnviarMensaje.setLocationRelativeTo(null);
         JFrameEnviarMensaje.setVisible(true);
-
+        
+//        getRutjFrame(rutVar);
 
     }//GEN-LAST:event_btnEnviarMEnsajeActionPerformed
 
@@ -374,4 +375,5 @@ public class JFrameMenuProfesor extends javax.swing.JFrame {
         jInvisibleProfe.setText(txt);
         jInvisibleProfe.setVisible(false);
     }
+    
 }

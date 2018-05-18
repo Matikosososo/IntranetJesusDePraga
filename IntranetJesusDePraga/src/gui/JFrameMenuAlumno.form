@@ -175,6 +175,9 @@
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jInvisibleAlumno">
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel1">
           <Properties>

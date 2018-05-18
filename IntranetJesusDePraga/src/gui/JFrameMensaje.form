@@ -74,10 +74,12 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="txFObserva" pref="0" max="32767" attributes="0"/>
                               <Component id="jScrollPane1" alignment="0" pref="545" max="32767" attributes="0"/>
-                              <Group type="102" attributes="0">
-                                  <Component id="lbl_anotacionALumno" min="-2" pref="216" max="-2" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="lbl_anotacionALumno" min="-2" pref="87" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="lbl_alumno" min="-2" pref="218" max="-2" attributes="0"/>
+                                  <Component id="cboAsignatura" min="-2" pref="231" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="btnAsignatura" min="-2" pref="96" max="-2" attributes="0"/>
                                   <EmptySpace max="32767" attributes="0"/>
                                   <Component id="jLabel1" min="-2" pref="64" max="-2" attributes="0"/>
                               </Group>
@@ -102,14 +104,15 @@
                       <Component id="jLabel1" alignment="0" min="-2" pref="64" max="-2" attributes="0"/>
                       <Group type="103" alignment="1" groupAlignment="3" attributes="0">
                           <Component id="lbl_anotacionALumno" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="lbl_alumno" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="cboAsignatura" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnAsignatura" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
                   <Component id="jScrollPane1" min="-2" pref="116" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
                   <Component id="txFObserva" min="-2" pref="196" max="-2" attributes="0"/>
-                  <EmptySpace pref="40" max="32767" attributes="0"/>
+                  <EmptySpace pref="44" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="btn_atrasMensaje" min="-2" max="-2" attributes="0"/>
                       <Component id="lblInvisibleRut" min="-2" max="-2" attributes="0"/>
@@ -125,15 +128,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Arial" size="14" style="0"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Anotaciones del alumno: "/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JLabel" name="lbl_alumno">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Arial" size="14" style="0"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="X"/>
+            <Property name="text" type="java.lang.String" value="Asignatura:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="btn_atrasMensaje">
@@ -176,6 +171,7 @@
         </Container>
         <Component class="javax.swing.JTextField" name="txFObserva">
           <Properties>
+            <Property name="editable" type="boolean" value="false"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Arial" size="14" style="0"/>
             </Property>
@@ -192,8 +188,31 @@
         </Component>
         <Component class="javax.swing.JLabel" name="lblInvisibleRut">
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
           </AuxValues>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="cboAsignatura">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="1">
+                <StringItem index="0" value="Item 1"/>
+              </StringArray>
+            </Property>
+            <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+              <Color id="Cursor Por defecto"/>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value=""/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JButton" name="btnAsignatura">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Seleccionar"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAsignaturaActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

@@ -6,6 +6,7 @@
 package gui;
 
 import factories.MySQL_AlumnoDAO;
+import factories.MySQL_ObservacionDAO;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,6 +20,7 @@ public class JFrameMenuAlumno extends javax.swing.JFrame {
 
     private String rutVar;
     private MySQL_AlumnoDAO al;
+    private MySQL_ObservacionDAO o;
 
     public JFrameMenuAlumno() {
 
@@ -27,12 +29,13 @@ public class JFrameMenuAlumno extends javax.swing.JFrame {
             initComponents();
 
 //            lbl_Alum.setText("Hola" + jInvisibleAlumno.getText());
-//            System.out.println(lbl_Alum.getText());
+//            System.out.println(" MENU "+ jInvisibleAlumno.getText()+" AQUI");
             this.setLocationRelativeTo(null);
 //            jInvisibleAlumno.setVisible(false);
 //            lbl_Alum.setText(rutVar);
-//            System.out.println(rutVar);
+            System.out.println();
             al = new MySQL_AlumnoDAO();
+            o = new MySQL_ObservacionDAO();
 //            setRutjFrame(jInvisibleAlumno.getText());
 
 //            lbl_Alum.setText("Hola" + jInvisibleAlumno.getText() );
@@ -212,9 +215,11 @@ public class JFrameMenuAlumno extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVerNotaAlumnoActionPerformed
 
     private void btnVerMensajeAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerMensajeAlumnoActionPerformed
+        
         JFrameMensaje verFormMensaje = new JFrameMensaje();
         verFormMensaje.setVisible(true);
-        verFormMensaje.cargarNombreMens();
+        String rutVaribale = jInvisibleAlumno.getText();
+        verFormMensaje.lblInvisibleRut.setText(rutVaribale);
 //        String rutVaribale = jInvisibleAlumno.getText();
 //        verFormMensaje.lblInvisibleRut.setText(rutVaribale);
 //        cargarNombre();
@@ -270,21 +275,24 @@ public class JFrameMenuAlumno extends javax.swing.JFrame {
     private javax.swing.JButton btnCerrarSesionAlumno;
     private javax.swing.JButton btnVerMensajeAlumno;
     private javax.swing.JButton btnVerNotaAlumno;
-    private javax.swing.JLabel jInvisibleAlumno;
+    public static javax.swing.JLabel jInvisibleAlumno;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JLabel lbl_Alum;
     // End of variables declaration//GEN-END:variables
-
+    
+    public String getRut(String rut){
+        String rutAL = rut;
+        return rutAL;
+    }
     public void setRutjFrame(String rut) {
         rutVar = rut;
         jInvisibleAlumno.setText(rut);
         jInvisibleAlumno.setVisible(false);
         System.out.println("RUT-->" + rutVar);
-
     }
-
+        
     public void cargarNombre() {
         String nombre = al.getByNombre(rutVar);
         lbl_Alum.setText(nombre);

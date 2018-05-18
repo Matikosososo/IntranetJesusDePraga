@@ -16,6 +16,7 @@ public class IntranetJesusDePraga extends javax.swing.JFrame {
     Usuario user;
 
     private MySQL_AlumnoDAO al;
+    public static String rut = "";
 
     public IntranetJesusDePraga() {
         try {
@@ -180,7 +181,7 @@ public class IntranetJesusDePraga extends javax.swing.JFrame {
     private void btn_login_ingresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_login_ingresarActionPerformed
 
         try {
-            String rut = txt_login_usuario.getText();
+            rut = txt_login_usuario.getText();
             String password = new String(txt_login_clave.getPassword());
 
             password = md5(password);
@@ -207,6 +208,7 @@ public class IntranetJesusDePraga extends javax.swing.JFrame {
                         menuProfesor.setVisible(true);
 
                         menuProfesor.getRutjFrame(rut);//hacer para todos
+
                         this.setVisible(false);
                         txt_login_clave.setText(null);
                         break;
@@ -217,8 +219,7 @@ public class IntranetJesusDePraga extends javax.swing.JFrame {
                         menuAlumno.setVisible(true);
                         menuAlumno.setRutjFrame(rut);
                         menuAlumno.cargarNombre();
-//                        System.out.println(rut);
-//                        menuAlumno.init();
+                        //menuAlumno.init();
                         this.setVisible(false);
                         txt_login_clave.setText(null);
                         break;
@@ -245,7 +246,7 @@ public class IntranetJesusDePraga extends javax.swing.JFrame {
     private void txt_login_claveKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_login_claveKeyPressed
         if (evt.getKeyCode() == evt.VK_ENTER) {
             try {
-                String rut = txt_login_usuario.getText();
+                rut = txt_login_usuario.getText();
                 String password = new String(txt_login_clave.getPassword());
 
                 password = md5(password);
@@ -275,10 +276,13 @@ public class IntranetJesusDePraga extends javax.swing.JFrame {
 
                         case 2:
                             JFrameMenuAlumno menuAlumno = new JFrameMenuAlumno();
+                            menuAlumno.jInvisibleAlumno.setText(rut);
+                            System.out.println("TXT-->" + menuAlumno.jInvisibleAlumno.getText());
                             menuAlumno.setVisible(true);
                             menuAlumno.setRutjFrame(rut);
                             this.setVisible(false);
                             menuAlumno.cargarNombre();
+
                             txt_login_clave.setText(null);
                             break;
                         case 3:
@@ -302,7 +306,7 @@ public class IntranetJesusDePraga extends javax.swing.JFrame {
     private void txt_login_usuarioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_login_usuarioKeyPressed
         if (evt.getKeyCode() == evt.VK_ENTER) {
             try {
-                String rut = txt_login_usuario.getText();
+                rut = txt_login_usuario.getText();
                 String password = new String(txt_login_clave.getPassword());
 
                 password = md5(password);

@@ -2,6 +2,14 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/Users/Lilo/Desktop/IntranetJesusDePraga/IntranetJesusDePraga/src/gui/JFrameMenuAdmin.java</file>
+            <file>file:/C:/Users/Lilo/Desktop/IntranetJesusDePraga/IntranetJesusDePraga/src/gui/JFrameCrud_Asignatura.java</file>
+            <file>file:/C:/Users/Lilo/Desktop/IntranetJesusDePraga/IntranetJesusDePraga/src/factories/MySQL_ObservacionDAO.java</file>
+            <file>file:/C:/Users/Lilo/Desktop/IntranetJesusDePraga/IntranetJesusDePraga/src/gui/JFrameMensaje.java</file>
+            <file>file:/C:/Users/Lilo/Desktop/IntranetJesusDePraga/IntranetJesusDePraga/src/model/Asignatura.java</file>
+            <file>file:/C:/Users/Lilo/Desktop/IntranetJesusDePraga/IntranetJesusDePraga/src/factories/DatosConexion.java</file>
+            <file>file:/C:/Users/Lilo/Desktop/IntranetJesusDePraga/IntranetJesusDePraga/src/gui/JFrameAsignatura.java</file>
+        </group>
     </open-files>
 </project-private>

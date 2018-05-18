@@ -86,7 +86,7 @@ public class MySQL_ObservacionDAO implements ObservacionDAO {
 
     @Override
     public List<Observacion> search(String exp) {
-        String query = "Select * from observacion LIKE '%"+exp+"%'";
+        String query = "Select * from observacion LIKE '%" + exp + "%'";
         Observacion o;
         list_Observ = new ArrayList<>();
         tablaVirtual = c.ejecutarSelect(query);
@@ -106,4 +106,36 @@ public class MySQL_ObservacionDAO implements ObservacionDAO {
         c.desconectar();
         return list_Observ;
     }
+
+    @Override
+    public List<Observacion> getByRut(String rut,String asignatura) {
+
+        String query = "SELECT observacion.id, observacion.comentario "
+                + "FROM observacion, alumno, asignatura "
+                + "WHERE asignatura.id = observacion.asignatura_fk and observacion.alumno_fk = alumno.id "
+                + "and alumno.rut = '" + rut + "' and asignatura.id = '"+asignatura+"'";
+        Observacion o;
+        list_Observ = new ArrayList<>();
+        tablaVirtual = c.ejecutarSelect(query);
+
+        try {
+            System.out.println("Antes");
+            while (tablaVirtual.next()) {
+                System.out.println("ENtro");
+                o = new Observacion();
+                
+                o.setId(tablaVirtual.getInt(1));
+//                System.out.println(tablaVirtual.getString(1));
+                o.setObservacion(tablaVirtual.getString(2));
+//                System.out.println(tablaVirtual.getString(2));
+                list_Observ.add(o);
+                System.out.println("GUARDA");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQL_ObservacionDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        c.desconectar();
+        return list_Observ;
+    }
+
 }

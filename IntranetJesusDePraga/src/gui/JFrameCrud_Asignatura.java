@@ -18,12 +18,12 @@ import model.Usuario;
 
 public class JFrameCrud_Asignatura extends javax.swing.JFrame {
 
-    private List<Profesor> listaProfes = new ArrayList<>();
     private Usuario user;
     private String rutVar;
 
     public JFrameCrud_Asignatura() {
         initComponents();
+        cargarProfesores();
     }
 
     /**
@@ -223,8 +223,8 @@ public class JFrameCrud_Asignatura extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_volverActionPerformed
 
     private void cbo_ProfesMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbo_ProfesMousePressed
-        cbo_Profes.removeAllItems();
-        cargarProfesores();
+//        cbo_Profes.removeAllItems();
+//        cargarProfesores();
     }//GEN-LAST:event_cbo_ProfesMousePressed
 
     /**
@@ -287,12 +287,11 @@ public class JFrameCrud_Asignatura extends javax.swing.JFrame {
     }
 
     private void cargarProfesores() {
-
         try {
 //            String rut = jInvisibleCrearAsig.getText();
 //            user = DAOFactory.getInstance().getUsuarioDAO(DAOFactory.Motor.MY_SQL).search(rut).get(0);
-            listaProfes = DAOFactory.getInstance().getProfesorDAO(DAOFactory.Motor.MY_SQL).read();
-
+            List<Profesor> listaProfes = DAOFactory.getInstance().getProfesorDAO(DAOFactory.Motor.MY_SQL).read();
+            cbo_Profes.removeAllItems();
             for (Profesor p : listaProfes) {
                 cbo_Profes.addItem(p);
             }

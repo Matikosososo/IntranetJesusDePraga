@@ -21,13 +21,11 @@ import javax.swing.table.TableModel;
 public class TMObservacion implements TableModel {
 
     private List<Observacion> list;
-    private MySQL_ObservacionDAO ob;
     private MySQL_AsignaturaDAO as;
     private MySQL_AlumnoDAO al;
 
     public TMObservacion(List<Observacion> list) throws ClassNotFoundException, SQLException {
         this.list = list;
-        ob = new MySQL_ObservacionDAO();
         as = new MySQL_AsignaturaDAO();
         al = new MySQL_AlumnoDAO();
 
@@ -44,7 +42,7 @@ public class TMObservacion implements TableModel {
 
     @Override
     public int getColumnCount() {
-        return 4;
+        return 2;
     }
 
     @Override
@@ -52,10 +50,8 @@ public class TMObservacion implements TableModel {
         switch (columnIndex) {
             case 0:
                 return "ID";
-            case 1:
-                return "Asignatura";
-            case 2:
-                return "Alumno";
+//            case 0:
+//                return "Asignatura";
             default:
                 return  "Observacion";
         }
@@ -74,15 +70,14 @@ public class TMObservacion implements TableModel {
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         Observacion o = list.get(rowIndex);
+        System.out.println(o.getAsignatura());
         switch(columnIndex){
             case 0:
                 return o.getId();
-            case 1:
-                Asignatura a = as.getByID(o.getAsignatura());
-                return a.getNombre();
-            case 2:
-                Alumno alu = al.getByID(o.getAlumno());
-                return alu.getNombre();
+//            case 0:
+//                Asignatura a = as.getByID(o.getAsignatura());
+//                System.out.println(a.getNombre()+" ASIGNA");
+//                return a.getNombre();
             default:
               return o.getObservacion();
         }
