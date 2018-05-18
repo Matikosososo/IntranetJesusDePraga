@@ -18,16 +18,16 @@ import model.Usuario;
  *
  * @author valvarado
  */
-public class jFrameModificarNotas extends javax.swing.JFrame {
+public class JFrameModificarNotas extends javax.swing.JFrame {
 
     /**
-     * Creates new form jFrameModificarNotas
+     * Creates new form JFrameModificarNotas
      */
     private String rutVar;
     private List<Asignatura> listaAsig;
     private Usuario user;
     
-    public jFrameModificarNotas() {
+    public JFrameModificarNotas() {
         initComponents();
         init();
     }
@@ -216,20 +216,21 @@ public class jFrameModificarNotas extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(jFrameModificarNotas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JFrameModificarNotas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(jFrameModificarNotas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JFrameModificarNotas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(jFrameModificarNotas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JFrameModificarNotas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(jFrameModificarNotas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JFrameModificarNotas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new jFrameModificarNotas().setVisible(true);
+                new JFrameModificarNotas().setVisible(true);
             }
         });
     }
@@ -260,11 +261,11 @@ public class jFrameModificarNotas extends javax.swing.JFrame {
                 cbox_asignatura.addItem(a);
             }
         } catch (MotorNoSoportadoException ex) {
-            Logger.getLogger(jFrameModificarNotas.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(JFrameModificarNotas.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(jFrameModificarNotas.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(JFrameModificarNotas.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            Logger.getLogger(jFrameModificarNotas.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(JFrameModificarNotas.class.getName()).log(Level.SEVERE, null, ex);
         }
         
     }

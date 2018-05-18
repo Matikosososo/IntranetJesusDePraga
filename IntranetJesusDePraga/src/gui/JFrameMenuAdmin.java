@@ -6,10 +6,10 @@
 package gui;
 
 
-public class jFrameMenuAdmin extends javax.swing.JFrame {
+public class JFrameMenuAdmin extends javax.swing.JFrame {
 
     private String rutVar;
-    public jFrameMenuAdmin() {
+    public JFrameMenuAdmin() {
         initComponents();
     }
 
@@ -167,7 +167,7 @@ public class jFrameMenuAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCerrarSesionApoderadoActionPerformed
 
     private void btnCambioPassApoderadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCambioPassApoderadoActionPerformed
-        jFramePassword verFarmPass = new jFramePassword();
+        JFramePassword verFarmPass = new JFramePassword();
         verFarmPass.setVisible(true);
         String rutVariable = jInvisibleAdmin.getText();
         verFarmPass.jInsivisiblePass.setText(rutVariable);
@@ -175,7 +175,7 @@ public class jFrameMenuAdmin extends javax.swing.JFrame {
 
     private void jbtn_AdminAsignaturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_AdminAsignaturaActionPerformed
         // TODO add your handling code here:
-        jFrameCrud_Asignatura ver = new jFrameCrud_Asignatura();
+        JFrameCrud_Asignatura ver = new JFrameCrud_Asignatura();
         ver.setVisible(true);
     }//GEN-LAST:event_jbtn_AdminAsignaturaActionPerformed
 
@@ -203,20 +203,21 @@ public class jFrameMenuAdmin extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(jFrameMenuAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JFrameMenuAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(jFrameMenuAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JFrameMenuAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(jFrameMenuAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JFrameMenuAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(jFrameMenuAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JFrameMenuAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new jFrameMenuAdmin().setVisible(true);
+                new JFrameMenuAdmin().setVisible(true);
             }
         });
     }

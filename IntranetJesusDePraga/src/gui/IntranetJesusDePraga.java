@@ -14,14 +14,14 @@ import model.Usuario;
 public class IntranetJesusDePraga extends javax.swing.JFrame {
 
     Usuario user;
-    
+
     private MySQL_AlumnoDAO al;
-    
+
     public IntranetJesusDePraga() {
         try {
             initComponents();
             this.setLocationRelativeTo(null);
-            
+
             al = new MySQL_AlumnoDAO();
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(IntranetJesusDePraga.class.getName()).log(Level.SEVERE, null, ex);
@@ -184,11 +184,10 @@ public class IntranetJesusDePraga extends javax.swing.JFrame {
             String password = new String(txt_login_clave.getPassword());
 
             password = md5(password);
-            
-            jFrameMenuAdmin menuAdmin = new jFrameMenuAdmin();
-            jFrameMenuAlumno menuAlumno = new jFrameMenuAlumno();
-            jFrameMenuProfesor menuProfesor = new jFrameMenuProfesor();
-            
+
+            JFrameMenuAdmin menuAdmin = new JFrameMenuAdmin();
+
+            JFrameMenuProfesor menuProfesor = new JFrameMenuProfesor();
 
             if (rut.equals("") || !rut.equals(DAOFactory.getInstance().getUsuarioDAO(DAOFactory.Motor.MY_SQL).getByRut(rut))) {
                 JOptionPane.showMessageDialog(null, "Usuario Invalido", "ERROR", JOptionPane.OK_OPTION);
@@ -213,15 +212,14 @@ public class IntranetJesusDePraga extends javax.swing.JFrame {
                         break;
 
                     case 2:
-                        
+                        JFrameMenuAlumno menuAlumno = new JFrameMenuAlumno();
                         menuAlumno.setLocationRelativeTo(null);
                         menuAlumno.setVisible(true);
                         menuAlumno.setRutjFrame(rut);
-                        
+                        menuAlumno.cargarNombre();
+
 //                        System.out.println(rut);
 //                        menuAlumno.init();
-                        
-                        
                         this.setVisible(false);
                         txt_login_clave.setText(null);
                         break;
@@ -253,9 +251,8 @@ public class IntranetJesusDePraga extends javax.swing.JFrame {
 
                 password = md5(password);
 
-                jFrameMenuAdmin menuAdmin = new jFrameMenuAdmin();
-                jFrameMenuAlumno menuAlumno = new jFrameMenuAlumno();
-                jFrameMenuProfesor menuProfe = new jFrameMenuProfesor();
+                JFrameMenuAdmin menuAdmin = new JFrameMenuAdmin();
+                JFrameMenuProfesor menuProfe = new JFrameMenuProfesor();
 
                 if (rut.equals("") || !rut.equals(DAOFactory.getInstance().getUsuarioDAO(DAOFactory.Motor.MY_SQL).getByRut(rut))) {
                     JOptionPane.showMessageDialog(null, "Usuario Invalido", "ERROR", JOptionPane.OK_OPTION);
@@ -278,9 +275,11 @@ public class IntranetJesusDePraga extends javax.swing.JFrame {
                             break;
 
                         case 2:
+                            JFrameMenuAlumno menuAlumno = new JFrameMenuAlumno();
                             menuAlumno.setVisible(true);
                             menuAlumno.setRutjFrame(rut);
                             this.setVisible(false);
+                            menuAlumno.cargarNombre();
                             txt_login_clave.setText(null);
                             break;
                         case 3:
@@ -309,9 +308,8 @@ public class IntranetJesusDePraga extends javax.swing.JFrame {
 
                 password = md5(password);
 
-                jFrameMenuAdmin menuAdmin = new jFrameMenuAdmin();
-                jFrameMenuAlumno menuAlumno = new jFrameMenuAlumno();
-                jFrameMenuProfesor menuProfe = new jFrameMenuProfesor();
+                JFrameMenuAdmin menuAdmin = new JFrameMenuAdmin();
+                JFrameMenuProfesor menuProfe = new JFrameMenuProfesor();
 
                 if (rut.equals("") || !rut.equals(DAOFactory.getInstance().getUsuarioDAO(DAOFactory.Motor.MY_SQL).getByRut(rut))) {
                     JOptionPane.showMessageDialog(null, "Usuario Invalido", "ERROR", JOptionPane.OK_OPTION);
@@ -334,8 +332,10 @@ public class IntranetJesusDePraga extends javax.swing.JFrame {
                             break;
 
                         case 2:
+                            JFrameMenuAlumno menuAlumno = new JFrameMenuAlumno();
                             menuAlumno.setVisible(true);
                             menuAlumno.setRutjFrame(rut);
+                            menuAlumno.cargarNombre();
                             this.setVisible(false);
                             txt_login_clave.setText(null);
                             break;

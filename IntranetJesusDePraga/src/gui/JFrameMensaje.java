@@ -9,12 +9,13 @@ import exception.MotorNoSoportadoException;
 import factories.DAOFactory;
 import factories.MySQL_AlumnoDAO;
 import factories.MySQL_ObservacionDAO;
-import static gui.jFramePassword.jInsivisiblePass;
+import static gui.JFramePassword.jInsivisiblePass;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.scene.shape.FillRule;
+import model.Alumno;
 import model.Observacion;
 import model.TMObservacion;
 import model.Usuario;
@@ -23,15 +24,16 @@ import model.Usuario;
  *
  * @author naxho
  */
-public class jFrameMensaje extends javax.swing.JFrame {
+public class JFrameMensaje extends javax.swing.JFrame {
 
     private MySQL_ObservacionDAO ob;
     private MySQL_AlumnoDAO al;
+    private String rutVar;
 
     /**
      * Creates new form jFrameMensaje
      */
-    public jFrameMensaje() {
+    public JFrameMensaje() {
         try {
             initComponents();
             lblInvisibleRut.setVisible(false);
@@ -40,9 +42,9 @@ public class jFrameMensaje extends javax.swing.JFrame {
             cargarTablaObservacion();
 
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(jFrameMensaje.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(JFrameMensaje.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            Logger.getLogger(jFrameMensaje.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(JFrameMensaje.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -109,6 +111,8 @@ public class jFrameMensaje extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tabObservacion);
 
         txFObserva.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        txFObserva.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txFObserva.setToolTipText("");
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/icon/examen(1).png"))); // NOI18N
 
@@ -126,7 +130,7 @@ public class jFrameMensaje extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(lbl_anotacionALumno, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lbl_alumno, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lbl_alumno, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(40, 40, 40))
@@ -185,9 +189,11 @@ public class jFrameMensaje extends javax.swing.JFrame {
             int fila = tabObservacion.getSelectedRow();
             System.out.println(fila);
             TMObservacion tabla = (TMObservacion) tabObservacion.getModel();
-
+            
             Observacion o = tabla.getObservacion(fila);
-            lbl_alumno.setText(o.getAlumno());
+            Alumno a ;
+             a = al.getByID(o.getAlumno());
+            lbl_alumno.setText(a.getNombre());
 
             txFObserva.setText(o.getObservacion());
         }
@@ -210,20 +216,21 @@ public class jFrameMensaje extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(jFrameMensaje.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JFrameMensaje.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(jFrameMensaje.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JFrameMensaje.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(jFrameMensaje.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JFrameMensaje.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(jFrameMensaje.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JFrameMensaje.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new jFrameMensaje().setVisible(true);
+                new JFrameMensaje().setVisible(true);
             }
         });
     }
@@ -251,10 +258,15 @@ public class jFrameMensaje extends javax.swing.JFrame {
             tm = new TMObservacion(list);
             tabObservacion.setModel(tm);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(jFrameMensaje.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(JFrameMensaje.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            Logger.getLogger(jFrameMensaje.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(JFrameMensaje.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+    }
+    
+    public void cargarNombreMens(){
+        String nombre  = al.getByNombre(rutVar);
+        lbl_alumno.setText(nombre);
     }
 }

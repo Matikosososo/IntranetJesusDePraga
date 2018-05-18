@@ -186,27 +186,19 @@ public class MySQL_AlumnoDAO implements AlumnoDAO {
     }
 
     @Override
-    public String getByRUT(String rut) {
-        String query = "Select * from alumno where rut = '" + rut + "'";
-        Alumno a;
-        String rutExp = "";
+    public String getByNombre(String rut) {
+        String query = "SELECT nombre FROM alumno WHERE rut = '" + rut + "'";
+        String nombre = "n/a";
         tablaVirtual = c.ejecutarSelect(query);
         try {
             if (tablaVirtual.next()) {
-                a = new Alumno();
-
-                a.setId(tablaVirtual.getInt(1));
-                a.setNombre(tablaVirtual.getString(2));
-                a.setRut(tablaVirtual.getString(3));
-                a.setUsuario(tablaVirtual.getInt(4));
-
-                rutExp = a.getRut();
+                nombre = tablaVirtual.getString(1);
             }
         } catch (SQLException ex) {
             Logger.getLogger(MySQL_UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         c.desconectar();
-        return rutExp;
+        return nombre;
     }
 
 }

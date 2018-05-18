@@ -16,13 +16,13 @@ import model.Asignatura;
 import model.Profesor;
 import model.Usuario;
 
-public class jFrameCrud_Asignatura extends javax.swing.JFrame {
+public class JFrameCrud_Asignatura extends javax.swing.JFrame {
 
     private List<Profesor> listaProfes = new ArrayList<>();
     private Usuario user;
     private String rutVar;
 
-    public jFrameCrud_Asignatura() {
+    public JFrameCrud_Asignatura() {
         initComponents();
     }
 
@@ -209,11 +209,11 @@ public class jFrameCrud_Asignatura extends javax.swing.JFrame {
             DAOFactory.getInstance().getAsignaturaDAO(DAOFactory.Motor.MY_SQL).create(a);
 
         } catch (MotorNoSoportadoException ex) {
-            Logger.getLogger(jFrameCrud_Asignatura.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(JFrameCrud_Asignatura.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(jFrameCrud_Asignatura.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(JFrameCrud_Asignatura.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            Logger.getLogger(jFrameCrud_Asignatura.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(JFrameCrud_Asignatura.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }//GEN-LAST:event_btnCrearActionPerformed
@@ -244,20 +244,21 @@ public class jFrameCrud_Asignatura extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(jFrameCrud_Asignatura.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JFrameCrud_Asignatura.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(jFrameCrud_Asignatura.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JFrameCrud_Asignatura.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(jFrameCrud_Asignatura.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JFrameCrud_Asignatura.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(jFrameCrud_Asignatura.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JFrameCrud_Asignatura.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new jFrameCrud_Asignatura().setVisible(true);
+                new JFrameCrud_Asignatura().setVisible(true);
             }
         });
     }
@@ -297,11 +298,11 @@ public class jFrameCrud_Asignatura extends javax.swing.JFrame {
             }
 
         } catch (MotorNoSoportadoException ex) {
-            Logger.getLogger(jFrameSubirNota.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(JFrameSubirNota.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(jFrameSubirNota.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(JFrameSubirNota.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            Logger.getLogger(jFrameSubirNota.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(JFrameSubirNota.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }

@@ -5,12 +5,14 @@
  */
 package gui;
 
-public class jFrameMenuProfesor extends javax.swing.JFrame {
+public class JFrameMenuProfesor extends javax.swing.JFrame {
 
     private String rutVar;
-    public jFrameMenuProfesor() {
+
+    public JFrameMenuProfesor() {
         initComponents();
         this.setLocationRelativeTo(null);
+//        JFrameEnviarMensaje.setLocationRelativeTo(null);
     }
 
     /**
@@ -22,16 +24,117 @@ public class jFrameMenuProfesor extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        JFrameEnviarMensaje = new javax.swing.JFrame();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jComboBox2 = new javax.swing.JComboBox<>();
+        btnNolverProfe = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        TxtAreaMensaje = new javax.swing.JTextArea();
         jPanel4 = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
         btnSubirNotaProfesor = new javax.swing.JButton();
         btnModificarNotaProfesor = new javax.swing.JButton();
         btnRegistrarAsistenciaProfesor = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        btnEnviarMEnsaje = new javax.swing.JButton();
         btnCambiarPassProfesor = new javax.swing.JButton();
         jInvisibleProfe = new javax.swing.JLabel();
         btnCerrarSesionProfesor = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+
+        jLabel2.setText("Enviar Mensaje:");
+
+        jLabel3.setText("jLabel3");
+
+        jLabel4.setText("jLabel4");
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        btnNolverProfe.setText("Volver");
+        btnNolverProfe.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNolverProfeActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText("Enviar");
+
+        TxtAreaMensaje.setColumns(20);
+        TxtAreaMensaje.setRows(5);
+        jScrollPane2.setViewportView(TxtAreaMensaje);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 395, Short.MAX_VALUE)
+                        .addGap(26, 26, 26))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(btnNolverProfe)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel2)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(42, 42, 42)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 38, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnNolverProfe)
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 63, Short.MAX_VALUE))
+                .addGap(16, 16, 16))
+        );
+
+        javax.swing.GroupLayout JFrameEnviarMensajeLayout = new javax.swing.GroupLayout(JFrameEnviarMensaje.getContentPane());
+        JFrameEnviarMensaje.getContentPane().setLayout(JFrameEnviarMensajeLayout);
+        JFrameEnviarMensajeLayout.setHorizontalGroup(
+            JFrameEnviarMensajeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(JFrameEnviarMensajeLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        JFrameEnviarMensajeLayout.setVerticalGroup(
+            JFrameEnviarMensajeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(JFrameEnviarMensajeLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -60,8 +163,13 @@ public class jFrameMenuProfesor extends javax.swing.JFrame {
         btnRegistrarAsistenciaProfesor.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         btnRegistrarAsistenciaProfesor.setText("Registrar Asistencia");
 
-        jButton4.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jButton4.setText("Enviar un Mensaje");
+        btnEnviarMEnsaje.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btnEnviarMEnsaje.setText("Enviar un Mensaje");
+        btnEnviarMEnsaje.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEnviarMEnsajeActionPerformed(evt);
+            }
+        });
 
         btnCambiarPassProfesor.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         btnCambiarPassProfesor.setText("Cambiar Contraseña");
@@ -94,7 +202,7 @@ public class jFrameMenuProfesor extends javax.swing.JFrame {
                                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(btnCerrarSesionProfesor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(btnCambiarPassProfesor, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jButton4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnEnviarMEnsaje, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(btnRegistrarAsistenciaProfesor, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(btnModificarNotaProfesor, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(btnSubirNotaProfesor, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
@@ -124,7 +232,7 @@ public class jFrameMenuProfesor extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(btnRegistrarAsistenciaProfesor, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnEnviarMEnsaje, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnCambiarPassProfesor, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -155,10 +263,10 @@ public class jFrameMenuProfesor extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCambiarPassProfesorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCambiarPassProfesorActionPerformed
-        jFramePassword verFormPass = new jFramePassword();
+        JFramePassword verFormPass = new JFramePassword();
         verFormPass.setVisible(true);
         String rutVaribale = jInvisibleProfe.getText();
-        System.out.println("La wea esss"+rutVaribale);
+        System.out.println("La wea esss" + rutVaribale);
         verFormPass.jInsivisiblePass.setText(rutVaribale);
     }//GEN-LAST:event_btnCambiarPassProfesorActionPerformed
 
@@ -170,21 +278,36 @@ public class jFrameMenuProfesor extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCerrarSesionProfesorActionPerformed
 
     private void btnSubirNotaProfesorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubirNotaProfesorActionPerformed
-        jFrameSubirNota verFormSubirN = new jFrameSubirNota();
+        JFrameSubirNota verFormSubirN = new JFrameSubirNota();
         verFormSubirN.setVisible(true);
 
         String rutVaribale = jInvisibleProfe.getText();
-        System.out.println("La wea es"+rutVaribale);
+        System.out.println("La wea es" + rutVaribale);
         verFormSubirN.setRutjFrame(rutVaribale);
     }//GEN-LAST:event_btnSubirNotaProfesorActionPerformed
 
     private void btnModificarNotaProfesorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarNotaProfesorActionPerformed
-        jFrameModificarNotas modNotas = new jFrameModificarNotas();
+        JFrameModificarNotas modNotas = new JFrameModificarNotas();
         modNotas.setVisible(true);
-        
+
         String rutVaribale = jInvisibleProfe.getText();
         modNotas.setRutjFrame(rutVaribale);
     }//GEN-LAST:event_btnModificarNotaProfesorActionPerformed
+
+    private void btnEnviarMEnsajeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarMEnsajeActionPerformed
+//        this.setVisible(false);
+        JFrameEnviarMensaje.setSize(400, 400);
+        JFrameEnviarMensaje.setLocationRelativeTo(null);
+        JFrameEnviarMensaje.setVisible(true);
+
+
+    }//GEN-LAST:event_btnEnviarMEnsajeActionPerformed
+
+    private void btnNolverProfeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNolverProfeActionPerformed
+        JFrameEnviarMensaje.setVisible(false);
+
+
+    }//GEN-LAST:event_btnNolverProfeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -203,38 +326,50 @@ public class jFrameMenuProfesor extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(jFrameMenuProfesor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JFrameMenuProfesor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(jFrameMenuProfesor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JFrameMenuProfesor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(jFrameMenuProfesor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JFrameMenuProfesor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(jFrameMenuProfesor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JFrameMenuProfesor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new jFrameMenuProfesor().setVisible(true);
+                new JFrameMenuProfesor().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JFrame JFrameEnviarMensaje;
+    private javax.swing.JTextArea TxtAreaMensaje;
     private javax.swing.JButton btnCambiarPassProfesor;
     private javax.swing.JButton btnCerrarSesionProfesor;
+    private javax.swing.JButton btnEnviarMEnsaje;
     private javax.swing.JButton btnModificarNotaProfesor;
+    private javax.swing.JButton btnNolverProfe;
     private javax.swing.JButton btnRegistrarAsistenciaProfesor;
     private javax.swing.JButton btnSubirNotaProfesor;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jInvisibleProfe;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables
 
-    public void getRutjFrame(String txt){
+    public void getRutjFrame(String txt) {
         rutVar = txt;
         jInvisibleProfe.setText(txt);
         jInvisibleProfe.setVisible(false);

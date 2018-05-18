@@ -15,18 +15,18 @@ import model.Alumno;
  *
  * @author Sammy Guergachi <sguergachi at gmail.com>
  */
-public class jFrameMenuAlumno extends javax.swing.JFrame {
+public class JFrameMenuAlumno extends javax.swing.JFrame {
 
     private String rutVar;
     private MySQL_AlumnoDAO al;
 
-    public jFrameMenuAlumno() {
+    public JFrameMenuAlumno() {
 
         try {
 
             initComponents();
             
-            lbl_Alum.setText("Hola" + jInvisibleAlumno.getText());
+//            lbl_Alum.setText("Hola" + jInvisibleAlumno.getText());
 //            System.out.println(lbl_Alum.getText());
             this.setLocationRelativeTo(null);
 //            jInvisibleAlumno.setVisible(false);
@@ -36,16 +36,19 @@ public class jFrameMenuAlumno extends javax.swing.JFrame {
 //            setRutjFrame(jInvisibleAlumno.getText());
 
 //            lbl_Alum.setText("Hola" + jInvisibleAlumno.getText() );
+            
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(jFrameMenuAlumno.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(JFrameMenuAlumno.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            Logger.getLogger(jFrameMenuAlumno.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(JFrameMenuAlumno.class.getName()).log(Level.SEVERE, null, ex);
         }
+//        String rutString = jInvisibleAlumno.getText();
+//        System.out.println();
 //        String rutString = jInvisibleAlumno.getText();
 //        System.out.println();
 
     }
-
+//
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -194,7 +197,7 @@ public class jFrameMenuAlumno extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCambiarPassAlumnoActionPerformed
 
     private void btnCambiarPassAlumno1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCambiarPassAlumno1ActionPerformed
-        jFramePassword verFormPass = new jFramePassword();
+        JFramePassword verFormPass = new JFramePassword();
         verFormPass.setVisible(true);
         String rutVaribale = jInvisibleAlumno.getText();
         verFormPass.jInsivisiblePass.setText(rutVaribale);
@@ -209,12 +212,12 @@ public class jFrameMenuAlumno extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVerNotaAlumnoActionPerformed
 
     private void btnVerMensajeAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerMensajeAlumnoActionPerformed
-        jFrameMensaje verFormMensaje = new jFrameMensaje();
+        JFrameMensaje verFormMensaje = new JFrameMensaje();
         verFormMensaje.setVisible(true);
-
-        String rutVaribale = jInvisibleAlumno.getText();
-        verFormMensaje.lblInvisibleRut.setText(rutVaribale);
-
+        verFormMensaje.cargarNombreMens();
+//        String rutVaribale = jInvisibleAlumno.getText();
+//        verFormMensaje.lblInvisibleRut.setText(rutVaribale);
+//        cargarNombre();
     }//GEN-LAST:event_btnVerMensajeAlumnoActionPerformed
 
     private void btnCerrarSesionAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarSesionAlumnoActionPerformed
@@ -241,20 +244,21 @@ public class jFrameMenuAlumno extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(jFrameMenuAlumno.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JFrameMenuAlumno.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(jFrameMenuAlumno.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JFrameMenuAlumno.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(jFrameMenuAlumno.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JFrameMenuAlumno.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(jFrameMenuAlumno.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JFrameMenuAlumno.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new jFrameMenuAlumno().setVisible(true);
+                new JFrameMenuAlumno().setVisible(true);
 
             }
         });
@@ -273,20 +277,16 @@ public class jFrameMenuAlumno extends javax.swing.JFrame {
     private javax.swing.JLabel lbl_Alum;
     // End of variables declaration//GEN-END:variables
 
-    public void setRutjFrame(String txt) {
-
-        rutVar = txt;
-        jInvisibleAlumno.setText(txt);
+    public void setRutjFrame(String rut) {
+        rutVar = rut;
+        jInvisibleAlumno.setText(rut);
         jInvisibleAlumno.setVisible(false);
-//        System.out.println(rutVar);
-
+        System.out.println("RUT-->"+rutVar);
+        
     }
-
-    public void getRut() {
-
-        lbl_Alum.setText(al.getByRUT(rutVar));
-        System.out.println(lbl_Alum.getText());
-
+    
+    public void cargarNombre(){
+        String nombre  = al.getByNombre(rutVar);
+        lbl_Alum.setText(nombre);
     }
-
 }

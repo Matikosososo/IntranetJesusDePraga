@@ -23,14 +23,14 @@ import model.Usuario;
  *
  * @author naxho
  */
-public class jFrameSubirNota extends javax.swing.JFrame {
+public class JFrameSubirNota extends javax.swing.JFrame {
 
     private List<Asignatura> listaAsig = new ArrayList<>();
     private List<Alumno> listaAlum;
     Usuario user;
     private String rutVar;
     private boolean activo = false;
-    public jFrameSubirNota() {
+    public JFrameSubirNota() {
 
         initComponents();
         init();
@@ -272,11 +272,11 @@ public class jFrameSubirNota extends javax.swing.JFrame {
             listaAlum = DAOFactory.getInstance().getAlumnoDAO(DAOFactory.Motor.MY_SQL).getByAsignatura(a.getId());
             cargarAlumnos(listaAlum);
         } catch (MotorNoSoportadoException ex) {
-            Logger.getLogger(jFrameSubirNota.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(JFrameSubirNota.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            Logger.getLogger(jFrameSubirNota.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(JFrameSubirNota.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(jFrameSubirNota.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(JFrameSubirNota.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jcbox_asignaturaItemStateChanged
 
@@ -311,20 +311,21 @@ public class jFrameSubirNota extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(jFrameSubirNota.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JFrameSubirNota.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(jFrameSubirNota.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JFrameSubirNota.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(jFrameSubirNota.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JFrameSubirNota.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(jFrameSubirNota.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JFrameSubirNota.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new jFrameSubirNota().setVisible(true);
+                new JFrameSubirNota().setVisible(true);
             }
         });
     }
@@ -364,11 +365,11 @@ public class jFrameSubirNota extends javax.swing.JFrame {
             }
 
         } catch (MotorNoSoportadoException ex) {
-            Logger.getLogger(jFrameSubirNota.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(JFrameSubirNota.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(jFrameSubirNota.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(JFrameSubirNota.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            Logger.getLogger(jFrameSubirNota.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(JFrameSubirNota.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

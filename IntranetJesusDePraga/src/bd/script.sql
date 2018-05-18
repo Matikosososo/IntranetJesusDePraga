@@ -56,6 +56,10 @@ create table alumno(
     foreign key (usuario) references usuario(id)
 );
 
+/*1.- Ver el nombre del rut 11-1*/
+
+
+
 insert into alumno values(null, 'vero', '22-2', 3);
 insert into alumno values(null, 'Mati', '33-3', 4);
 
