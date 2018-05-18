@@ -28,7 +28,11 @@ public class Nota {
         this.ponderacion = ponderacion;
     }
 
-    
+    public Nota(String alumno, float nota, float ponderacion) {
+        this.alumno = alumno;
+        this.nota = nota;
+        this.ponderacion = ponderacion;
+    }
 
     public int getId() {
         return id;
@@ -78,7 +82,9 @@ public class Nota {
         this.ponderacion = ponderacion;
     }
 
-    
-    
+    @Override
+    public String toString() {
+        return "Nota " + identificador;
+    }
     
 }

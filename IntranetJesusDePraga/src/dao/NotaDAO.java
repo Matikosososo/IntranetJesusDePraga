@@ -17,6 +17,8 @@ public interface NotaDAO {
     
     List<Nota> search(String exp);
     
-    List<Nota> getNotaByAsig(int asig, int not);
+    List<Nota> getNotaByAsig(String asig, int not);
+    
+    List<Nota> getIdentificador(String asig);
     
 }

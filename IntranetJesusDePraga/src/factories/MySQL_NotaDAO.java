@@ -111,11 +111,11 @@ public class MySQL_NotaDAO implements NotaDAO {
     }
 
     @Override
-    public List<Nota> getNotaByAsig(int asig, int not) {
-        String query = "select alumno.nombre, nota.nota, nota.ponderacion "
-                + "from asignatura, alumno, nota "
-                + "where nota.alumno_fk = alumno.id and nota.asignatura = asignatura.id "
-                + "and asignatura.id = " + asig + " and nota.identificador = " + not;
+    public List<Nota> getNotaByAsig(String asig, int not) {
+        String query = "select nota.id, nota.identificador, nota.asignatura, alumno.nombre, nota.nota, nota.ponderacion "
+                       + "from asignatura, alumno, nota "
+                       + "where nota.alumno_fk = alumno.id and nota.asignatura = asignatura.id "
+                       + "and asignatura.nombre = '" + asig + "' and nota.identificador = " + not;
         Nota n;
         list_Nota = new ArrayList<>();
         tablaVirtual = c.ejecutarSelect(query);
@@ -125,9 +125,13 @@ public class MySQL_NotaDAO implements NotaDAO {
 
                 n = new Nota();
 
-                n.setAlumno(tablaVirtual.getString(1));
-                n.setNota(tablaVirtual.getFloat(2));
-                n.setPonderacion(tablaVirtual.getFloat(3));
+                n.setId(tablaVirtual.getInt(1));
+                n.setIdentificador(tablaVirtual.getInt(2));
+                n.setAsignatura(tablaVirtual.getString(3));
+                n.setAlumno(tablaVirtual.getString(4));
+                n.setNota(tablaVirtual.getFloat(5));
+                n.setPonderacion(tablaVirtual.getInt(6));
+                        
                 list_Nota.add(n);
 
             }
@@ -136,6 +140,35 @@ public class MySQL_NotaDAO implements NotaDAO {
         }
 
         c.desconectar();
+        return list_Nota;
+    }
+
+    @Override
+    public List<Nota> getIdentificador(String asig) {
+
+        String query = "select DISTINCT nota.identificador "
+                + "from nota, asignatura "
+                + "where nota.asignatura = asignatura.id and asignatura.nombre = '" + asig + "'";
+
+        Nota n;
+        list_Nota = new ArrayList<>();
+        tablaVirtual = c.ejecutarSelect(query);
+
+        try {
+            while (tablaVirtual.next()) {
+
+                n = new Nota();
+
+                n.setIdentificador(tablaVirtual.getInt(1));
+
+                list_Nota.add(n);
+
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQL_NotaDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        c.desconectar();
+
         return list_Nota;
     }
 }

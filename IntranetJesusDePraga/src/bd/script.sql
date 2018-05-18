@@ -74,14 +74,42 @@ create table nota(
     foreign key(asignatura) references asignatura(id)
 );
 
-select * from nota
-
-insert into nota values(null, 1, 1, 1, 0, 0);
-insert into nota values(null, 1, 1, 2, 0, 0);
-insert into nota values(null, 1, 2, 2, 0, 0);
-insert into nota values(null, 2, 2, 2, 50, 25);
+insert into nota values(null, 1, 1, 1, 6, 10);
+insert into nota values(null, 1, 1, 2, 4, 10);
+insert into nota values(null, 2, 1, 1, 7, 15);
+insert into nota values(null, 2, 1, 2, 5, 15);
+insert into nota values(null, 1, 2, 1, 3, 10);
+insert into nota values(null, 1, 2, 2, 2, 10);
 
 /*
+
+select DISTINCT nota.identificador
+from nota
+right join asignatura on nota.asignatura = asignatura.id
+right join alumno on nota.alumno_fk = alumno.id
+where nota.asignatura = 2 
+
+
+select DISTINCT nota.identificador
+from nota, asignatura, alumno
+where nota.asignatura = asignatura.id and nota.alumno_fk = alumno.id and asignatura.nombre = "Arquitectura de Software" 
+
+
+
+select alumno.nombre, nota.nota, nota.ponderacion
+from asignatura, alumno, nota
+where nota.alumno_fk = alumno.id and nota.asignatura = asignatura.id
+and asignatura.nombre = 'Arquitectura de Software' and nota.identificador = 2
+
+select nota.id, nota.identificador, nota.asignatura, alumno.nombre, nota.nota, nota.ponderacion
+from asignatura, alumno, nota
+where nota.alumno_fk = alumno.id and nota.asignatura = asignatura.id
+and asignatura.nombre = 'Arquitectura de Software' and nota.identificador = 2
+
+select identificador
+from asignatura, nota
+where nota.asignatura = asignatura.id and asignatura.id = 
+
 select nota.id, asignatura.nombre, alumno.nombre, nota.nota, nota.ponderacion
 from profesor, asignatura, alumno, nota
 where asignatura.profesor = profesor.id and nota.alumno_fk = alumno.id and nota.asignatura = asignatura.id
@@ -161,5 +189,12 @@ select alumno.nombre, nota.nota, nota.ponderacion
 from asignatura, alumno, nota 
 where nota.alumno_fk = alumno.id and nota.asignatura = asignatura.id 
 and asignatura.id = 2 and nota.identificador = 2
+
+
+select nota.id, nota.identificador, nota.asignatura, alumno.nombre, nota.nota, nota.ponderacion 
+from asignatura, alumno, nota
+where nota.alumno_fk = alumno.id and nota.asignatura = asignatura.id and asignatura.nombre = 'Programacion' and nota.identificador = 1
+
+
 
 */
