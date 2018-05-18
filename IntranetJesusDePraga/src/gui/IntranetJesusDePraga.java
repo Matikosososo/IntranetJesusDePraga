@@ -18,17 +18,18 @@ public class IntranetJesusDePraga extends javax.swing.JFrame {
     private MySQL_AlumnoDAO al;
     public static String rut = "";
 
+//    private MySQL_AlumnoDAO al;
     public IntranetJesusDePraga() {
-        try {
-            initComponents();
-            this.setLocationRelativeTo(null);
+//        try {
+        initComponents();
+        this.setLocationRelativeTo(null);
 
-            al = new MySQL_AlumnoDAO();
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(IntranetJesusDePraga.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(IntranetJesusDePraga.class.getName()).log(Level.SEVERE, null, ex);
-        }
+//            al = new MySQL_AlumnoDAO();
+//        } catch (ClassNotFoundException ex) {
+//            Logger.getLogger(IntranetJesusDePraga.class.getName()).log(Level.SEVERE, null, ex);
+//        } catch (SQLException ex) {
+//            Logger.getLogger(IntranetJesusDePraga.class.getName()).log(Level.SEVERE, null, ex);
+//        }
     }
 
     /**

@@ -20,4 +20,6 @@ public interface AsignaturaDAO {
     List<Asignatura> getByProfe(int id);
     
     List<Asignatura> getByAlumno(int id);
+    
+    int getId(String nom);
 }

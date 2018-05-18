@@ -14,6 +14,7 @@ public class MySQL_AsignaturaDAO implements AsignaturaDAO {
     private ResultSet tablaVirtual;
     private List<Asignatura> list_Asignatura;
     MySQL_ConexionDAO c;
+    
 
     public MySQL_AsignaturaDAO() throws ClassNotFoundException, SQLException {
 
@@ -170,4 +171,22 @@ public class MySQL_AsignaturaDAO implements AsignaturaDAO {
 //        return a;
 //
 //    }
+    @Override
+    public int getId(String nom) {
+        String query = "select id from asignatura where nombre = '" + nom + "'";
+        tablaVirtual = c.ejecutarSelect(query);
+        int id = 0;
+        try {
+            while (tablaVirtual.next()){
+                
+                id = tablaVirtual.getInt(1);
+                
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQL_AsignaturaDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        c.desconectar();
+        return id;
+    }
+
 }

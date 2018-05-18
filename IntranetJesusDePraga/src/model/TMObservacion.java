@@ -21,6 +21,7 @@ import javax.swing.table.TableModel;
 public class TMObservacion implements TableModel {
 
     private List<Observacion> list;
+//    private MySQL_ObservacionDAO ob;
     private MySQL_AsignaturaDAO as;
     private MySQL_AlumnoDAO al;
 

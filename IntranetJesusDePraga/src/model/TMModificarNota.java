@@ -6,6 +6,7 @@
 package model;
 
 import factories.MySQL_AlumnoDAO;
+import factories.MySQL_AsignaturaDAO;
 import factories.MySQL_NotaDAO;
 import java.sql.SQLException;
 import java.util.List;
@@ -19,13 +20,15 @@ import javax.swing.table.TableModel;
 public class TMModificarNota implements TableModel {
 
     private List<Nota> lista;
-    private MySQL_NotaDAO nota;
-    private MySQL_AlumnoDAO al;
+    // ESTO DE ACA ABAJO (LINEA 23 a la 26 y ademas la 30 y 31) no hacen anda, solo estan ahi ocupando recursos.
+//    private MySQL_NotaDAO nota; 
+//    private MySQL_AlumnoDAO al;
+//    private MySQL_AsignaturaDAO as;
 
     public TMModificarNota(List<Nota> lista) throws ClassNotFoundException, SQLException {
         this.lista = lista;
-        nota = new MySQL_NotaDAO();
-        al = new MySQL_AlumnoDAO();
+//        nota = new MySQL_NotaDAO();
+//        al = new MySQL_AlumnoDAO();
     }
 
     @Override
@@ -57,13 +60,13 @@ public class TMModificarNota implements TableModel {
 
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
-        return columnIndex > 1;
+        return false;
     }
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         Nota n = lista.get(rowIndex);
-        switch(rowIndex){
+        switch(columnIndex){
             case 0:
                 return n.getAlumno();
             case 1:

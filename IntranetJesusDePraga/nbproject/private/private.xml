@@ -3,6 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/C:/Users/Lilo/Desktop/IntranetJesusDePraga/IntranetJesusDePraga/src/gui/JFrameMenuAdmin.java</file>
             <file>file:/C:/Users/Lilo/Desktop/IntranetJesusDePraga/IntranetJesusDePraga/src/gui/JFrameCrud_Asignatura.java</file>
             <file>file:/C:/Users/Lilo/Desktop/IntranetJesusDePraga/IntranetJesusDePraga/src/factories/MySQL_ObservacionDAO.java</file>
@@ -10,6 +11,13 @@
             <file>file:/C:/Users/Lilo/Desktop/IntranetJesusDePraga/IntranetJesusDePraga/src/model/Asignatura.java</file>
             <file>file:/C:/Users/Lilo/Desktop/IntranetJesusDePraga/IntranetJesusDePraga/src/factories/DatosConexion.java</file>
             <file>file:/C:/Users/Lilo/Desktop/IntranetJesusDePraga/IntranetJesusDePraga/src/gui/JFrameAsignatura.java</file>
+=======
+            <file>file:/C:/Users/puppe/Desktop/IntranetJesusDePraga/IntranetJesusDePraga/src/gui/JFrameModificarNotas.java</file>
+            <file>file:/C:/Users/puppe/Desktop/IntranetJesusDePraga/IntranetJesusDePraga/src/gui/JFrameSubirNota.java</file>
+            <file>file:/C:/Users/puppe/Desktop/IntranetJesusDePraga/IntranetJesusDePraga/src/factories/MySQL_NotaDAO.java</file>
+            <file>file:/C:/Users/puppe/Desktop/IntranetJesusDePraga/IntranetJesusDePraga/src/gui/JFrameMensaje.java</file>
+            <file>file:/C:/Users/puppe/Desktop/IntranetJesusDePraga/IntranetJesusDePraga/src/bd/script.sql</file>
+>>>>>>> a5d525642457c543aab8fb449d2090d230755f04
         </group>
     </open-files>
 </project-private>
