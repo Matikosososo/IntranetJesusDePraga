@@ -217,7 +217,6 @@ public class IntranetJesusDePraga extends javax.swing.JFrame {
                         menuAlumno.setVisible(true);
                         menuAlumno.setRutjFrame(rut);
                         menuAlumno.cargarNombre();
-
 //                        System.out.println(rut);
 //                        menuAlumno.init();
                         this.setVisible(false);

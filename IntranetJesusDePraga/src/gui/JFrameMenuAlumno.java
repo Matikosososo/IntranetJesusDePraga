@@ -25,7 +25,7 @@ public class JFrameMenuAlumno extends javax.swing.JFrame {
         try {
 
             initComponents();
-            
+
 //            lbl_Alum.setText("Hola" + jInvisibleAlumno.getText());
 //            System.out.println(lbl_Alum.getText());
             this.setLocationRelativeTo(null);
@@ -36,7 +36,6 @@ public class JFrameMenuAlumno extends javax.swing.JFrame {
 //            setRutjFrame(jInvisibleAlumno.getText());
 
 //            lbl_Alum.setText("Hola" + jInvisibleAlumno.getText() );
-            
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(JFrameMenuAlumno.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
@@ -49,6 +48,7 @@ public class JFrameMenuAlumno extends javax.swing.JFrame {
 
     }
 //
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -281,12 +281,12 @@ public class JFrameMenuAlumno extends javax.swing.JFrame {
         rutVar = rut;
         jInvisibleAlumno.setText(rut);
         jInvisibleAlumno.setVisible(false);
-        System.out.println("RUT-->"+rutVar);
-        
+        System.out.println("RUT-->" + rutVar);
+
     }
-    
-    public void cargarNombre(){
-        String nombre  = al.getByNombre(rutVar);
+
+    public void cargarNombre() {
+        String nombre = al.getByNombre(rutVar);
         lbl_Alum.setText(nombre);
     }
 }
