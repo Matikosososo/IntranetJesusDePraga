@@ -7,10 +7,13 @@ package gui;
 
 import exception.MotorNoSoportadoException;
 import factories.DAOFactory;
+import factories.MySQL_ProfesorDAO;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Profesor;
+import model.TMProfesor;
 import model.Usuario;
 
 /**
@@ -21,9 +24,19 @@ public class JFrameCRUDProfesor extends javax.swing.JFrame {
 
     private int PROFESOR = 1;
     private int ALUMNO = 2;
-    
+    private MySQL_ProfesorDAO profesor;
+
     public JFrameCRUDProfesor() {
-        initComponents();
+        try {
+            initComponents();
+            profesor = new MySQL_ProfesorDAO();
+            lblID.setVisible(false);
+            cargarTablaProfesor();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(JFrameCRUDProfesor.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(JFrameCRUDProfesor.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -47,6 +60,8 @@ public class JFrameCRUDProfesor extends javax.swing.JFrame {
         btn_volver = new javax.swing.JButton();
         txtBuscar = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
+        btnBuscarProfe = new javax.swing.JButton();
+        lblID = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -63,6 +78,11 @@ public class JFrameCRUDProfesor extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tbl_profes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbl_profesMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tbl_profes);
 
         jLabel1.setText("Nombre completo :");
@@ -77,6 +97,11 @@ public class JFrameCRUDProfesor extends javax.swing.JFrame {
         });
 
         btn_actualizar.setText("Actualizar");
+        btn_actualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_actualizarActionPerformed(evt);
+            }
+        });
 
         btn_volver.setText("Volver");
         btn_volver.addActionListener(new java.awt.event.ActionListener() {
@@ -86,6 +111,13 @@ public class JFrameCRUDProfesor extends javax.swing.JFrame {
         });
 
         jLabel3.setText("Buscar :");
+
+        btnBuscarProfe.setText("Buscar");
+        btnBuscarProfe.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarProfeActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -104,32 +136,41 @@ public class JFrameCRUDProfesor extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txt_nombreProfe)
-                            .addComponent(txtRut, javax.swing.GroupLayout.DEFAULT_SIZE, 232, Short.MAX_VALUE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 79, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabel2))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txt_nombreProfe)
+                                    .addComponent(txtRut, javax.swing.GroupLayout.DEFAULT_SIZE, 232, Short.MAX_VALUE)))
+                            .addComponent(lblID))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel3)
-                        .addGap(49, 49, 49)
-                        .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnBuscarProfe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGap(55, 55, 55))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(28, 28, 28)
+                .addGap(27, 27, 27)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txt_nombreProfe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
-                .addGap(18, 18, 18)
+                    .addComponent(jLabel3)
+                    .addComponent(btnBuscarProfe))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(17, 17, 17)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
@@ -137,11 +178,10 @@ public class JFrameCRUDProfesor extends javax.swing.JFrame {
                         .addGap(39, 39, 39)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btn_registrar)
-                            .addComponent(btn_actualizar)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(17, 17, 17)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btn_actualizar))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblID)
+                        .addGap(48, 48, 48)))
                 .addComponent(btn_volver)
                 .addGap(74, 74, 74))
         );
@@ -171,17 +211,17 @@ public class JFrameCRUDProfesor extends javax.swing.JFrame {
             String rut, nombre;
             rut = txtRut.getText();
             nombre = txt_nombreProfe.getText();
-            
-            Usuario u = new Usuario(rut,PROFESOR,rut);
-            
+
+            Usuario u = new Usuario(rut, PROFESOR, rut);
+
             DAOFactory.getInstance().getUsuarioDAO(DAOFactory.Motor.MY_SQL).create(u);
             Usuario uDos = DAOFactory.getInstance().getUsuarioDAO(DAOFactory.Motor.MY_SQL).getObjectByRut(rut);
-            
-            System.out.println("cantidad de id's: "+uDos.getId());
+
+            System.out.println("cantidad de id's: " + uDos.getId());
             Profesor p = new Profesor(nombre, rut, uDos.getId());
-            
+
             DAOFactory.getInstance().getProfesorDAO(DAOFactory.Motor.MY_SQL).create(p);
-            
+            cargarTablaProfesor();
         } catch (MotorNoSoportadoException ex) {
             Logger.getLogger(JFrameCRUDProfesor.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
@@ -192,8 +232,46 @@ public class JFrameCRUDProfesor extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_registrarActionPerformed
 
     private void btn_volverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_volverActionPerformed
-     this.setVisible(false);
+        this.setVisible(false);
     }//GEN-LAST:event_btn_volverActionPerformed
+
+    private void btnBuscarProfeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarProfeActionPerformed
+        cargarTablaActualizada(tbl_profes, txtBuscar.getText());
+
+
+    }//GEN-LAST:event_btnBuscarProfeActionPerformed
+
+    private void tbl_profesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_profesMouseClicked
+        if (evt.getClickCount() == 2) {
+            int fila = tbl_profes.getSelectedRow();
+            System.out.println(fila);
+            TMProfesor tabla = (TMProfesor) tbl_profes.getModel();
+
+            Profesor p = tabla.getProfesor(fila);
+            txtRut.setText(p.getRut());
+            txt_nombreProfe.setText(p.getNombre());
+            lblID.setText(String.valueOf(p.getId()));
+        }
+    }//GEN-LAST:event_tbl_profesMouseClicked
+
+    private void btn_actualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_actualizarActionPerformed
+        try {
+            String nom, rut;
+            int id;
+            nom = txt_nombreProfe.getText();
+            rut = txtRut.getText();
+            id = Integer.parseInt(lblID.getText());
+
+            Profesor newProfesor = new Profesor(id, nom, rut);
+
+            profesor.update(newProfesor);
+
+            cargarTablaProfesor();
+        } catch (Exception e) {
+        }
+
+
+    }//GEN-LAST:event_btn_actualizarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -231,6 +309,7 @@ public class JFrameCRUDProfesor extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBuscarProfe;
     private javax.swing.JButton btn_actualizar;
     private javax.swing.JButton btn_registrar;
     private javax.swing.JButton btn_volver;
@@ -239,9 +318,31 @@ public class JFrameCRUDProfesor extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblID;
     private javax.swing.JTable tbl_profes;
     private javax.swing.JTextField txtBuscar;
     private javax.swing.JTextField txtRut;
     private javax.swing.JTextField txt_nombreProfe;
     // End of variables declaration//GEN-END:variables
+
+    private void cargarTablaActualizada(javax.swing.JTable tablaActual, String busqueda) {
+        try {
+            List<Profesor> listaProfes = profesor.search(busqueda);
+            TMProfesor tm = new TMProfesor(listaProfes);
+            tablaActual.setModel(tm);
+        } catch (Exception e) {
+        }
+
+    }
+
+    private void cargarTablaProfesor() {
+        try {
+            List<Profesor> list = profesor.read();
+            TMProfesor tm = new TMProfesor(list);
+
+            tbl_profes.setModel(tm);
+        } catch (Exception e) {
+        }
+
+    }
 }

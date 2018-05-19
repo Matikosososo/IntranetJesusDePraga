@@ -178,7 +178,7 @@ create table asistencia(
 
 /*
 select * from alumno
-select * from asignatura
+select asignatura.nombre, profesor.nombre from asignatura, profesor where asignatura.profesor = profesor.id
 select * from profesor
 
 Select * from usuario where rut = '11-1'

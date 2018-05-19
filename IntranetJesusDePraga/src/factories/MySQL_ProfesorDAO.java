@@ -22,7 +22,7 @@ public class MySQL_ProfesorDAO implements ProfesorDAO {
 
     @Override
     public void create(Profesor p) {
-        String query = "insert into profesor values(null,'" + p.getNombre() + "','" + p.getRut() + "','"+p.getUsuario()+"')";
+        String query = "insert into profesor values(null,'" + p.getNombre() + "','" + p.getRut() + "','" + p.getUsuario() + "')";
         c.ejecutar(query);
     }
 
@@ -51,7 +51,10 @@ public class MySQL_ProfesorDAO implements ProfesorDAO {
 
     @Override
     public void update(Profesor p) {
-        String query = "update profesor set nombre = " + p.getNombre() + ", rut = " + p.getRut() + " where id =" + p.getId();
+        String query = "update profesor set "
+                + "id = '" + p.getId() + "'"
+                + ", nombre = '" + p.getNombre() + "' "
+                + ",rut = '" + p.getRut() + "' where id = '" + p.getId() + "'";
         c.ejecutar(query);
     }
 
@@ -63,7 +66,7 @@ public class MySQL_ProfesorDAO implements ProfesorDAO {
 
     @Override
     public Profesor getByID(String id) {
-        String query = "Select * from profesor id = " + id;
+        String query = "Select * from profesor where id = " + id;
         Profesor p;
         list_Profesores = new ArrayList<>();
         tablaVirtual = c.ejecutarSelect(query);
@@ -86,7 +89,7 @@ public class MySQL_ProfesorDAO implements ProfesorDAO {
 
     @Override
     public List<Profesor> search(String exp) {
-        String query = "Select * from profesor LIKE '%"+exp+"%'";
+        String query = "Select nombre,rut from profesor where nombre LIKE '%" + exp + "%'";
         Profesor p;
         list_Profesores = new ArrayList<>();
         tablaVirtual = c.ejecutarSelect(query);
@@ -94,9 +97,8 @@ public class MySQL_ProfesorDAO implements ProfesorDAO {
             while (tablaVirtual.next()) {
                 p = new Profesor();
 
-                p.setId(tablaVirtual.getInt(1));
-                p.setNombre(tablaVirtual.getString(2));
-                p.setRut(tablaVirtual.getString(3));
+                p.setNombre(tablaVirtual.getString(1));
+                p.setRut(tablaVirtual.getString(2));
 
                 list_Profesores.add(p);
             }

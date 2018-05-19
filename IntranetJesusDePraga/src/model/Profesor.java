@@ -8,7 +8,7 @@ public class Profesor {
 
     public Profesor() {
     }
-
+    
     public Profesor(String nombre, String rut) {
         this.nombre = nombre;
         this.rut = rut;

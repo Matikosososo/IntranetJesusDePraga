@@ -7,6 +7,7 @@ package gui;
 
 import exception.MotorNoSoportadoException;
 import factories.DAOFactory;
+import factories.MySQL_AsignaturaDAO;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,16 +15,27 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Asignatura;
 import model.Profesor;
+import model.TMAsignatura;
 import model.Usuario;
 
 public class JFrameCrud_Asignatura extends javax.swing.JFrame {
 
     private Usuario user;
     private String rutVar;
+    private MySQL_AsignaturaDAO listASig;
 
     public JFrameCrud_Asignatura() {
-        initComponents();
-        cargarProfesores();
+        try {
+            initComponents();
+            listASig = new MySQL_AsignaturaDAO();
+            lblIDASig.setVisible(false);
+            cargarProfesores();
+            cargarTablaAsignatura();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(JFrameCrud_Asignatura.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(JFrameCrud_Asignatura.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -49,6 +61,7 @@ public class JFrameCrud_Asignatura extends javax.swing.JFrame {
         txt_Buscar = new javax.swing.JTextField();
         btn_volver = new javax.swing.JButton();
         jInvisibleCrearAsig = new javax.swing.JLabel();
+        lblIDASig = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -77,6 +90,11 @@ public class JFrameCrud_Asignatura extends javax.swing.JFrame {
         });
 
         btnActualizar.setText("Actualizar");
+        btnActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnActualizarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -137,9 +155,19 @@ public class JFrameCrud_Asignatura extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jtableAsignatura.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jtableAsignaturaMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jtableAsignatura);
 
         btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
 
         btn_volver.setText("Volver");
         btn_volver.addActionListener(new java.awt.event.ActionListener() {
@@ -161,7 +189,9 @@ public class JFrameCrud_Asignatura extends javax.swing.JFrame {
                                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(22, 22, 22)
-                                .addComponent(btn_volver)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblIDASig)
+                                    .addComponent(btn_volver))))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -182,13 +212,15 @@ public class JFrameCrud_Asignatura extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addGap(31, 31, 31)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblIDASig)
+                .addGap(11, 11, 11)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(txt_Buscar)
                         .addComponent(btn_volver))
                     .addComponent(btnBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
                 .addComponent(jInvisibleCrearAsig)
                 .addContainerGap())
         );
@@ -207,7 +239,7 @@ public class JFrameCrud_Asignatura extends javax.swing.JFrame {
 
             Asignatura a = new Asignatura(nombreAsignatura, profe.getId());
             DAOFactory.getInstance().getAsignaturaDAO(DAOFactory.Motor.MY_SQL).create(a);
-
+            cargarTablaAsignatura();
         } catch (MotorNoSoportadoException ex) {
             Logger.getLogger(JFrameCrud_Asignatura.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
@@ -226,6 +258,46 @@ public class JFrameCrud_Asignatura extends javax.swing.JFrame {
 //        cbo_Profes.removeAllItems();
 //        cargarProfesores();
     }//GEN-LAST:event_cbo_ProfesMousePressed
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        cargarTablaActualizada(jtableAsignatura, txt_Buscar.getText());
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void jtableAsignaturaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtableAsignaturaMouseClicked
+        if (evt.getClickCount() == 2) {
+            int fila = jtableAsignatura.getSelectedRow();
+            System.out.println(fila);
+            TMAsignatura tabla = (TMAsignatura) jtableAsignatura.getModel();
+
+            Asignatura a = tabla.getAsignatura(fila);
+            cbo_Profes.setSelectedItem(a.getProfesor());
+            txt_CrearNom.setText(a.getNombre());
+
+            lblIDASig.setText(String.valueOf(a.getId()));
+        }
+    }//GEN-LAST:event_jtableAsignaturaMouseClicked
+
+    private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
+        try {
+            String nom;
+            Profesor p;
+            int id;
+            int profesorID;
+
+            p = (Profesor) cbo_Profes.getSelectedItem();
+            profesorID = p.getId();
+            nom = txt_CrearNom.getText();
+            id = Integer.parseInt(lblIDASig.getText());
+
+            Asignatura newAsignatura = new Asignatura(id, nom, profesorID);
+
+            listASig.update(newAsignatura);
+
+            cargarTablaAsignatura();
+        } catch (Exception e) {
+        }
+
+    }//GEN-LAST:event_btnActualizarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -276,6 +348,7 @@ public class JFrameCrud_Asignatura extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jtableAsignatura;
+    private javax.swing.JLabel lblIDASig;
     private javax.swing.JTextField txt_Buscar;
     private javax.swing.JTextField txt_CrearNom;
     // End of variables declaration//GEN-END:variables
@@ -284,6 +357,26 @@ public class JFrameCrud_Asignatura extends javax.swing.JFrame {
         rutVar = txt;
         jInvisibleCrearAsig.setText(txt);
         jInvisibleCrearAsig.setVisible(false);
+    }
+
+    private void cargarTablaAsignatura() {
+        try {
+            List<Asignatura> list = listASig.read();
+            TMAsignatura tm = new TMAsignatura(list);
+
+            jtableAsignatura.setModel(tm);
+        } catch (Exception e) {
+        }
+    }
+
+    private void cargarTablaActualizada(javax.swing.JTable tablaActual, String busqueda) {
+        try {
+            List<Asignatura> listAlum = listASig.search(busqueda);
+            TMAsignatura tm = new TMAsignatura(listAlum);
+            tablaActual.setModel(tm);
+        } catch (Exception e) {
+        }
+
     }
 
     private void cargarProfesores() {

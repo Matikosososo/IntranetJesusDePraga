@@ -5,33 +5,29 @@
  */
 package model;
 
-import factories.MySQL_AsignaturaDAO;
-import factories.MySQL_ProfesorDAO;
-import java.sql.SQLException;
 import java.util.List;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.TableModel;
 
 /**
  *
- * @author Marcos
+ * @author Lilo
  */
-public class TMAsignatura implements TableModel{
-    private List<Asignatura> listAsig;
-    private  MySQL_ProfesorDAO pro;
+public class TMAlumno implements TableModel {
 
-    public TMAsignatura(List<Asignatura> listAsig) throws ClassNotFoundException, SQLException {
-        this.listAsig = listAsig;
-        pro = new MySQL_ProfesorDAO();
+    private List<Alumno> listALum;
+
+    public TMAlumno(List<Alumno> listALum) {
+        this.listALum = listALum;
     }
-    
-    public Asignatura getAsignatura(int index){
-    return listAsig.get(index);
+
+    public Alumno getAlumno(int index) {
+        return listALum.get(index);
     }
-    
+
     @Override
     public int getRowCount() {
-        return listAsig.size();
+        return listALum.size();
     }
 
     @Override
@@ -41,11 +37,11 @@ public class TMAsignatura implements TableModel{
 
     @Override
     public String getColumnName(int columnIndex) {
-        switch(columnIndex){
+        switch (columnIndex) {
             case 0:
                 return "Nombre";
             default:
-                return "Asignatura";
+                return "Rut";
         }
     }
 
@@ -61,13 +57,13 @@ public class TMAsignatura implements TableModel{
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        Asignatura a = listAsig.get(rowIndex);
-        switch(columnIndex){
-           case 0:
-               return a.getNombre();
-           default:
-               Profesor p = pro.getByID(String.valueOf(a.getProfesor()));
-               return p.getNombre();
+        Alumno a = listALum.get(rowIndex);
+        switch (columnIndex) {
+            case 0:
+                return a.getNombre();
+            default:
+                return a.getRut();
+
         }
     }
 
@@ -82,5 +78,5 @@ public class TMAsignatura implements TableModel{
     @Override
     public void removeTableModelListener(TableModelListener l) {
     }
-    
+
 }

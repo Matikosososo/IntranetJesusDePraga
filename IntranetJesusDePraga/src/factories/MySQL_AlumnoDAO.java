@@ -53,9 +53,9 @@ public class MySQL_AlumnoDAO implements AlumnoDAO {
 
     @Override
     public void update(Alumno a) {
-        String query = "UPDATE alumno set nombre = " + a.getNombre() + ""
-                + ", rut = " + a.getRut() + ""
-                + " where id =" + a.getId();
+        String query = "UPDATE alumno set nombre = '" + a.getNombre() + "'"
+                + ", rut = '" + a.getRut() + "'"
+                + " where id ='" + a.getId() + "'";
         c.ejecutar(query);
 
     }
@@ -89,7 +89,7 @@ public class MySQL_AlumnoDAO implements AlumnoDAO {
 
     @Override
     public List<Alumno> search(String exp) {
-        String query = "Select * from alumno LIKE '%" + exp + "%'";
+        String query = "Select * from alumno where nombre LIKE '%" + exp + "%'";
         Alumno a;
         list_ALumnos = new ArrayList<>();
         tablaVirtual = c.ejecutarSelect(query);
@@ -200,6 +200,5 @@ public class MySQL_AlumnoDAO implements AlumnoDAO {
         c.desconectar();
         return nombre;
     }
-
 
 }

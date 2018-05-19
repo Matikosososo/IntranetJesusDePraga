@@ -10,7 +10,7 @@ public class Usuario {
     }
     
     
-
+    
     public Usuario(String rut_usuario, int tipo, String contrasenia) {
         this.rut_usuario = rut_usuario;
         this.tipo = tipo;

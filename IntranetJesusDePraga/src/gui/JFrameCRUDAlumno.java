@@ -7,10 +7,13 @@ package gui;
 
 import exception.MotorNoSoportadoException;
 import factories.DAOFactory;
+import factories.MySQL_AlumnoDAO;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Alumno;
+import model.TMAlumno;
 import model.Usuario;
 
 /**
@@ -21,8 +24,19 @@ public class JFrameCRUDAlumno extends javax.swing.JFrame {
 
     private int PROFESOR = 1;
     private int ALUMNO = 2;
+
+    private MySQL_AlumnoDAO alumno;
+
     public JFrameCRUDAlumno() {
-        initComponents();
+        try {
+            initComponents();
+            alumno = new MySQL_AlumnoDAO();
+            cargarTablaAlumno();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(JFrameCRUDAlumno.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(JFrameCRUDAlumno.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -46,6 +60,8 @@ public class JFrameCRUDAlumno extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         txt_buscar_alum = new javax.swing.JTextField();
         btn_volver = new javax.swing.JButton();
+        lblIDALUM = new javax.swing.JLabel();
+        btnBuscarAlum = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -80,6 +96,11 @@ public class JFrameCRUDAlumno extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        table_alumno.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                table_alumnoMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(table_alumno);
 
         jLabel4.setText("Buscar");
@@ -88,6 +109,13 @@ public class JFrameCRUDAlumno extends javax.swing.JFrame {
         btn_volver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_volverActionPerformed(evt);
+            }
+        });
+
+        btnBuscarAlum.setText("Buscar");
+        btnBuscarAlum.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarAlumActionPerformed(evt);
             }
         });
 
@@ -113,7 +141,8 @@ public class JFrameCRUDAlumno extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(btn_crear_alum, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(65, 65, 65)
-                                .addComponent(btn_actualizar_alum)))))
+                                .addComponent(btn_actualizar_alum))
+                            .addComponent(lblIDALUM))))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
@@ -123,18 +152,21 @@ public class JFrameCRUDAlumno extends javax.swing.JFrame {
                         .addGap(35, 35, 35)
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txt_buscar_alum, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txt_buscar_alum, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnBuscarAlum, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(23, 23, 23)
+                .addGap(22, 22, 22)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txt_nombreAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4)
-                    .addComponent(txt_buscar_alum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_buscar_alum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBuscarAlum))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -148,7 +180,9 @@ public class JFrameCRUDAlumno extends javax.swing.JFrame {
                         .addGap(73, 73, 73)
                         .addComponent(btn_volver))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(106, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
+                .addComponent(lblIDALUM)
+                .addGap(57, 57, 57))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -176,20 +210,17 @@ public class JFrameCRUDAlumno extends javax.swing.JFrame {
             String rut, nombre;
             rut = txt_rutAlumno.getText();
             nombre = txt_nombreAlumno.getText();
-                        
+
             Usuario u = new Usuario(rut, ALUMNO, rut);
-            
+
             DAOFactory.getInstance().getUsuarioDAO(DAOFactory.Motor.MY_SQL).create(u);
-            
+
             Usuario u2 = DAOFactory.getInstance().getUsuarioDAO(DAOFactory.Motor.MY_SQL).getObjectByRut(rut);
-            
-            
-            
-           System.out.println("cantidad de id's: "+u2.getId());
+
+            System.out.println("cantidad de id's: " + u2.getId());
             Alumno a = new Alumno(nombre, rut, u2.getId());
             DAOFactory.getInstance().getAlumnoDAO(DAOFactory.Motor.MY_SQL).create(a);
-            
-            
+            cargarTablaAlumno();
         } catch (MotorNoSoportadoException ex) {
             Logger.getLogger(JFrameCRUDAlumno.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
@@ -197,7 +228,7 @@ public class JFrameCRUDAlumno extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(JFrameCRUDAlumno.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }//GEN-LAST:event_btn_crear_alumActionPerformed
 
     private void btn_volverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_volverActionPerformed
@@ -205,8 +236,38 @@ public class JFrameCRUDAlumno extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_volverActionPerformed
 
     private void btn_actualizar_alumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_actualizar_alumActionPerformed
-        
+        try {
+            String nom, rut;
+            int id;
+            nom = txt_nombreAlumno.getText();
+            rut = txt_rutAlumno.getText();
+            id = Integer.parseInt(lblIDALUM.getText());
+
+            Alumno newAlumno = new Alumno(id, nom, rut);
+
+            alumno.update(newAlumno);
+
+            cargarTablaAlumno();
+        } catch (Exception e) {
+        }
     }//GEN-LAST:event_btn_actualizar_alumActionPerformed
+
+    private void table_alumnoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_table_alumnoMouseClicked
+        if (evt.getClickCount() == 2) {
+            int fila = table_alumno.getSelectedRow();
+            System.out.println(fila);
+            TMAlumno tabla = (TMAlumno) table_alumno.getModel();
+
+            Alumno p = tabla.getAlumno(fila);
+            txt_rutAlumno.setText(p.getRut());
+            txt_nombreAlumno.setText(p.getNombre());
+            lblIDALUM.setText(String.valueOf(p.getId()));
+        }
+    }//GEN-LAST:event_table_alumnoMouseClicked
+
+    private void btnBuscarAlumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarAlumActionPerformed
+        cargarTablaActualizada(table_alumno, txt_buscar_alum.getText());
+    }//GEN-LAST:event_btnBuscarAlumActionPerformed
 
     /**
      * @param args the command line arguments
@@ -244,6 +305,7 @@ public class JFrameCRUDAlumno extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBuscarAlum;
     private javax.swing.JButton btn_actualizar_alum;
     private javax.swing.JButton btn_crear_alum;
     private javax.swing.JButton btn_volver;
@@ -252,9 +314,32 @@ public class JFrameCRUDAlumno extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblIDALUM;
     private javax.swing.JTable table_alumno;
     private javax.swing.JTextField txt_buscar_alum;
     private javax.swing.JTextField txt_nombreAlumno;
     private javax.swing.JTextField txt_rutAlumno;
     // End of variables declaration//GEN-END:variables
+
+    private void cargarTablaActualizada(javax.swing.JTable tablaActual, String busqueda) {
+        try {
+            List<Alumno> listAlum = alumno.search(busqueda);
+            TMAlumno tm = new TMAlumno(listAlum);
+            tablaActual.setModel(tm);
+        } catch (Exception e) {
+        }
+
+    }
+
+    private void cargarTablaAlumno() {
+        try {
+            List<Alumno> list = alumno.read();
+            TMAlumno tm = new TMAlumno(list);
+
+            table_alumno.setModel(tm);
+        } catch (Exception e) {
+        }
+
+    }
+
 }
